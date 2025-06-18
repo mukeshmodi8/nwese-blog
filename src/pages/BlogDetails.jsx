@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import blogs from "../data/blogs";
 import { formatDistanceToNow, format } from "date-fns";
 import { Helmet } from "react-helmet"; // Helmet for dynamic meta tags
+// import { updateBlogView, fetchBlogView } from "../data/firebase";
+
+// import { updateBlogView, fetchBlogView } from "../firebase";
+
+// console.log("Firebase Functions", updateBlogView, fetchBlogView);
+
 
 import {
   FaWhatsapp,
@@ -10,11 +16,22 @@ import {
   FaTwitter,
   FaTelegram,
   FaShareAlt,
+  FaEye,
 } from "react-icons/fa";
+
+import { updateBlogView, fetchBlogView } from "../firebase"; // 👈 Import views functions
 
 const BlogDetails = () => {
   const { id } = useParams();
   const blog = blogs.find((b) => b.id.toString() === id);
+  const [views, setViews] = useState(0); // 👈 View state
+
+  useEffect(() => {
+    if (blog?.id) {
+      updateBlogView(blog.id);             // 👁️ Increase views
+      fetchBlogView(blog.id).then(setViews); // 👁️ Get views
+    }
+  }, [blog]);
 
   if (!blog) {
     return <h2>❌ Blog Not Found</h2>;
@@ -77,6 +94,12 @@ const BlogDetails = () => {
         📅 Published: {format(new Date(blog.publishedAt), "hh:mm a")} | ⏱️{" "}
         {blog.readingTime} | ⌛{" "}
         {formatDistanceToNow(new Date(blog.publishedAt), { addSuffix: true })}
+      </p>
+
+      {/* 👁️ View Count */}
+      <p style={{ fontSize: "16px", marginTop: "10px", fontWeight: "500" }}>
+        <FaEye style={{ marginRight: "6px", color: "#666" }} />
+        Views: {views}
       </p>
 
       {/* Share Icons */}

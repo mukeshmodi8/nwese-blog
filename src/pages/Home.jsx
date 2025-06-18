@@ -13,7 +13,7 @@ import {
 import "./Home.css";
 
 const Home = () => {
-  const baseUrl = window.location.origin; // for localhost or vercel both
+  const baseUrl = window.location.origin; 
 
   return (
     <div className="home-page">
