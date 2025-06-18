@@ -22,6 +22,7 @@ const BlogDetails = () => {
   useEffect(() => {
     const handleViews = async () => {
       if (blog?.id) {
+        console.log("Updating view for blog ID:", blog.id);
         await updateBlogView(blog.id.toString());
         const count = await fetchBlogView(blog.id.toString());
         setViews(count);
