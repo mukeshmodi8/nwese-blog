@@ -1,6 +1,5 @@
-// src/firebase.js
+// ✅ src/data/firebase.js
 import { initializeApp } from "firebase/app";
-
 import {
   getFirestore,
   doc,
@@ -22,6 +21,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+// 👉 Blog View Count Update
 export const updateBlogView = async (blogId) => {
   const blogRef = doc(db, "blogViews", blogId.toString());
   const snap = await getDoc(blogRef);
@@ -33,6 +33,7 @@ export const updateBlogView = async (blogId) => {
   }
 };
 
+// 👉 Blog View Count Fetch
 export const fetchBlogView = async (blogId) => {
   const blogRef = doc(db, "blogViews", blogId.toString());
   const snap = await getDoc(blogRef);
