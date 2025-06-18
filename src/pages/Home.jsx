@@ -1,6 +1,8 @@
 import React from "react";
 import blogs from "../data/blogs";
 import { Link } from "react-router-dom";
+import { formatDistanceToNow, format } from "date-fns";
+
 import {
   FaWhatsapp,
   FaFacebook,
@@ -46,6 +48,13 @@ const Home = () => {
                 <h3>{blog.title}</h3>
                 <p>{blog.content.slice(0, 60)}...</p>
                 <Link to={`/blogs/${blog.id}`}>
+                  <p style={{ fontSize: "14px", color: "#777" }}>
+                    📅 Published: {format(new Date(blog.publishedAt), "hh:mm a")} |
+                    ⏱️ {blog.readingTime} |
+                    ⌛ {formatDistanceToNow(new Date(blog.publishedAt), { addSuffix: true })}
+                  </p>
+
+
                   <button>Read More</button>
                 </Link>
 

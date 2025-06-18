@@ -93,3 +93,8 @@
     width: 90%;
   }
 }
+.card a {
+  text-decoration: none;
+  color: inherit; /* ताकि link का color default रहे */
+}
+
