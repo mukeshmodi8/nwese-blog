@@ -6,12 +6,13 @@ import {
   FaFacebook,
   FaTwitter,
   FaTelegram,
-  FaInstagram,
   FaShareAlt,
 } from "react-icons/fa";
 import "./Home.css";
 
 const Home = () => {
+  const baseUrl = window.location.origin; // for localhost or vercel both
+
   return (
     <div className="home-page">
       <div className="hero">
@@ -24,7 +25,7 @@ const Home = () => {
         <div className="card-container">
           {blogs.map((blog) => {
             const shareText = `Check out this blog: ${blog.title}`;
-            const shareUrl = `${window.location.origin}/blogs/${blog.id}`;
+            const shareUrl = `${baseUrl}/blogs/${blog.id}`;
 
             const whatsappLink = `https://wa.me/?text=${encodeURIComponent(
               shareText + " " + shareUrl
@@ -38,7 +39,6 @@ const Home = () => {
             const telegramLink = `https://t.me/share/url?url=${encodeURIComponent(
               shareUrl
             )}&text=${encodeURIComponent(shareText)}`;
-            const instagramLink = `https://www.instagram.com/`;
 
             return (
               <div key={blog.id} className="card">
@@ -100,15 +100,7 @@ const Home = () => {
                   >
                     <FaTelegram />
                   </a>
-                  <a
-                    href={instagramLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    title="Instagram"
-                    style={{ color: "#C13584", fontSize: "20px" }}
-                  >
-                    <FaInstagram />
-                  </a>
+                  {/* Instagram sharing not supported, so removed */}
                 </div>
               </div>
             );
