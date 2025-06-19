@@ -1,13 +1,23 @@
 import React, { useEffect } from "react";
-// import Footer from "./components/Footer";
-
 
 const Footer = () => {
   useEffect(() => {
+    // Create adsterra script tag
     const script = document.createElement("script");
+    script.type = "text/javascript";
     script.src = "//www.highperformanceformat.com/478f55f3c7805db3f3405b8dc2d0666f/invoke.js";
     script.async = true;
-    document.getElementById("ad-container-footer")?.appendChild(script);
+
+    // Create the Ad container div with ID
+    const adDiv = document.createElement("div");
+    adDiv.id = "container-478f55f3c7805db3f3405b8dc2d0666f";
+
+    const adContainer = document.getElementById("ad-container-footer");
+    if (adContainer) {
+      adContainer.innerHTML = ""; // Clear previous
+      adContainer.appendChild(adDiv);
+      adContainer.appendChild(script);
+    }
   }, []);
 
   return (
@@ -16,26 +26,13 @@ const Footer = () => {
       <div
         id="ad-container-footer"
         style={{
-          width: "728px",
-          height: "90px",
+          width: "100%",
+          maxWidth: "728px",
+          height: "auto",
           margin: "20px auto",
           textAlign: "center",
         }}
-      >
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              atOptions = {
-                'key' : '478f55f3c7805db3f3405b8dc2d0666f',
-                'format' : 'iframe',
-                'height' : 90,
-                'width' : 728,
-                'params' : {}
-              };
-            `,
-          }}
-        />
-      </div>
+      />
 
       {/* ✅ Footer Text */}
       <footer
