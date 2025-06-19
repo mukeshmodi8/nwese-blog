@@ -1,5 +1,7 @@
-// ✅ src/data/firebase.js
+// ✅ Firebase SDK imports
 import { initializeApp } from "firebase/app";
+
+// 🔵 Firestore for View Count
 import {
   getFirestore,
   doc,
@@ -9,6 +11,10 @@ import {
   increment,
 } from "firebase/firestore";
 
+// 🔴 Realtime Database for Comments
+import { getDatabase } from "firebase/database";
+
+// ✅ Firebase Config
 const firebaseConfig = {
   apiKey: "YOUR_API_KEY",
   authDomain: "your-project-id.firebaseapp.com",
@@ -16,14 +22,21 @@ const firebaseConfig = {
   storageBucket: "your-project-id.appspot.com",
   messagingSenderId: "YOUR_SENDER_ID",
   appId: "YOUR_APP_ID",
+  databaseURL: "https://your-project-id-default-rtdb.firebaseio.com", // ✅ ADD THIS
 };
 
+// ✅ Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
 
-// 👉 Blog View Count Update
+// 🔵 Firestore DB (for Views)
+const firestore = getFirestore(app);
+
+// 🔴 Realtime DB (for Comments)
+export const db = getDatabase(app);
+
+// 🔵 Blog View Count: Firestore
 export const updateBlogView = async (blogId) => {
-  const blogRef = doc(db, "blogViews", blogId.toString());
+  const blogRef = doc(firestore, "blogViews", blogId.toString());
   const snap = await getDoc(blogRef);
 
   if (snap.exists()) {
@@ -33,9 +46,8 @@ export const updateBlogView = async (blogId) => {
   }
 };
 
-// 👉 Blog View Count Fetch
 export const fetchBlogView = async (blogId) => {
-  const blogRef = doc(db, "blogViews", blogId.toString());
+  const blogRef = doc(firestore, "blogViews", blogId.toString());
   const snap = await getDoc(blogRef);
   return snap.exists() ? snap.data().views : 0;
 };

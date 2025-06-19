@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import blogs from "../data/blogs";
 import { formatDistanceToNow, format } from "date-fns";
 import { Helmet } from "react-helmet";
+import CommentSection from "../components/CommentSection";
+
 import {
   FaWhatsapp,
   FaFacebook,
@@ -16,14 +18,13 @@ import { updateBlogView, fetchBlogView } from "../data/firebase";
 
 const BlogDetails = () => {
   const { id } = useParams();
-  const decodedId = decodeURIComponent(id); // ✅ FIX for %20 or special characters
+  const decodedId = decodeURIComponent(id);
   const blog = blogs.find((b) => b.id === decodedId);
   const [views, setViews] = useState(0);
 
   useEffect(() => {
     const handleViews = async () => {
       if (blog?.id) {
-        console.log("Updating view for blog ID:", blog.id);
         await updateBlogView(blog.id.toString());
         const count = await fetchBlogView(blog.id.toString());
         setViews(count);
@@ -109,6 +110,9 @@ const BlogDetails = () => {
           <FaTelegram />
         </a>
       </div>
+
+      {/* 🟢 COMMENT SECTION HERE */}
+      <CommentSection blogId={blog.id} />
     </div>
   );
 };
