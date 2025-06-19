@@ -1,0 +1,29 @@
+.about-page {
+  font-family: 'Segoe UI', sans-serif;
+  color: #333;
+}
+
+.about-page h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  /* color: #0b74de; */
+  color: #facc15;
+}
+
+.about-page h2 {
+  margin-top: 2rem;
+  /* color: #facc15; */
+  color: #0b74de;
+}
+
+.about-page ul {
+  padding-left: 1.2rem;
+}
+
+.about-page a {
+  color: #0b74de;
+  text-decoration: none;
+}
+.about-page a:hover {
+  text-decoration: underline;
+}

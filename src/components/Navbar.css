@@ -19,6 +19,7 @@
 .navbar-links {
   display: flex;
   gap: 32px;
+  color: #facc15;
 }
 
 .navbar-links a {

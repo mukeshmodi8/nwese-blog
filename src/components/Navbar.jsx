@@ -11,11 +11,15 @@ const Navbar = () => {
     <header className="navbar">
       <NavLink to="/" className="navbar-brand">Mr. Happy Blog</NavLink>
 
-      {/* Desktop Links */}
+      
       <nav className="navbar-links">
         <NavLink to="/" className={({ isActive }) => isActive ? "active" : ""}>Home</NavLink>
         <NavLink to="/blogs" className={({ isActive }) => isActive ? "active" : ""}>Blogs</NavLink>
         <NavLink to="/news" className={({ isActive }) => isActive ? "active" : ""}>News</NavLink>
+        <NavLink to="/about" className={({ isActive }) => isActive ? "active" : ""}>About Us</NavLink>
+        <NavLink to="/contact" className={({ isActive }) => isActive ? "active" : ""}>Contact</NavLink>
+
+
       </nav>
 
       {/* Hamburger Toggle */}
