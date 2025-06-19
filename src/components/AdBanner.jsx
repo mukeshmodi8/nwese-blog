@@ -1,35 +1,39 @@
-import React, { useEffect } from "react";
+// src/components/AdBanner.js
+import React, { useEffect, useRef } from "react";
 
-const BannerAd = () => {
+const AdBanner = () => {
+  const adRef = useRef(null);
+
   useEffect(() => {
     const script = document.createElement("script");
     script.type = "text/javascript";
-    script.src = "//www.highperformanceformat.com/478f55f3c7805db3f3405b8dc2d0666f/invoke.js";
     script.async = true;
+    script.setAttribute("data-cfasync", "false");
+    script.src =
+      "//pl26954151.profitableratecpm.com/9811eb47cec886e50887ad29cf5a19f2/invoke.js";
 
-    document.getElementById("ad-container").appendChild(script);
+    if (adRef.current) {
+      adRef.current.innerHTML = ""; // remove old if re-render
+      const containerDiv = document.createElement("div");
+      containerDiv.id = "container-9811eb47cec886e50887ad29cf5a19f2";
+      adRef.current.appendChild(containerDiv);
+      adRef.current.appendChild(script);
+    }
   }, []);
 
   return (
     <div
-      id="ad-container"
-      style={{ width: "728px", height: "90px", margin: "auto", textAlign: "center" }}
-    >
-      <script
-        dangerouslySetInnerHTML={{
-          __html: `
-            atOptions = {
-              'key' : '478f55f3c7805db3f3405b8dc2d0666f',
-              'format' : 'iframe',
-              'height' : 90,
-              'width' : 728,
-              'params' : {}
-            };
-          `,
-        }}
-      />
-    </div>
+      ref={adRef}
+      style={{
+        width: "100%",
+        maxWidth: "728px",
+        minHeight: "100px",
+        margin: "20px auto",
+        overflow: "hidden",
+        textAlign: "center",
+      }}
+    />
   );
 };
 
-export default BannerAd;
+export default AdBanner;
