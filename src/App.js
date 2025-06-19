@@ -8,6 +8,7 @@ import BlogDetails from "./pages/BlogDetails";
 import News from "./pages/News";
 import About from "./pages/About";
 import Contact from "./pages/Contact"; // ✅ Correct import
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/about" element={<About />} /> {/* ✅ About route */}
           <Route path="/contact" element={<Contact />} /> {/* ✅ Contact route */}
         </Routes>
+        <Footer /> 
       </div>
     </Router>
   );
