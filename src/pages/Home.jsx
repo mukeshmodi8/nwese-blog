@@ -10,7 +10,7 @@ import {
   FaShareAlt,
 } from "react-icons/fa";
 import "./Home.css";
-import AdBanner from "../components/AdBanner"; // ✅ AdBanner Import
+// import AdBanner from "../components/AdBanner"; // ✅ AdBanner Import
 
 const Home = () => {
   const baseUrl = window.location.origin;
@@ -23,7 +23,7 @@ const Home = () => {
       </div>
 
       {/* ✅ Top Ad */}
-      <AdBanner />
+      {/* <AdBanner /> */}
 
       <div className="section">
         <h2>Latest Blogs</h2>
@@ -91,7 +91,7 @@ const Home = () => {
                 </div>
 
                 {/* ✅ Mid Ad after every 2 blogs */}
-                {(index + 1) % 2 === 0 && <AdBanner />}
+                {/* {(index + 1) % 2 === 0 && <AdBanner />} */}
               </React.Fragment>
             );
           })}
@@ -99,7 +99,7 @@ const Home = () => {
       </div>
 
       {/* ✅ Bottom Ad */}
-      <AdBanner />
+      {/* <AdBanner /> */}
     </div>
   );
 };
