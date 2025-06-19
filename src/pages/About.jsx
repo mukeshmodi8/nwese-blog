@@ -3,6 +3,7 @@ import React from "react";
 import "./About.css"; // Optional CSS file
 
 const About = () => {
+     console.log("✅ About Page Loaded");
   return (
     <div className="about-page" style={{ padding: "2rem", maxWidth: "800px", margin: "auto", lineHeight: "1.8" }}>
       <h1>About Mr. Happy Blog</h1>

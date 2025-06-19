@@ -22,16 +22,18 @@ const Navbar = () => {
 
       </nav>
 
-      {/* Hamburger Toggle */}
+     
       <button className="mobile-toggle" onClick={toggleMenu}>
         {isOpen ? <X size={26} /> : <Menu size={26} />}
       </button>
 
-      {/* Mobile Menu */}
+     
       <div className={`mobile-menu ${isOpen ? "open" : ""}`}>
         <NavLink to="/" onClick={toggleMenu} className={({ isActive }) => isActive ? "active" : ""}>Home</NavLink>
         <NavLink to="/blogs" onClick={toggleMenu} className={({ isActive }) => isActive ? "active" : ""}>Blogs</NavLink>
         <NavLink to="/news" onClick={toggleMenu} className={({ isActive }) => isActive ? "active" : ""}>News</NavLink>
+        <NavLink to="/about" onClick={toggleMenu} className={({ isActive }) => isActive ? "active" : ""}>about</NavLink>
+        <NavLink to="/contact" onClick={toggleMenu} className={({ isActive }) => isActive ? "active" : ""}>contact</NavLink>
       </div>
     </header>
   );

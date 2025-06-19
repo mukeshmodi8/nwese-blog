@@ -2,6 +2,7 @@ import React from "react";
 import "./Contact.css";
 
 const Contact = () => {
+   console.log("✅ Contact Page Loaded");
   return (
     <div className="contact-page">
       <h1>Contact Us</h1>

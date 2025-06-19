@@ -12,11 +12,12 @@ import {
   FaEye,
 } from "react-icons/fa";
 
-import { updateBlogView, fetchBlogView } from "../data/firebase"; // ✅ Correct Path
+import { updateBlogView, fetchBlogView } from "../data/firebase";
 
 const BlogDetails = () => {
   const { id } = useParams();
-  const blog = blogs.find((b) => b.id.toString() === id);
+  const decodedId = decodeURIComponent(id); // ✅ FIX for %20 or special characters
+  const blog = blogs.find((b) => b.id === decodedId);
   const [views, setViews] = useState(0);
 
   useEffect(() => {
@@ -76,13 +77,11 @@ const BlogDetails = () => {
         {formatDistanceToNow(new Date(blog.publishedAt), { addSuffix: true })}
       </p>
 
-      {/* 👁️ View Count */}
       <p style={{ fontSize: "16px", marginTop: "10px", fontWeight: "500" }}>
         <FaEye style={{ marginRight: "6px", color: "#666" }} />
         Views: {views}
       </p>
 
-      {/* 🔗 Share Icons */}
       <div
         style={{
           marginTop: "30px",
