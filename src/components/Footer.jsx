@@ -1,40 +1,15 @@
-import React, { useEffect } from "react";
+// Example usage in Footer.js or Home.js
+import React from "react";
+// import ErrorBoundary from "./components/ErrorBoundary";
+// import NativeAd from "./components/NativeAd";
 
 const Footer = () => {
-  useEffect(() => {
-    // Create adsterra script tag
-    const script = document.createElement("script");
-    script.type = "text/javascript";
-    script.src = "//www.highperformanceformat.com/478f55f3c7805db3f3405b8dc2d0666f/invoke.js";
-    script.async = true;
-
-    // Create the Ad container div with ID
-    const adDiv = document.createElement("div");
-    adDiv.id = "container-478f55f3c7805db3f3405b8dc2d0666f";
-
-    const adContainer = document.getElementById("ad-container-footer");
-    if (adContainer) {
-      adContainer.innerHTML = ""; // Clear previous
-      adContainer.appendChild(adDiv);
-      adContainer.appendChild(script);
-    }
-  }, []);
-
   return (
     <>
-      {/* 📢 Adsterra Banner Ad */}
-      <div
-        id="ad-container-footer"
-        style={{
-          width: "100%",
-          maxWidth: "728px",
-          height: "auto",
-          margin: "20px auto",
-          textAlign: "center",
-        }}
-      />
+      {/* <ErrorBoundary>
+        <NativeAd />
+      </ErrorBoundary> */}
 
-      {/* ✅ Footer Text */}
       <footer
         style={{
           textAlign: "center",

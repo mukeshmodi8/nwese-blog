@@ -11,6 +11,7 @@ import {
   FaShareAlt,
 } from "react-icons/fa";
 import "./Home.css";
+// import NativeAd from "../components/NativeAd";
 
 const Home = () => {
   const baseUrl = window.location.origin; 
@@ -57,6 +58,8 @@ const Home = () => {
 
                   <button>Read More</button>
                 </Link>
+                {/* <NativeAd /> */}
+
 
                 {/* Share Icons */}
                 <div
