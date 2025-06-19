@@ -113,6 +113,7 @@ const BlogDetails = () => {
 
       {/* 🟢 COMMENT SECTION HERE */}
       <CommentSection blogId={blog.id} />
+
     </div>
   );
 };

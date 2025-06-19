@@ -1,48 +1,105 @@
-// ✅ src/components/CommentSection.jsx
 import React, { useEffect, useState } from "react";
-import { ref, push, onValue } from "firebase/database";
+import { ref, push, onValue, update, remove } from "firebase/database";
 import { db } from "../data/firebase";
 
 const CommentSection = ({ blogId }) => {
   const [name, setName] = useState("");
   const [comment, setComment] = useState("");
   const [comments, setComments] = useState([]);
+  const [editingId, setEditingId] = useState(null);
+  const [replyingId, setReplyingId] = useState(null);
+
+  const commentRef = ref(db, `comments/${blogId}`);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (name.trim() === "" || comment.trim() === "") return;
+    if (!name.trim() || !comment.trim()) return;
 
-    const commentRef = ref(db, `comments/${blogId}`);
-    const newComment = {
-      name,
-      comment,
-      timestamp: new Date().toISOString(),
-    };
+    const timestamp = new Date().toISOString();
 
-    push(commentRef, newComment);
+    if (editingId) {
+      update(ref(db, `comments/${blogId}/${editingId}`), {
+        name,
+        comment,
+        timestamp,
+      });
+      setEditingId(null);
+    } else {
+      const newComment = {
+        name,
+        comment,
+        timestamp,
+        likes: 0,
+        parentId: replyingId || null,
+      };
+      push(commentRef, newComment);
+    }
+
     setComment("");
     setName("");
+    setReplyingId(null);
+  };
+
+  const handleEdit = (id, c) => {
+    setName(c.name);
+    setComment(c.comment);
+    setEditingId(id);
+  };
+
+  const handleDelete = (id) => {
+    remove(ref(db, `comments/${blogId}/${id}`));
+  };
+
+  const handleLike = (id, currentLikes) => {
+    update(ref(db, `comments/${blogId}/${id}`), {
+      likes: currentLikes + 1,
+    });
+  };
+
+  const handleReply = (id) => {
+    setReplyingId(id);
   };
 
   useEffect(() => {
-    const commentRef = ref(db, `comments/${blogId}`);
     onValue(commentRef, (snapshot) => {
       const data = snapshot.val();
       if (data) {
-        const loadedComments = Object.values(data).sort((a, b) =>
-          new Date(b.timestamp) - new Date(a.timestamp)
-        );
-        setComments(loadedComments);
+        const list = Object.entries(data).map(([id, val]) => ({ id, ...val }));
+        setComments(list);
       } else {
         setComments([]);
       }
     });
   }, [blogId]);
 
+ const renderComments = (parentId = null) => {
+  return comments
+    .filter((c) => (c.parentId ?? null) === parentId)  // ✅ FIXED
+    .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
+    .map((c) => (
+      <div key={c.id} style={{ marginLeft: parentId ? 30 : 0, ...styles.commentBox }}>
+        <div style={styles.avatar}>{c.name?.[0]?.toUpperCase()}</div>
+        <div style={{ flex: 1 }}>
+          <strong>{c.name}</strong>
+          <p>{c.comment}</p>
+          <div style={styles.actionsRow}>
+            <span style={styles.time}>{new Date(c.timestamp).toLocaleString()}</span>
+            <button onClick={() => handleLike(c.id, c.likes || 0)} style={styles.actionBtn}>👍 {c.likes || 0}</button>
+            <button onClick={() => handleReply(c.id)} style={styles.actionBtn}>↩️ Reply</button>
+            <button onClick={() => handleEdit(c.id, c)} style={styles.actionBtn}>✏️ Edit</button>
+            <button onClick={() => handleDelete(c.id)} style={styles.actionBtn}>🗑 Delete</button>
+          </div>
+          {/* 🔁 Recursive call */}
+          {renderComments(c.id)}
+        </div>
+      </div>
+    ));
+};
+
+
   return (
     <div style={styles.container}>
-      <h3 style={styles.heading}>💬 Leave a Comment</h3>
-
+      <h3>{editingId ? "✏️ Edit Comment" : replyingId ? "↩️ Reply" : "💬 Leave a Comment"}</h3>
       <form onSubmit={handleSubmit} style={styles.form}>
         <input
           type="text"
@@ -58,7 +115,7 @@ const CommentSection = ({ blogId }) => {
           onChange={(e) => setComment(e.target.value)}
         ></textarea>
         <button type="submit" style={styles.button}>
-          Submit
+          {editingId ? "Update" : "Submit"}
         </button>
       </form>
 
@@ -66,20 +123,7 @@ const CommentSection = ({ blogId }) => {
         {comments.length === 0 ? (
           <p style={{ color: "#777", fontStyle: "italic" }}>No comments yet.</p>
         ) : (
-          comments.map((c, i) => (
-            <div key={i} style={styles.commentBox}>
-              <div style={styles.avatar}>
-                {c.name?.[0]?.toUpperCase() || "?"}
-              </div>
-              <div>
-                <strong>{c.name}</strong>
-                <p style={{ margin: "5px 0" }}>{c.comment}</p>
-                <span style={styles.time}>
-                  {new Date(c.timestamp).toLocaleString()}
-                </span>
-              </div>
-            </div>
-          ))
+          renderComments()
         )}
       </div>
     </div>
@@ -87,73 +131,40 @@ const CommentSection = ({ blogId }) => {
 };
 
 const styles = {
-  container: {
-    borderTop: "1px solid #ccc",
-    marginTop: "40px",
-    paddingTop: "30px",
-  },
-  heading: {
-    marginBottom: "15px",
-    fontSize: "22px",
-    color: "#333",
-  },
-  form: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "12px",
-    marginBottom: "25px",
-  },
-  input: {
-    padding: "10px",
-    fontSize: "16px",
-    borderRadius: "6px",
-    border: "1px solid #ccc",
-  },
-  textarea: {
-    padding: "10px",
-    fontSize: "16px",
-    borderRadius: "6px",
-    border: "1px solid #ccc",
-    minHeight: "80px",
-  },
-  button: {
-    padding: "10px",
-    fontSize: "16px",
-    backgroundColor: "#333",
-    color: "white",
-    borderRadius: "6px",
-    border: "none",
-    cursor: "pointer",
-    transition: "0.3s",
-  },
-  commentList: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "16px",
-  },
+  container: { padding: 20 },
+  form: { display: "flex", flexDirection: "column", gap: 10, marginBottom: 20 },
+  input: { padding: 8, borderRadius: 4, border: "1px solid #ccc" },
+  textarea: { padding: 8, borderRadius: 4, border: "1px solid #ccc" },
+  button: { padding: 10, background: "#333", color: "#fff", border: "none", borderRadius: 4 },
+  commentList: { display: "flex", flexDirection: "column", gap: 12 },
   commentBox: {
     display: "flex",
-    gap: "10px",
+    alignItems: "flex-start",
+    gap: 10,
     background: "#f9f9f9",
-    padding: "12px",
-    borderRadius: "8px",
-    boxShadow: "0 2px 6px rgba(0,0,0,0.08)",
+    padding: 10,
+    borderRadius: 8,
   },
   avatar: {
-    width: "38px",
-    height: "38px",
+    width: 32,
+    height: 32,
     borderRadius: "50%",
     backgroundColor: "#007bff",
     color: "#fff",
     fontWeight: "bold",
-    fontSize: "18px",
+    fontSize: 16,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
   },
-  time: {
-    fontSize: "12px",
-    color: "#888",
+  time: { fontSize: 12, color: "#888" },
+  actionsRow: { display: "flex", gap: 10, flexWrap: "wrap", marginTop: 5 },
+  actionBtn: {
+    background: "transparent",
+    border: "none",
+    color: "#007bff",
+    cursor: "pointer",
+    fontSize: 14,
   },
 };
 

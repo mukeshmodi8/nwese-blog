@@ -22,7 +22,7 @@ const firebaseConfig = {
   storageBucket: "your-project-id.appspot.com",
   messagingSenderId: "YOUR_SENDER_ID",
   appId: "YOUR_APP_ID",
-  databaseURL: "https://your-project-id-default-rtdb.firebaseio.com", // ✅ ADD THIS
+ databaseURL: "https://react-blog-comments-default-rtdb.firebaseio.com", // ✅ ADD THIS
 };
 
 // ✅ Initialize Firebase
