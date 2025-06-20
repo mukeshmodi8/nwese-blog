@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { ref, push, onValue, update, remove } from "firebase/database";
 import { db } from "../data/firebase";
+import { getAuth } from "firebase/auth";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 const CommentSection = ({ blogId }) => {
   const [name, setName] = useState("");
@@ -10,6 +14,8 @@ const CommentSection = ({ blogId }) => {
   const [replyingId, setReplyingId] = useState(null);
 
   const commentRef = ref(db, `comments/${blogId}`);
+  const auth = getAuth();
+  const currentUser = auth.currentUser;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -31,6 +37,8 @@ const CommentSection = ({ blogId }) => {
         timestamp,
         likes: 0,
         parentId: replyingId || null,
+        userId: currentUser?.uid || null,
+        userEmail: currentUser?.email || null,
       };
       push(commentRef, newComment);
     }
@@ -46,9 +54,17 @@ const CommentSection = ({ blogId }) => {
     setEditingId(id);
   };
 
-  const handleDelete = (id) => {
-    remove(ref(db, `comments/${blogId}/${id}`));
-  };
+ const handleDelete = (id) => {
+  remove(ref(db, `comments/${blogId}/${id}`))
+    .then(() => {
+      toast.success("🗑️ Comment deleted successfully!");
+    })
+    .catch((error) => {
+      toast.error("❌ Failed to delete comment!");
+      console.error(error);
+    });
+};
+
 
   const handleLike = (id, currentLikes) => {
     update(ref(db, `comments/${blogId}/${id}`), {
@@ -72,62 +88,79 @@ const CommentSection = ({ blogId }) => {
     });
   }, [blogId]);
 
- const renderComments = (parentId = null) => {
-  return comments
-    .filter((c) => (c.parentId ?? null) === parentId)  // ✅ FIXED
-    .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
-    .map((c) => (
-      <div key={c.id} style={{ marginLeft: parentId ? 30 : 0, ...styles.commentBox }}>
-        <div style={styles.avatar}>{c.name?.[0]?.toUpperCase()}</div>
-        <div style={{ flex: 1 }}>
-          <strong>{c.name}</strong>
-          <p>{c.comment}</p>
-          <div style={styles.actionsRow}>
-            <span style={styles.time}>{new Date(c.timestamp).toLocaleString()}</span>
-            <button onClick={() => handleLike(c.id, c.likes || 0)} style={styles.actionBtn}>👍 {c.likes || 0}</button>
-            <button onClick={() => handleReply(c.id)} style={styles.actionBtn}>↩️ Reply</button>
-            <button onClick={() => handleEdit(c.id, c)} style={styles.actionBtn}>✏️ Edit</button>
-            <button onClick={() => handleDelete(c.id)} style={styles.actionBtn}>🗑 Delete</button>
-          </div>
-          {/* 🔁 Recursive call */}
-          {renderComments(c.id)}
-        </div>
-      </div>
-    ));
-};
+  const renderComments = (parentId = null) => {
+    return comments
+      .filter((c) => (c.parentId ?? null) === parentId)
+      .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
+      .map((c) => (
+        <div key={c.id} style={{ marginLeft: parentId ? 30 : 0, ...styles.commentBox }}>
+          <div style={styles.avatar}>{c.name?.[0]?.toUpperCase()}</div>
+          <div style={{ flex: 1 }}>
+            <strong>{c.name}</strong>
+            <p>{c.comment}</p>
+            <div style={styles.actionsRow}>
+              <span style={styles.time}>{new Date(c.timestamp).toLocaleString()}</span>
+              <button onClick={() => handleLike(c.id, c.likes || 0)} style={styles.actionBtn}>
+                💖
+                {c.likes || 0}
+              </button>
+              <button onClick={() => handleReply(c.id)} style={styles.actionBtn}>
+                ↩️ Reply
+              </button>
 
+              {(c.userId === currentUser?.uid || currentUser?.email === "admin@gmail.com") && (
+                <>
+                  <button onClick={() => handleEdit(c.id, c)} style={styles.actionBtn}>
+                    ✏️ Edit
+                  </button>
+                  <button onClick={() => handleDelete(c.id)} style={styles.actionBtn}>
+                    🗑 Delete
+                  </button>
+                </>
+              )}
+            </div>
+            {renderComments(c.id)}
+          </div>
+        </div>
+      ));
+  };
 
   return (
-    <div style={styles.container}>
-      <h3>{editingId ? "✏️ Edit Comment" : replyingId ? "↩️ Reply" : "💬 Leave a Comment"}</h3>
-      <form onSubmit={handleSubmit} style={styles.form}>
-        <input
-          type="text"
-          placeholder="Your Name"
-          value={name}
-          style={styles.input}
-          onChange={(e) => setName(e.target.value)}
-        />
-        <textarea
-          placeholder="Your Comment"
-          value={comment}
-          style={styles.textarea}
-          onChange={(e) => setComment(e.target.value)}
-        ></textarea>
-        <button type="submit" style={styles.button}>
-          {editingId ? "Update" : "Submit"}
-        </button>
-      </form>
+  <div style={styles.container}>
+    <h3>{editingId ? "✏️ Edit Comment" : replyingId ? "↩️ Reply" : "💬 Leave a Comment"}</h3>
 
-      <div style={styles.commentList}>
-        {comments.length === 0 ? (
-          <p style={{ color: "#777", fontStyle: "italic" }}>No comments yet.</p>
-        ) : (
-          renderComments()
-        )}
-      </div>
+    <form onSubmit={handleSubmit} style={styles.form}>
+      <input
+        type="text"
+        placeholder="Your Name"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        style={styles.input}
+      />
+      <textarea
+        placeholder="Your Comment"
+        value={comment}
+        onChange={(e) => setComment(e.target.value)}
+        style={styles.textarea}
+      ></textarea>
+      <button type="submit" style={styles.button}>
+        {editingId ? "Update" : "Submit"}
+      </button>
+    </form>
+
+    <div style={styles.commentList}>
+      {comments.length === 0 ? (
+        <p style={{ color: "#777", fontStyle: "italic" }}>No comments yet.</p>
+      ) : (
+        renderComments()
+      )}
     </div>
-  );
+
+    {/* ✅ ToastContainer यहाँ रखें */}
+    <ToastContainer position="top-right" autoClose={2000} />
+  </div>
+);
+
 };
 
 const styles = {
