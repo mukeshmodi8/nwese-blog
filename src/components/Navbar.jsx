@@ -11,7 +11,7 @@ const Navbar = () => {
     <header className="navbar">
       <NavLink to="/" className="navbar-brand">Mr. Happy Blog</NavLink>
 
-      
+      {/* 🔹 Desktop Navigation */}
       <nav className="navbar-links">
         <NavLink to="/" className={({ isActive }) => isActive ? "active" : ""}>Home</NavLink>
         <NavLink to="/blogs" className={({ isActive }) => isActive ? "active" : ""}>Blogs</NavLink>
@@ -19,21 +19,27 @@ const Navbar = () => {
         <NavLink to="/about" className={({ isActive }) => isActive ? "active" : ""}>About Us</NavLink>
         <NavLink to="/contact" className={({ isActive }) => isActive ? "active" : ""}>Contact</NavLink>
 
-
+        {/* ✅ New Invite Friends link */}
+        <NavLink to="/invite" className={({ isActive }) => isActive ? "active invite-btn" : "invite-btn"}>
+          🎁 Invite Friends
+        </NavLink>
       </nav>
 
-     
+      {/* 🔸 Mobile Toggle Button */}
       <button className="mobile-toggle" onClick={toggleMenu}>
         {isOpen ? <X size={26} /> : <Menu size={26} />}
       </button>
 
-     
+      {/* 🔻 Mobile Menu */}
       <div className={`mobile-menu ${isOpen ? "open" : ""}`}>
         <NavLink to="/" onClick={toggleMenu} className={({ isActive }) => isActive ? "active" : ""}>Home</NavLink>
         <NavLink to="/blogs" onClick={toggleMenu} className={({ isActive }) => isActive ? "active" : ""}>Blogs</NavLink>
         <NavLink to="/news" onClick={toggleMenu} className={({ isActive }) => isActive ? "active" : ""}>News</NavLink>
-        <NavLink to="/about" onClick={toggleMenu} className={({ isActive }) => isActive ? "active" : ""}>about</NavLink>
-        <NavLink to="/contact" onClick={toggleMenu} className={({ isActive }) => isActive ? "active" : ""}>contact</NavLink>
+        <NavLink to="/about" onClick={toggleMenu} className={({ isActive }) => isActive ? "active" : ""}>About</NavLink>
+        <NavLink to="/contact" onClick={toggleMenu} className={({ isActive }) => isActive ? "active" : ""}>Contact</NavLink>
+        <NavLink to="/invite" onClick={toggleMenu} className={({ isActive }) => isActive ? "active" : ""}>
+          🎁 Invite Friends
+        </NavLink>
       </div>
     </header>
   );

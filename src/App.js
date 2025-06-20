@@ -9,6 +9,7 @@ import News from "./pages/News";
 import About from "./pages/About";
 import Contact from "./pages/Contact"; // ✅ Correct import
 import Footer from "./components/Footer";
+import InviteFriends from "./pages/InviteFriends";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/news" element={<News />} />
           <Route path="/about" element={<About />} /> {/* ✅ About route */}
           <Route path="/contact" element={<Contact />} /> {/* ✅ Contact route */}
+          <Route path="/invite" element={<InviteFriends />} />
         </Routes>
         <Footer /> 
       </div>
