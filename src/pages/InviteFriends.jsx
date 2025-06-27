@@ -25,7 +25,7 @@ const InviteFriends = () => {
   return (
     <div className="invite-container">
       <img
-        src="/images/invite-banner.png" // 🖼️ Make sure this image is in public/images folder
+        src="/images/invite-banner.png"
         alt="Invite Your Friends"
         className="invite-top-banner"
       />
