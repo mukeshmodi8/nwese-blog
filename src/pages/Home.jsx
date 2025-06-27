@@ -39,7 +39,7 @@ const emojiMap = {
 };
 
 
-// ✅ Add "All" at the top
+
 const categories = ["All", ...rawCategories];
 
 const Home = () => {

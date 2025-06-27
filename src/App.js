@@ -6,9 +6,10 @@ import Blogs from "./pages/Blogs";
 import BlogDetails from "./pages/BlogDetails";
 import News from "./pages/News";
 import About from "./pages/About";
-import Contact from "./pages/Contact"; // ✅ Correct import
+import Contact from "./pages/Contact";
 import Footer from "./components/Footer";
 import InviteFriends from "./pages/InviteFriends";
+import Privacy from "./pages/Privacy";
 
 function App() {
   return (
@@ -20,9 +21,10 @@ function App() {
           <Route path="/blogs" element={<Blogs />} />
           <Route path="/blogs/:id" element={<BlogDetails />} />
           <Route path="/news" element={<News />} />
-          <Route path="/about" element={<About />} /> {/* ✅ About route */}
-          <Route path="/contact" element={<Contact />} /> {/* ✅ Contact route */}
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="/invite" element={<InviteFriends />} />
+          <Route path="/privacy" element={<Privacy />} />
         </Routes>
         <Footer /> 
       </div>

@@ -25,7 +25,7 @@ const Navbar = () => {
         </NavLink>
       </nav>
 
-      \
+      
       <button className="mobile-toggle" onClick={toggleMenu}>
         {isOpen ? <X size={26} /> : <Menu size={26} />}
       </button>

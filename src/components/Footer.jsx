@@ -1,7 +1,5 @@
-// Example usage in Footer.js or Home.js
 import React from "react";
-// import ErrorBoundary from "./components/ErrorBoundary";
-// import NativeAd from "./components/NativeAd";
+import { Link } from "react-router-dom"; // जरूरी है React Router के लिए
 
 const Footer = () => {
   return (
@@ -21,7 +19,16 @@ const Footer = () => {
         }}
       >
         <div>&copy; {new Date().getFullYear()} Mr. Happy Blogs. All Rights Reserved.</div>
-        <p style={{ marginTop: "8px", maxWidth: "600px", marginInline: "auto" }}>
+
+        <div style={{ marginTop: "12px" }}>
+          <Link to="/privacy" style={linkStyle}>Privacy Policy</Link>
+          <span style={{ margin: "0 8px" }}>|</span>
+          <Link to="/about" style={linkStyle}>About</Link>
+          <span style={{ margin: "0 8px" }}>|</span>
+          <Link to="/contact" style={linkStyle}>Contact</Link>
+        </div>
+
+        <p style={{ marginTop: "12px", maxWidth: "600px", marginInline: "auto" }}>
           This website is created for informational and educational purposes only. If you notice any
           unintentional mistakes or inaccuracies in the content, please understand that it may be
           human error. Feel free to contact us for suggestions or corrections.
@@ -29,6 +36,13 @@ const Footer = () => {
       </footer>
     </>
   );
+};
+
+// External Style for Link
+const linkStyle = {
+  textDecoration: "none",
+  color: "#007bff",
+  fontWeight: "500",
 };
 
 export default Footer;

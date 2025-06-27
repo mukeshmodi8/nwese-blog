@@ -1,6 +1,6 @@
 // src/pages/About.jsx
 import React from "react";
-import "./About.css"; // Optional CSS file
+import "./About.css"; 
 
 const About = () => {
      console.log("✅ About Page Loaded");

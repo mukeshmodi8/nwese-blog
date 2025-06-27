@@ -1,0 +1,22 @@
+/* Page links hover effect */
+.footer-link:hover {
+  color: #ffc107; /* Yellow */
+}
+
+/* Icons default */
+.icon {
+  margin: 0 6px;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+/* Social icon hover effects */
+.icon.fb:hover {
+  color: #1877F2; /* Facebook Blue */
+}
+.icon.tw:hover {
+  color: #1DA1F2; /* Twitter Blue */
+}
+.icon.ig:hover {
+  color: #C13584; /* Instagram Pink */
+}
