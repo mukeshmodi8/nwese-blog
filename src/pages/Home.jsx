@@ -3,10 +3,6 @@ import blogs from "../data/blogs";
 import { Link } from "react-router-dom";
 import { formatDistanceToNow, format } from "date-fns";
 import { categories as rawCategories } from "../data/categories";
-// import { categories as rawCategories } from "../data/categories";
-// const categories = ["All", ...rawCategories];
-
-
 import {
   FaWhatsapp,
   FaFacebook,
@@ -37,8 +33,6 @@ const emojiMap = {
   "Real Estate": "🏠",
   "Art & Culture": "🎨",
 };
-
-
 
 const categories = ["All", ...rawCategories];
 
@@ -84,7 +78,7 @@ const Home = () => {
         <div className="card-container">
           {filteredBlogs.map((blog) => {
             const shareText = `Check out this blog: ${blog.title}`;
-            const shareUrl = `${baseUrl}/blogs/${blog.id}`;
+            const shareUrl = `${baseUrl}/blogs/${encodeURIComponent(blog.id)}`;
 
             const whatsappLink = `https://wa.me/?text=${encodeURIComponent(
               shareText + " " + shareUrl
@@ -104,7 +98,9 @@ const Home = () => {
                 <img src={blog.image} alt={blog.title} />
                 <h3>{blog.title}</h3>
                 <p>{blog.content.slice(0, 60)}...</p>
-                <Link to={`/blogs/${blog.id}`}>
+
+                {/* ✅ Updated Link with encodeURIComponent */}
+                <Link to={`/blogs/${encodeURIComponent(blog.id)}`}>
                   <p style={{ fontSize: "14px", color: "#777" }}>
                     📅 Published:{" "}
                     {format(new Date(blog.publishedAt), "hh:mm a")} | ⏱️{" "}

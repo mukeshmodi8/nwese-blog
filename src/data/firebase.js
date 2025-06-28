@@ -1,36 +1,52 @@
-// blog-site/src/firebase.js
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
-import { getDatabase, ref, get, set } from "firebase/database";
 
+
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc,
+  updateDoc,
+  increment,
+} from "firebase/firestore";
+
+
+import { getDatabase } from "firebase/database";
+
+// ✅ Firebase Config
 const firebaseConfig = {
-  apiKey: "AIzaSyCOH8OnAKoATdQwhus3MtY1WkNw_uKnyPw",
-  authDomain: "mr-happy-blog-admin.firebaseapp.com",
-  projectId: "mr-happy-blog-admin",
-  storageBucket: "mr-happy-blog-admin.appspot.com",
-  messagingSenderId: "898141460751",
-  appId: "1:898141460751:web:9542cad34b5410153fc67a",
-  databaseURL: "https://react-blog-comments-default-rtdb.firebaseio.com",
+  apiKey: "YOUR_API_KEY",
+  authDomain: "your-project-id.firebaseapp.com",
+  projectId: "blog-a330c",
+  storageBucket: "your-project-id.appspot.com",
+  messagingSenderId: "YOUR_SENDER_ID",
+  appId: "YOUR_APP_ID",
+ databaseURL: "https://react-blog-comments-default-rtdb.firebaseio.com", // ✅ ADD THIS
 };
 
-const app = initializeApp(firebaseConfig);
-export const db = getFirestore(app);     // 🔥 For reading blogs
-export const rtdb = getDatabase(app);    // 🔥 For views/comments
 
-// ✅ View Count Functions
+const app = initializeApp(firebaseConfig);
+
+
+const firestore = getFirestore(app);
+
+
+export const db = getDatabase(app);
+
+
 export const updateBlogView = async (blogId) => {
-  const viewRef = ref(rtdb, `views/${blogId}`);
-  const snapshot = await get(viewRef);
-  if (snapshot.exists()) {
-    const currentViews = snapshot.val();
-    await set(viewRef, currentViews + 1);
+  const blogRef = doc(firestore, "blogViews", blogId.toString());
+  const snap = await getDoc(blogRef);
+
+  if (snap.exists()) {
+    await updateDoc(blogRef, { views: increment(1) });
   } else {
-    await set(viewRef, 1);
+    await setDoc(blogRef, { views: 1 });
   }
 };
 
 export const fetchBlogView = async (blogId) => {
-  const viewRef = ref(rtdb, `views/${blogId}`);
-  const snapshot = await get(viewRef);
-  return snapshot.exists() ? snapshot.val() : 0;
-};
+  const blogRef = doc(firestore, "blogViews", blogId.toString());
+  const snap = await getDoc(blogRef);
+  return snap.exists() ? snap.data().views : 0;
+}; 

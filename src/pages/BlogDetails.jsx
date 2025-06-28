@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
 import blogs from "../data/blogs";
-import { formatDistanceToNow, format } from "date-fns";
 import { Helmet } from "react-helmet";
 import CommentSection from "../components/CommentSection";
 
@@ -14,38 +13,22 @@ import {
   FaEye,
 } from "react-icons/fa";
 
-import { updateBlogView, fetchBlogView } from "../data/firebase";
-
 const BlogDetails = () => {
   const { id } = useParams();
-  const decodedId = decodeURIComponent(id);
-  const blog = blogs.find((b) => b.id === decodedId);
-  const [views, setViews] = useState(0);
+  const blog = blogs.find((b) => b.id === decodeURIComponent(id));
 
-  useEffect(() => {
-    const handleViews = async () => {
-      if (blog?.id) {
-        await updateBlogView(blog.id.toString());
-        const count = await fetchBlogView(blog.id.toString());
-        setViews(count);
-      }
-    };
-    handleViews();
-  }, [blog]);
-
-  if (!blog) return <h2>❌ Blog Not Found</h2>;
+  if (!blog) {
+    return <h2 className="text-center text-danger">❌ Blog Not Found</h2>;
+  }
 
   const shareText = `Check out this blog: ${blog.title}`;
-  const shareUrl = `${window.location.origin}/blogs/${blog.id}`;
-  const shareImage = `${window.location.origin}${blog.image}`;
-
-  const whatsappLink = `https://wa.me/?text=${encodeURIComponent(shareText + " " + shareUrl)}`;
-  const facebookLink = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`;
-  const twitterLink = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`;
-  const telegramLink = `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}`;
+  const shareUrl = `${window.location.origin}/blogs/${encodeURIComponent(blog.id)}`;
+  const shareImage = blog.image?.startsWith("http")
+    ? blog.image
+    : `${window.location.origin}/${blog.image}`;
 
   return (
-    <div className="blog-details" style={{ padding: "20px" }}>
+    <div className="blog-details container py-4">
       <Helmet>
         <title>{blog.title}</title>
         <meta name="description" content={blog.content.slice(0, 120)} />
@@ -58,62 +41,82 @@ const BlogDetails = () => {
 
       <h1>{blog.title}</h1>
 
-      <img
-        src={blog.image}
-        alt={blog.title}
-        style={{
-          width: "100%",
-          maxWidth: "600px",
-          borderRadius: "8px",
-          marginTop: "20px",
-        }}
-      />
+      {blog.image && (
+        <img
+          src={blog.image}
+          alt={blog.title}
+          className="img-fluid rounded mb-4"
+          style={{ maxWidth: "600px" }}
+        />
+      )}
 
-      <p style={{ fontSize: "18px", marginTop: "20px", whiteSpace: "pre-line" }}>
-        {blog.content}
+      <p style={{ fontSize: "18px", whiteSpace: "pre-line" }}>{blog.content}</p>
+
+      <p className="text-muted">
+        📅 {new Date(blog.publishedAt).toLocaleString()} | ⏱️ {blog.readingTime}
       </p>
 
-      <p style={{ fontSize: "14px", color: "#777" }}>
-        📅 Published: {format(new Date(blog.publishedAt), "hh:mm a")} | ⏱️ {blog.readingTime} | ⌛{" "}
-        {formatDistanceToNow(new Date(blog.publishedAt), { addSuffix: true })}
+      <p className="fw-bold">
+        <FaEye className="me-2 text-secondary" />
+        Views: Static Blogs (No Counter)
       </p>
 
-      <p style={{ fontSize: "16px", marginTop: "10px", fontWeight: "500" }}>
-        <FaEye style={{ marginRight: "6px", color: "#666" }} />
-        Views: {views}
-      </p>
-
+      {/* 🔗 Social Share */}
       <div
+        className="share-icons"
         style={{
-          marginTop: "30px",
           display: "flex",
           alignItems: "center",
           gap: "12px",
+          marginTop: "20px",
           flexWrap: "wrap",
         }}
       >
         <span style={{ fontWeight: "bold", fontSize: "16px" }}>
           <FaShareAlt style={{ marginRight: "5px" }} />
-          Share Social:
+          Share:
         </span>
 
-        <a href={whatsappLink} target="_blank" rel="noopener noreferrer" style={{ color: "#25D366", fontSize: "24px" }} title="WhatsApp">
+        <a
+          href={`https://wa.me/?text=${encodeURIComponent(shareText + " " + shareUrl)}`}
+          target="_blank"
+          rel="noreferrer"
+          title="WhatsApp"
+          style={{ color: "#25D366", fontSize: "24px" }}
+        >
           <FaWhatsapp />
         </a>
-        <a href={facebookLink} target="_blank" rel="noopener noreferrer" style={{ color: "#1877F2", fontSize: "24px" }} title="Facebook">
+        <a
+          href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`}
+          target="_blank"
+          rel="noreferrer"
+          title="Facebook"
+          style={{ color: "#1877F2", fontSize: "24px" }}
+        >
           <FaFacebook />
         </a>
-        <a href={twitterLink} target="_blank" rel="noopener noreferrer" style={{ color: "#1DA1F2", fontSize: "24px" }} title="Twitter">
+        <a
+          href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`}
+          target="_blank"
+          rel="noreferrer"
+          title="Twitter"
+          style={{ color: "#1DA1F2", fontSize: "24px" }}
+        >
           <FaTwitter />
         </a>
-        <a href={telegramLink} target="_blank" rel="noopener noreferrer" style={{ color: "#0088cc", fontSize: "24px" }} title="Telegram">
+        <a
+          href={`https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}`}
+          target="_blank"
+          rel="noreferrer"
+          title="Telegram"
+          style={{ color: "#0088cc", fontSize: "24px" }}
+        >
           <FaTelegram />
         </a>
       </div>
 
-      {/* 🟢 COMMENT SECTION HERE */}
+      <hr className="my-4" />
       <CommentSection blogId={blog.id} />
-
     </div>
   );
 };
