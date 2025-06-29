@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import blogs from "../data/blogs";
 import { Helmet } from "react-helmet";
 import CommentSection from "../components/CommentSection";
+import "./BlogDetails.css";
 
 import {
   FaWhatsapp,
@@ -45,8 +46,7 @@ const BlogDetails = () => {
         <img
           src={blog.image}
           alt={blog.title}
-          className="img-fluid rounded mb-4"
-          style={{ maxWidth: "600px" }}
+          className="blog-detail-image"
         />
       )}
 
