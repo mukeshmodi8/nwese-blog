@@ -17,23 +17,24 @@ import {
 const BlogDetails = () => {
   const { id } = useParams();
   const blog = blogs.find((b) => b.id === decodeURIComponent(id));
-
   const [views, setViews] = useState(0);
 
-  // ✅ View Counter Logic
+  // ✅ View Counter Logic: One view per user per day
   useEffect(() => {
     if (!blog) return;
 
     const viewKey = `viewed_${blog.id}`;
     const viewsKey = `views_${blog.id}`;
-    const hasViewed = localStorage.getItem(viewKey);
+    const today = new Date().toISOString().split("T")[0]; // "2025-06-29"
 
-    if (!hasViewed) {
+    const lastViewed = localStorage.getItem(viewKey);
+
+    if (lastViewed !== today) {
       const currentViews = parseInt(localStorage.getItem(viewsKey) || "0", 10);
       const newViews = currentViews + 1;
 
       localStorage.setItem(viewsKey, newViews.toString());
-      localStorage.setItem(viewKey, "true");
+      localStorage.setItem(viewKey, today);
       setViews(newViews);
     } else {
       const existingViews = parseInt(localStorage.getItem(viewsKey) || "0", 10);
