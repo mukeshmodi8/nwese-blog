@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import blogs from "../data/blogs";
 import { Helmet } from "react-helmet";
@@ -17,6 +17,29 @@ import {
 const BlogDetails = () => {
   const { id } = useParams();
   const blog = blogs.find((b) => b.id === decodeURIComponent(id));
+
+  const [views, setViews] = useState(0);
+
+  // ✅ View Counter Logic
+  useEffect(() => {
+    if (!blog) return;
+
+    const viewKey = `viewed_${blog.id}`;
+    const viewsKey = `views_${blog.id}`;
+    const hasViewed = localStorage.getItem(viewKey);
+
+    if (!hasViewed) {
+      const currentViews = parseInt(localStorage.getItem(viewsKey) || "0", 10);
+      const newViews = currentViews + 1;
+
+      localStorage.setItem(viewsKey, newViews.toString());
+      localStorage.setItem(viewKey, "true");
+      setViews(newViews);
+    } else {
+      const existingViews = parseInt(localStorage.getItem(viewsKey) || "0", 10);
+      setViews(existingViews);
+    }
+  }, [blog]);
 
   if (!blog) {
     return <h2 className="text-center text-danger">❌ Blog Not Found</h2>;
@@ -58,7 +81,7 @@ const BlogDetails = () => {
 
       <p className="fw-bold">
         <FaEye className="me-2 text-secondary" />
-        Views: Static Blogs (No Counter)
+        Views: {views}
       </p>
 
       {/* 🔗 Social Share */}
