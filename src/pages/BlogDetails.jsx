@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import blogs from "../data/blogs";
 import { Helmet } from "react-helmet";
@@ -18,28 +18,20 @@ const BlogDetails = () => {
   const { id } = useParams();
   const blog = blogs.find((b) => b.id === decodeURIComponent(id));
   const [views, setViews] = useState(0);
+  const hasCounted = useRef(false); // ✅ Added
 
-  // ✅ View Counter Logic: One view per user per day
+  // ✅ View count increases only once per real render (prevents +2 bug in dev)
   useEffect(() => {
-    if (!blog) return;
+    if (!blog || hasCounted.current) return;
 
-    const viewKey = `viewed_${blog.id}`;
     const viewsKey = `views_${blog.id}`;
-    const today = new Date().toISOString().split("T")[0]; // "2025-06-29"
+    const currentViews = parseInt(localStorage.getItem(viewsKey) || "0", 10);
+    const newViews = currentViews + 1;
 
-    const lastViewed = localStorage.getItem(viewKey);
+    localStorage.setItem(viewsKey, newViews.toString());
+    setViews(newViews);
 
-    if (lastViewed !== today) {
-      const currentViews = parseInt(localStorage.getItem(viewsKey) || "0", 10);
-      const newViews = currentViews + 1;
-
-      localStorage.setItem(viewsKey, newViews.toString());
-      localStorage.setItem(viewKey, today);
-      setViews(newViews);
-    } else {
-      const existingViews = parseInt(localStorage.getItem(viewsKey) || "0", 10);
-      setViews(existingViews);
-    }
+    hasCounted.current = true;
   }, [blog]);
 
   if (!blog) {
