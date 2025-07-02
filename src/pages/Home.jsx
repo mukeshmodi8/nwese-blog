@@ -10,6 +10,7 @@ import {
   FaTelegram,
   FaShareAlt,
 } from "react-icons/fa";
+import { Helmet } from "react-helmet";
 import "./Home.css";
 
 const emojiMap = {
@@ -47,9 +48,34 @@ const Home = () => {
 
   return (
     <div className="home-page">
+      {/* ✅ SEO Helmet */}
+      <Helmet>
+        <title>Mr Happy Blog | Hindi Tech & News Articles</title>
+        <meta
+          name="description"
+          content="Mr Happy Blog: हिंदी में पढ़ें लेटेस्ट टेक्नोलॉजी, न्यूज़, एंटरटेनमेंट और एजुकेशन से जुड़े मजेदार ब्लॉग्स।"
+        />
+        <meta
+          name="keywords"
+          content="Mr Happy, Mr Happy Blog, Hindi Tech Blog, React Blog, न्यूज़ ब्लॉग, Developer Blog"
+        />
+        <meta name="author" content="Mr Happy" />
+        <meta property="og:title" content="Mr Happy Blog | Latest Hindi Articles" />
+        <meta
+          property="og:description"
+          content="Mr Happy का ब्लॉग - हिंदी में कोडिंग, न्यूज़, तकनीक और जीवन से जुड़ी जानकारी।"
+        />
+        <meta property="og:url" content={baseUrl} />
+        <meta property="og:type" content="website" />
+      </Helmet>
+
+      {/* ✅ SEO-Friendly Heading */}
       <div className="hero">
-        <h1>Welcome to Blog & News</h1>
-        <p>Daily interesting content</p>
+        <h1>Mr Happy Blog - Official Hindi Tech & News Articles</h1>
+        <p>
+          Mr Happy द्वारा लिखा गया हिंदी ब्लॉग — यहाँ पढ़ें हर दिन रोचक तकनीकी,
+          मनोरंजन, एजुकेशन और लाइफ से जुड़ी नई पोस्ट्स।
+        </p>
       </div>
 
       {/* 🔽 Dropdown Category Selector */}
@@ -75,6 +101,7 @@ const Home = () => {
             ? "Latest Blogs"
             : `${selectedCategory} Blogs`}
         </h2>
+
         <div className="card-container">
           {filteredBlogs.map((blog) => {
             const shareText = `Check out this blog: ${blog.title}`;
@@ -97,9 +124,15 @@ const Home = () => {
               <div key={blog.id} className="card">
                 <img src={blog.image} alt={blog.title} />
                 <h3>{blog.title}</h3>
-                <p>{blog.content.slice(0, 60)}...</p>
 
-                {/* ✅ Updated Link with encodeURIComponent */}
+                {/* ✅ HTML-safe preview */}
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: blog.content.slice(0, 60) + "..."
+                  }}
+                  style={{ fontSize: "14px", color: "#333" }}
+                ></div>
+
                 <Link to={`/blogs/${encodeURIComponent(blog.id)}`}>
                   <p style={{ fontSize: "14px", color: "#777" }}>
                     📅 Published:{" "}

@@ -1,40 +1,73 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React from "react";
+import { Link } from "react-router-dom";
+import blogs from "../data/blogs";
+import {
+  FaShareAlt,
+  FaWhatsapp,
+  FaFacebook,
+  FaTwitter,
+} from "react-icons/fa";
+import "./News.css";
 
 const News = () => {
-  const [articles, setArticles] = useState([]);
+  const newsBlogs = blogs.filter(
+    (item) => item.category.trim().toLowerCase() === "newse"
+  );
 
-  useEffect(() => {
-    axios
-      .get("https://newsapi.org/v2/top-headlines?country=in&apiKey=YOUR_API_KEY")
-      .then((res) => setArticles(res.data.articles))
-      .catch((err) => console.error(err));
-  }, []);
+  const shareBlog = (platform, blog) => {
+    const url = `${window.location.origin}/blogs/${blog.id}`;
+    const text = `${blog.title} - पढ़ें Mr. Happy Blog पर!`;
+
+    let shareUrl = "";
+    if (platform === "whatsapp") {
+      shareUrl = `https://wa.me/?text=${encodeURIComponent(text + " " + url)}`;
+    } else if (platform === "facebook") {
+      shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+        url
+      )}`;
+    } else if (platform === "twitter") {
+      shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
+        text
+      )}&url=${encodeURIComponent(url)}`;
+    }
+
+    window.open(shareUrl, "_blank");
+  };
 
   return (
-    <div className="p-4">
-      <h2 className="text-2xl font-bold mb-6 text-center">📰 Latest News</h2>
+    <div className="news-container">
+      <h2 className="news-heading">📰 Latest News</h2>
+      <div className="news-grid">
+        {newsBlogs.map((blog) => (
+          <div className="news-card" key={blog.id}>
+            <img src={blog.image} alt={blog.title} className="news-img" />
+            <div className="news-content">
+              <h3>{blog.title}</h3>
+              <p className="news-date">
+                🗓️ {new Date(blog.publishedAt).toLocaleDateString()}
+              </p>
+              <p>{blog.readingTime} read</p>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {articles.map((news, i) => (
-          <div key={i} className="p-4 border rounded shadow hover:shadow-lg transition duration-300">
-            {news.urlToImage && (
-              <img
-                src={news.urlToImage}
-                alt={news.title}
-                className="w-full h-48 object-cover rounded mb-3"
-              />
-            )}
-            <h3 className="font-semibold text-lg mb-1">{news.title}</h3>
-            <p className="text-sm text-gray-700 mb-2">{news.description}</p>
-            <a
-              href={news.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-600 hover:underline"
-            >
-              Read More →
-            </a>
+              <Link to={`/blogs/${blog.id}`} className="read-more-btn">
+                Read More →
+              </Link>
+
+              <div className="share-icons">
+                <FaShareAlt title="Share" />
+                <FaWhatsapp
+                  title="WhatsApp"
+                  onClick={() => shareBlog("whatsapp", blog)}
+                />
+                <FaFacebook
+                  title="Facebook"
+                  onClick={() => shareBlog("facebook", blog)}
+                />
+                <FaTwitter
+                  title="Twitter"
+                  onClick={() => shareBlog("twitter", blog)}
+                />
+              </div>
+            </div>
           </div>
         ))}
       </div>

@@ -18,9 +18,8 @@ const BlogDetails = () => {
   const { id } = useParams();
   const blog = blogs.find((b) => b.id === decodeURIComponent(id));
   const [views, setViews] = useState(0);
-  const hasCounted = useRef(false); // ✅ Added
+  const hasCounted = useRef(false); // Prevent multiple count
 
-  // ✅ View count increases only once per real render (prevents +2 bug in dev)
   useEffect(() => {
     if (!blog || hasCounted.current) return;
 
@@ -66,7 +65,12 @@ const BlogDetails = () => {
         />
       )}
 
-      <p style={{ fontSize: "18px", whiteSpace: "pre-line" }}>{blog.content}</p>
+      {/* ✅ Show content as real HTML */}
+      <div
+        className="blog-content"
+        style={{ fontSize: "18px", lineHeight: "1.6" }}
+        dangerouslySetInnerHTML={{ __html: blog.content }}
+      />
 
       <p className="text-muted">
         📅 {new Date(blog.publishedAt).toLocaleString()} | ⏱️ {blog.readingTime}
