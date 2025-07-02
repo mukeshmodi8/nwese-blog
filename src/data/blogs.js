@@ -86,7 +86,7 @@ const blogs = [
   </tbody>
 </table>
 
-<h2>🌟 Details of Top 5 Places</h2>
+<h2>🌟 Details of Top 10 Places</h2>
 
 <h3>1. Statue of Unity (Kevadia)</h3>
 <div style="text-align:center; margin: 30px 0;">
