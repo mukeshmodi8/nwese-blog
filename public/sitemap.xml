@@ -1,13 +1,19 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+>
   <url>
-    <loc>https://nwese-blog-5xg5.vercel.app/</loc>
-    <changefreq>daily</changefreq>
+    <loc>https://nwese-blog-3z8e.vercel.app/</loc>
     <priority>1.0</priority>
   </url>
+  <!-- Add your blog pages dynamically or manually -->
   <url>
-    <loc>https://nwese-blog-5xg5.vercel.app/blogs/Arbuda%20Nasta%20House</loc>
-    <changefreq>weekly</changefreq>
+    <loc>https://nwese-blog-3z8e.vercel.app/blogs/Chandrayaan%204</loc>
     <priority>0.8</priority>
   </url>
+  <url>
+    <loc>https://nwese-blog-3z8e.vercel.app/blogs/ONDC</loc>
+    <priority>0.8</priority>
+  </url>
+  <!-- और भी जितने ब्लॉग हैं, वो सब url यहां डालो -->
 </urlset>

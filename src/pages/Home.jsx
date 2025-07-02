@@ -60,6 +60,7 @@ const Home = () => {
           content="Mr Happy, Mr Happy Blog, Hindi Tech Blog, React Blog, न्यूज़ ब्लॉग, Developer Blog"
         />
         <meta name="author" content="Mr Happy" />
+        <meta name="google-site-verification" content="bENOC1iJE7Tk0d7xoOCnaLz-LUndi4la1JuKEKyX6to" />
         <meta property="og:title" content="Mr Happy Blog | Latest Hindi Articles" />
         <meta
           property="og:description"
