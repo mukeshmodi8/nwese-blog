@@ -1,3 +1,4 @@
+// src/components/AdBanner.jsx
 import React, { useEffect, useRef } from "react";
 
 const AdBanner = () => {
@@ -12,7 +13,7 @@ const AdBanner = () => {
       "//pl26954151.profitableratecpm.com/9811eb47cec886e50887ad29cf5a19f2/invoke.js";
 
     if (adRef.current) {
-      adRef.current.innerHTML = ""; // remove old if re-render
+      adRef.current.innerHTML = "";
       const containerDiv = document.createElement("div");
       containerDiv.id = "container-9811eb47cec886e50887ad29cf5a19f2";
       adRef.current.appendChild(containerDiv);

@@ -2,9 +2,10 @@ import React, { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import blogs from "../data/blogs";
 import { Helmet } from "react-helmet";
-import "../styles/blog.css"; // ✅ CSS Import for Blog Content Styling
+import "../styles/blog.css";
 import CommentSection from "../components/CommentSection";
 import "./BlogDetails.css";
+import AdBanner from "../components/AdBanner"; // ✅ AdBanner Import
 
 import {
   FaWhatsapp,
@@ -66,6 +67,9 @@ const BlogDetails = () => {
 
       <h1>{blog.title}</h1>
 
+      {/* ✅ Ad after Title */}
+      <AdBanner />
+
       {blog.image && (
         <img
           src={shareImage}
@@ -75,11 +79,16 @@ const BlogDetails = () => {
         />
       )}
 
-      {/* ✅ Main Blog HTML Content */}
+      {/* ✅ Ad after Image */}
+      <AdBanner />
+
       <div
         className="blog-content"
         dangerouslySetInnerHTML={{ __html: blog.content }}
       />
+
+      {/* ✅ Ad after content */}
+      <AdBanner />
 
       <p className="text-muted">
         📅 {new Date(blog.publishedAt).toLocaleString()} | ⏱️ {blog.readingTime}
@@ -90,7 +99,6 @@ const BlogDetails = () => {
         Views: {views}
       </p>
 
-      {/* ✅ Social Sharing */}
       <div
         className="share-icons"
         style={{
