@@ -18,19 +18,27 @@ const BlogDetails = () => {
   const { id } = useParams();
   const blog = blogs.find((b) => b.id === decodeURIComponent(id));
   const [views, setViews] = useState(0);
-  const hasCounted = useRef(false); // Prevent multiple count
+  const hasCounted = useRef(false);
 
   useEffect(() => {
     if (!blog || hasCounted.current) return;
 
     const viewsKey = `views_${blog.id}`;
-    const currentViews = parseInt(localStorage.getItem(viewsKey) || "0", 10);
-    const newViews = currentViews + 1;
+    const sessionKey = `session_viewed_${blog.id}`;
 
-    localStorage.setItem(viewsKey, newViews.toString());
-    setViews(newViews);
+    if (!sessionStorage.getItem(sessionKey)) {
+      const currentViews = parseInt(localStorage.getItem(viewsKey) || "0", 10);
+      const newViews = currentViews + 1;
+      localStorage.setItem(viewsKey, newViews.toString());
+      setViews(newViews);
+      sessionStorage.setItem(sessionKey, "true");
+    } else {
+      const currentViews = parseInt(localStorage.getItem(viewsKey) || "0", 10);
+      setViews(currentViews);
+    }
 
     hasCounted.current = true;
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }, [blog]);
 
   if (!blog) {
@@ -46,10 +54,10 @@ const BlogDetails = () => {
   return (
     <div className="blog-details container py-4">
       <Helmet>
-        <title>{blog.title}</title>
-        <meta name="description" content={blog.content.slice(0, 120)} />
-        <meta property="og:title" content={blog.title} />
-        <meta property="og:description" content={blog.content.slice(0, 120)} />
+        <title>{blog?.title || "Blog Post"}</title>
+        <meta name="description" content={blog?.content?.slice(0, 120) || "Read this amazing blog."} />
+        <meta property="og:title" content={blog?.title || "Blog Title"} />
+        <meta property="og:description" content={blog?.content?.slice(0, 120) || "Read this blog"} />
         <meta property="og:image" content={shareImage} />
         <meta property="og:url" content={shareUrl} />
         <meta property="og:type" content="article" />
@@ -59,13 +67,13 @@ const BlogDetails = () => {
 
       {blog.image && (
         <img
-          src={blog.image}
+          src={shareImage}
           alt={blog.title}
           className="blog-detail-image"
+          onError={(e) => (e.target.src = "/fallback.jpg")}
         />
       )}
 
-      {/* ✅ Show content as real HTML */}
       <div
         className="blog-content"
         style={{ fontSize: "18px", lineHeight: "1.6" }}
@@ -81,7 +89,6 @@ const BlogDetails = () => {
         Views: {views}
       </p>
 
-      {/* 🔗 Social Share */}
       <div
         className="share-icons"
         style={{
