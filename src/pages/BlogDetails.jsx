@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import blogs from "../data/blogs";
 import { Helmet } from "react-helmet";
+import "../styles/blog.css"; // ✅ CSS Import for Blog Content Styling
 import CommentSection from "../components/CommentSection";
 import "./BlogDetails.css";
 
@@ -74,9 +75,9 @@ const BlogDetails = () => {
         />
       )}
 
+      {/* ✅ Main Blog HTML Content */}
       <div
         className="blog-content"
-        style={{ fontSize: "18px", lineHeight: "1.6" }}
         dangerouslySetInnerHTML={{ __html: blog.content }}
       />
 
@@ -89,6 +90,7 @@ const BlogDetails = () => {
         Views: {views}
       </p>
 
+      {/* ✅ Social Sharing */}
       <div
         className="share-icons"
         style={{
