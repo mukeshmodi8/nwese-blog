@@ -5,7 +5,6 @@ import { Helmet } from "react-helmet";
 import "../styles/blog.css";
 import CommentSection from "../components/CommentSection";
 import "./BlogDetails.css";
-import AdBanner from "../components/AdBanner"; // ✅ AdBanner Import
 
 import {
   FaWhatsapp,
@@ -15,6 +14,26 @@ import {
   FaShareAlt,
   FaEye,
 } from "react-icons/fa";
+
+// ✅ FUNCTION: Insert ads after every 3 <p> blocks
+const insertAdsInContent = (htmlString) => {
+  const adHtml = `
+    <div class="mid-article-ad" style="margin: 30px 0; text-align: center;">
+      <div id="container-9811eb47cec886e50887ad29cf5a19f2"></div>
+    </div>
+  `;
+
+  const parts = htmlString.split("</p>");
+  let result = "";
+  parts.forEach((part, index) => {
+    result += part + "</p>";
+    if ((index + 1) % 3 === 0) {
+      result += adHtml;
+    }
+  });
+
+  return result;
+};
 
 const BlogDetails = () => {
   const { id } = useParams();
@@ -43,6 +62,19 @@ const BlogDetails = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [blog]);
 
+  // ✅ Load external ad script for every injected ad container
+  useEffect(() => {
+    const adContainers = document.querySelectorAll("[id^=container-]");
+    adContainers.forEach((container) => {
+      const script = document.createElement("script");
+      script.async = true;
+      script.setAttribute("data-cfasync", "false");
+      script.src = "//pl26954151.profitableratecpm.com/9811eb47cec886e50887ad29cf5a19f2/invoke.js";
+      container.innerHTML = "";
+      container.appendChild(script);
+    });
+  }, [blog]);
+
   if (!blog) {
     return <h2 className="text-center text-danger">❌ Blog Not Found</h2>;
   }
@@ -67,9 +99,6 @@ const BlogDetails = () => {
 
       <h1>{blog.title}</h1>
 
-      {/* ✅ Ad after Title */}
-      <AdBanner />
-
       {blog.image && (
         <img
           src={shareImage}
@@ -79,16 +108,11 @@ const BlogDetails = () => {
         />
       )}
 
-      {/* ✅ Ad after Image */}
-      <AdBanner />
-
+      {/* ✅ Injected HTML + Ads */}
       <div
         className="blog-content"
-        dangerouslySetInnerHTML={{ __html: blog.content }}
+        dangerouslySetInnerHTML={{ __html: insertAdsInContent(blog.content) }}
       />
-
-      {/* ✅ Ad after content */}
-      <AdBanner />
 
       <p className="text-muted">
         📅 {new Date(blog.publishedAt).toLocaleString()} | ⏱️ {blog.readingTime}
