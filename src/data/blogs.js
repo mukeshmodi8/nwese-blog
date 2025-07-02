@@ -69,7 +69,7 @@ const blogs = [
     image: "/images/temple2.png",
     publishedAt: "2025-06-28T03:40:00",
     readingTime: "5 min",
-    category: "Food",
+    category: "Travel",
     content: `<h1>Top 10 Tourist Places in Gujarat with Local Tips</h1>
 
 <p>गुजरात, भारत का एक सांस्कृतिक और ऐतिहासिक राज्य है, जो अपने समृद्ध इतिहास, मंदिरों, प्राकृतिक सौंदर्य और त्योहारों के लिए जाना जाता है। अगर आप गुजरात घूमने का प्लान बना रहे हैं, तो ये टॉप 10 टूरिस्ट प्लेसेस आपकी यात्रा को खास बना देंगे।</p>

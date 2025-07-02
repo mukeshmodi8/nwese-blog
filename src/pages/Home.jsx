@@ -29,6 +29,7 @@ const emojiMap = {
   Food: "🍕",
   Fashion: "👗",
   Gaming: "🎮",
+  Culture: "🌍",
   Environment: "🌿",
   Automotive: "🚗",
   "Real Estate": "🏠",
