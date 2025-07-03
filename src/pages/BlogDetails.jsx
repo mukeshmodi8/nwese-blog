@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import blogs from "../data/blogs";
 import { Helmet } from "react-helmet";
@@ -39,26 +39,16 @@ const BlogDetails = () => {
   const { id } = useParams();
   const blog = blogs.find((b) => b.id === decodeURIComponent(id));
   const [views, setViews] = useState(0);
-  const hasCounted = useRef(false);
 
   useEffect(() => {
-    if (!blog || hasCounted.current) return;
+    if (!blog) return;
 
     const viewsKey = `views_${blog.id}`;
-    const sessionKey = `session_viewed_${blog.id}`;
+    const currentViews = parseInt(localStorage.getItem(viewsKey) || "0", 10);
+    const newViews = currentViews + 1;
+    localStorage.setItem(viewsKey, newViews.toString());
+    setViews(newViews);
 
-    if (!sessionStorage.getItem(sessionKey)) {
-      const currentViews = parseInt(localStorage.getItem(viewsKey) || "0", 10);
-      const newViews = currentViews + 1;
-      localStorage.setItem(viewsKey, newViews.toString());
-      setViews(newViews);
-      sessionStorage.setItem(sessionKey, "true");
-    } else {
-      const currentViews = parseInt(localStorage.getItem(viewsKey) || "0", 10);
-      setViews(currentViews);
-    }
-
-    hasCounted.current = true;
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [blog]);
 
