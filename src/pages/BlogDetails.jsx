@@ -14,6 +14,8 @@ import {
   FaShareAlt,
   FaEye,
 } from "react-icons/fa";
+import { ref, runTransaction } from "firebase/database";
+import { db } from "../data/firebase";
 
 // ✅ FUNCTION: Insert ad placeholders after every 3 <p> blocks
 const insertAdsInContent = (htmlString) => {
@@ -41,17 +43,20 @@ const BlogDetails = () => {
   const blog = blogs.find((b) => b.id === decodeURIComponent(id));
   const [views, setViews] = useState(0);
 
-  useEffect(() => {
-    if (!blog) return;
+ useEffect(() => {
+  if (!blog) return;
 
-    const viewsKey = `views_${blog.id}`;
-    const currentViews = parseInt(localStorage.getItem(viewsKey) || "0", 10);
-    const newViews = currentViews + 1;
-    localStorage.setItem(viewsKey, newViews.toString());
-    setViews(newViews);
+  const blogRef = ref(db, `views/${blog.id}`);
 
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }, [blog]);
+  runTransaction(blogRef, (currentViews) => {
+    return (currentViews || 0) + 1;
+  }).then((result) => {
+    setViews(result.snapshot.val());
+  });
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}, [blog]);
+
 
   // ✅ OPTIONAL: Load Adsterra script globally if needed
   // useEffect(() => {
