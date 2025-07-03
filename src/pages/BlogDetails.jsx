@@ -15,11 +15,12 @@ import {
   FaEye,
 } from "react-icons/fa";
 
-// ✅ FUNCTION: Insert ads after every 3 <p> blocks
+// ✅ FUNCTION: Insert ad placeholders after every 3 <p> blocks
 const insertAdsInContent = (htmlString) => {
-  const adHtml = `
+  const adPlaceholder = `
+    <!-- 🟡 Adsterra Ad Placeholder -->
     <div class="mid-article-ad" style="margin: 30px 0; text-align: center;">
-      <div id="container-9811eb47cec886e50887ad29cf5a19f2"></div>
+      <!-- Adsterra script and ad container will go here -->
     </div>
   `;
 
@@ -28,7 +29,7 @@ const insertAdsInContent = (htmlString) => {
   parts.forEach((part, index) => {
     result += part + "</p>";
     if ((index + 1) % 3 === 0) {
-      result += adHtml;
+      result += adPlaceholder;
     }
   });
 
@@ -52,18 +53,13 @@ const BlogDetails = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [blog]);
 
-  // ✅ Load external ad script for every injected ad container
-  useEffect(() => {
-    const adContainers = document.querySelectorAll("[id^=container-]");
-    adContainers.forEach((container) => {
-      const script = document.createElement("script");
-      script.async = true;
-      script.setAttribute("data-cfasync", "false");
-      script.src = "//pl26954151.profitableratecpm.com/9811eb47cec886e50887ad29cf5a19f2/invoke.js";
-      container.innerHTML = "";
-      container.appendChild(script);
-    });
-  }, [blog]);
+  // ✅ OPTIONAL: Load Adsterra script globally if needed
+  // useEffect(() => {
+  //   const script = document.createElement("script");
+  //   script.src = "https://YOUR-ADSTERRA-LINK.script.js"; // Replace with your real Adsterra link
+  //   script.async = true;
+  //   document.body.appendChild(script);
+  // }, []);
 
   if (!blog) {
     return <h2 className="text-center text-danger">❌ Blog Not Found</h2>;
@@ -98,7 +94,6 @@ const BlogDetails = () => {
         />
       )}
 
-      {/* ✅ Injected HTML + Ads */}
       <div
         className="blog-content"
         dangerouslySetInnerHTML={{ __html: insertAdsInContent(blog.content) }}
