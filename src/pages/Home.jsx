@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import blogs from "../data/blogs";
 import { Link } from "react-router-dom";
 import { formatDistanceToNow, format } from "date-fns";
@@ -46,6 +46,18 @@ const Home = () => {
     selectedCategory === "All"
       ? blogs
       : blogs.filter((b) => b.category === selectedCategory);
+      
+  useEffect(() => {
+    const popupAdScript = document.createElement("script");
+    popupAdScript.src = "//pl27073574.profitableratecpm.com/ce/cc/47/cecc470dcc4bf408d60f8bc10f665012.js";
+    popupAdScript.async = true;
+    document.body.appendChild(popupAdScript);
+
+    return () => {
+      document.body.removeChild(popupAdScript);
+    };
+  }, []);
+
 
   return (
     <div className="home-page">

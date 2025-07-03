@@ -14,160 +14,84 @@ import {
   FaShareAlt,
   FaEye,
 } from "react-icons/fa";
-import { ref, runTransaction } from "firebase/database";
-import { db } from "../data/firebase";
-
-// ✅ FUNCTION: Insert ad placeholders after every 3 <p> blocks
-const insertAdsInContent = (htmlString) => {
-  const adPlaceholder = `
-    <!-- 🟡 Adsterra Ad Placeholder -->
-    <div class="mid-article-ad" style="margin: 30px 0; text-align: center;">
-      <!-- Adsterra script and ad container will go here -->
-    </div>
-  `;
-
-  const parts = htmlString.split("</p>");
-  let result = "";
-  parts.forEach((part, index) => {
-    result += part + "</p>";
-    if ((index + 1) % 3 === 0) {
-      result += adPlaceholder;
-    }
-  });
-
-  return result;
-};
 
 const BlogDetails = () => {
   const { id } = useParams();
-  const blog = blogs.find((b) => b.id === decodeURIComponent(id));
-  const [views, setViews] = useState(0);
+  const blog = blogs.find((b) => b.id === id);
+  const [htmlContent, setHtmlContent] = useState("");
 
- useEffect(() => {
-  if (!blog) return;
+  useEffect(() => {
+    if (blog && blog.content) {
+      const modifiedContent = insertAdsInContent(blog.content);
+      setHtmlContent(modifiedContent);
+    }
+  }, [blog]);
 
-  const blogRef = ref(db, `views/${blog.id}`);
+  // ✅ Mid-Article Ad Insertion (after every 3 <p>)
+  const insertAdsInContent = (htmlString) => {
+    const adPlaceholder = `
+      <div class="mid-article-ad" style="margin: 30px 0; text-align: center;">
+        <script async="async" data-cfasync="false" src="//pl26954151.profitableratecpm.com/9811eb47cec886e50887ad29cf5a19f2/invoke.js"></script>
+        <div id="container-9811eb47cec886e50887ad29cf5a19f2"></div>
+      </div>
+    `;
+    const parts = htmlString.split("</p>");
+    let result = "";
+    parts.forEach((part, index) => {
+      result += part + "</p>";
+      if ((index + 1) % 3 === 0) {
+        result += adPlaceholder;
+      }
+    });
+    return result;
+  };
 
-  runTransaction(blogRef, (currentViews) => {
-    return (currentViews || 0) + 1;
-  }).then((result) => {
-    setViews(result.snapshot.val());
-  });
+  useEffect(() => {
+    // ✅ Global Popunder Script (loads once)
+    const popScript = document.createElement("script");
+    popScript.src = "//pl26953552.profitableratecpm.com/6a/39/23/6a392388ddb1d4aa0f2247847e971468.js";
+    popScript.async = true;
+    document.body.appendChild(popScript);
 
-  window.scrollTo({ top: 0, behavior: "smooth" });
-}, [blog]);
+    // ✅ Bottom Container Ad (invoke.js)
+    const bottomScript = document.createElement("script");
+    bottomScript.src = "//pl26954151.profitableratecpm.com/9811eb47cec886e50887ad29cf5a19f2/invoke.js";
+    bottomScript.async = true;
+    bottomScript.setAttribute("data-cfasync", "false");
+    const container = document.getElementById("bottom-ad-container");
+    if (container) {
+      container.appendChild(bottomScript);
+    }
 
+    // Cleanup scripts on unmount
+    return () => {
+      document.body.removeChild(popScript);
+      if (container) {
+        container.innerHTML = "";
+      }
+    };
+  }, []);
 
-  // ✅ OPTIONAL: Load Adsterra script globally if needed
-  // useEffect(() => {
-  //   const script = document.createElement("script");
-  //   script.src = "https://YOUR-ADSTERRA-LINK.script.js"; // Replace with your real Adsterra link
-  //   script.async = true;
-  //   document.body.appendChild(script);
-  // }, []);
-
-  if (!blog) {
-    return <h2 className="text-center text-danger">❌ Blog Not Found</h2>;
-  }
-
-  const shareText = `Check out this blog: ${blog.title}`;
-  const shareUrl = `${window.location.origin}/blogs/${encodeURIComponent(blog.id)}`;
-  const shareImage = blog.image?.startsWith("http")
-    ? blog.image
-    : `${window.location.origin}/${blog.image}`;
+  if (!blog) return <h1>Blog Not Found</h1>;
 
   return (
-    <div className="blog-details container py-4">
+    <div className="blog-details-container">
       <Helmet>
-        <title>{blog?.title || "Blog Post"}</title>
-        <meta name="description" content={blog?.content?.slice(0, 120) || "Read this amazing blog."} />
-        <meta property="og:title" content={blog?.title || "Blog Title"} />
-        <meta property="og:description" content={blog?.content?.slice(0, 120) || "Read this blog"} />
-        <meta property="og:image" content={shareImage} />
-        <meta property="og:url" content={shareUrl} />
-        <meta property="og:type" content="article" />
+        <title>{blog.title}</title>
+        <meta name="description" content={blog.title} />
       </Helmet>
 
-      <h1>{blog.title}</h1>
+      <h1 className="blog-title">{blog.title}</h1>
+      <p className="blog-date">{new Date(blog.publishedAt).toLocaleDateString()}</p>
+      <img className="blog-image" src={blog.image} alt={blog.title} />
 
-      {blog.image && (
-        <img
-          src={shareImage}
-          alt={blog.title}
-          className="blog-detail-image"
-          onError={(e) => (e.target.src = "/fallback.jpg")}
-        />
-      )}
+      <div className="blog-content" dangerouslySetInnerHTML={{ __html: htmlContent }} />
 
-      <div
-        className="blog-content"
-        dangerouslySetInnerHTML={{ __html: insertAdsInContent(blog.content) }}
-      />
+      {/* ✅ Bottom Ad Container */}
+      <div id="bottom-ad-container" style={{ textAlign: "center", margin: "40px 0" }}></div>
 
-      <p className="text-muted">
-        📅 {new Date(blog.publishedAt).toLocaleString()} | ⏱️ {blog.readingTime}
-      </p>
-
-      <p className="fw-bold">
-        <FaEye className="me-2 text-secondary" />
-        Views: {views}
-      </p>
-
-      <div
-        className="share-icons"
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "12px",
-          marginTop: "20px",
-          flexWrap: "wrap",
-        }}
-      >
-        <span style={{ fontWeight: "bold", fontSize: "16px" }}>
-          <FaShareAlt style={{ marginRight: "5px" }} />
-          Share:
-        </span>
-
-        <a
-          href={`https://wa.me/?text=${encodeURIComponent(shareText + " " + shareUrl)}`}
-          target="_blank"
-          rel="noreferrer"
-          title="WhatsApp"
-          style={{ color: "#25D366", fontSize: "24px" }}
-        >
-          <FaWhatsapp />
-        </a>
-        <a
-          href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`}
-          target="_blank"
-          rel="noreferrer"
-          title="Facebook"
-          style={{ color: "#1877F2", fontSize: "24px" }}
-        >
-          <FaFacebook />
-        </a>
-        <a
-          href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`}
-          target="_blank"
-          rel="noreferrer"
-          title="Twitter"
-          style={{ color: "#1DA1F2", fontSize: "24px" }}
-        >
-          <FaTwitter />
-        </a>
-        <a
-          href={`https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}`}
-          target="_blank"
-          rel="noreferrer"
-          title="Telegram"
-          style={{ color: "#0088cc", fontSize: "24px" }}
-        >
-          <FaTelegram />
-        </a>
-      </div>
-
-      <hr className="my-4" />
-      <CommentSection blogId={blog.id} />
+      {/* ✅ Comment Section */}
+      <CommentSection blogId={id} />
     </div>
   );
 };
