@@ -1057,7 +1057,7 @@ GPT-4o सिर्फ एक AI नहीं, बल्कि भविष्�
     image: "/images/ondc.jpg",
     publishedAt: "2025-06-18T11:00:00",
     readingTime: "6 min",
-    category: "Newse",
+    category: "News",
     content: `
 <h2>🛒 ONDC: भारत का अपना डिजिटल कॉमर्स नेटवर्क</h2>
 <p><strong>ONDC (Open Network for Digital Commerce)</strong> भारत सरकार की एक क्रांतिकारी योजना है,  
@@ -1146,7 +1146,7 @@ AI मशीनों को स्मार्ट बनाता है ता
     image: "/images/airoplan.webp",
     publishedAt: "2025-06-18T19:00:00",
     readingTime: "4 min",
-    category: "Newse",
+    category: "News",
     content: `
 <h2>✈️ 12 जून 2025 – एयर इंडिया AI-171 का भयावह हादसा</h2>
 
@@ -1208,7 +1208,7 @@ AI मशीनों को स्मार्ट बनाता है ता
     image: "/images/chandrayaan-4-mission-1.jpg",
     publishedAt: "2025-06-18T12:00:00",
     readingTime: "8 min",
-    category: "Newse",
+    category: "News",
     content: `
 <h2>🚀 ISRO की नई उड़ान: Chandrayaan-4 की आधिकारिक घोषणा</h2>
 
@@ -1319,7 +1319,7 @@ AI मशीनों को स्मार्ट बनाता है ता
     image: "/images/isro.jpg",
     publishedAt: "2025-06-18T19:00:00",
     readingTime: "4 min",
-    category: "Newse",
+    category: "News",
     content: `
 <h2>🚀 Mars Orbiter Mission 2.0: ISRO की नई अंतरिक्ष छलांग</h2>
 
