@@ -1,16 +1,27 @@
-// src/components/FooterNav.jsx
 import React from "react";
-import { Link } from "react-router-dom";
-import "./FooterNav.css"; // इसमें fix position वाला CSS होगा
+import { Link, useLocation } from "react-router-dom";
+import "./FooterNav.css";
 
 const FooterNav = () => {
+  const { pathname } = useLocation(); // ✅ Destructuring pathname only
+
   return (
     <footer className="footer-nav">
-      <Link to="/" className="footer-btn">🏠 होम</Link>
-      <Link to="/epaper" className="footer-btn">📰 ई-पेपर</Link>
-      <Link to="/fast-news" className="footer-btn highlight">⚡ फटाफट खबरें</Link>
-      <Link to="/videos" className="footer-btn">🎥 वीडियो</Link>
-      <Link to="/states" className="footer-btn">📍 राज्य चुनें</Link>
+      <Link to="/" className={`footer-btn ${pathname === "/" ? "active" : ""}`}>
+        🏠<span>होम</span>
+      </Link>
+      <Link to="/epaper" className={`footer-btn ${pathname === "/epaper" ? "active" : ""}`}>
+        📰<span>ई-पेपर</span>
+      </Link>
+      <Link to="/fast-news" className={`footer-btn ${pathname === "/fast-news" ? "active highlight" : ""}`}>
+        ⚡<span>फटाफट</span>
+      </Link>
+      <Link to="/videos" className={`footer-btn ${pathname === "/videos" ? "active" : ""}`}>
+        🎥<span>वीडियो</span>
+      </Link>
+      <Link to="/states" className={`footer-btn ${pathname === "/states" ? "active" : ""}`}>
+        📍<span>राज्य</span>
+      </Link>
     </footer>
   );
 };

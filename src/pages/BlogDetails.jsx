@@ -11,8 +11,6 @@ import {
   FaFacebook,
   FaTwitter,
   FaTelegram,
-  FaShareAlt,
-  FaEye,
 } from "react-icons/fa";
 
 const BlogDetails = () => {
@@ -22,11 +20,13 @@ const BlogDetails = () => {
 
   useEffect(() => {
     if (blog && blog.content) {
-      setHtmlContent(blog.content); // 🔻 Ads removed from here
+      setHtmlContent(blog.content);
     }
   }, [blog]);
 
   if (!blog) return <h1>Blog Not Found</h1>;
+
+  const currentUrl = window.location.href;
 
   return (
     <div className="blog-details-container">
@@ -39,8 +39,45 @@ const BlogDetails = () => {
       <p className="blog-date">{new Date(blog.publishedAt).toLocaleDateString()}</p>
       <img className="blog-image" src={blog.image} alt={blog.title} />
 
-      {/* ✅ Blog Content Without Ads */}
-      <div className="blog-content" dangerouslySetInnerHTML={{ __html: htmlContent }} />
+      <div
+        className="blog-content"
+        dangerouslySetInnerHTML={{ __html: htmlContent }}
+      />
+
+      {/* ✅ Share Section */}
+      <div className="share-section">
+        <h4>Share This Blog:</h4>
+        <div className="share-icons">
+          <a
+            href={`https://wa.me/?text=${encodeURIComponent(currentUrl)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FaWhatsapp className="icon whatsapp" />
+          </a>
+          <a
+            href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FaFacebook className="icon facebook" />
+          </a>
+          <a
+            href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(currentUrl)}&text=${encodeURIComponent(blog.title)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FaTwitter className="icon twitter" />
+          </a>
+          <a
+            href={`https://t.me/share/url?url=${encodeURIComponent(currentUrl)}&text=${encodeURIComponent(blog.title)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FaTelegram className="icon telegram" />
+          </a>
+        </div>
+      </div>
 
       {/* ✅ Comment Section */}
       <CommentSection blogId={id} />

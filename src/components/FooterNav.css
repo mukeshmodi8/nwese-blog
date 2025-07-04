@@ -1,26 +1,53 @@
 .footer-nav {
   position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background-color: #fff;
-  border-top: 1px solid #ddd;
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
+  background: #ffffff;
   display: flex;
-  justify-content: space-around;
-  padding: 10px 0;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 10px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
   z-index: 999;
+  border: 1px solid #e0e0e0;
+  gap: 6px;
 }
 
 .footer-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 12px;
+  color: #333;
   text-decoration: none;
-  color: #d62300;
-  font-weight: bold;
-  font-size: 14px;
+  padding: 6px 4px;
+  flex: 1;
+  transition: all 0.2s ease-in-out;
+  min-width: 20%;
+  text-align: center;
 }
 
-.footer-btn.highlight {
-  color: #fff;
-  background-color: #d62300;
-  padding: 6px 12px;
-  border-radius: 20px;
+.footer-btn span {
+  font-size: 10px;
+  margin-top: 2px;
 }
+
+.footer-btn:hover {
+  background-color: #f8f8f8;
+  border-radius: 8px;
+}
+
+.highlight {
+  color: #fff;
+  background: #d70000;
+  border-radius: 20px;
+  padding: 2px 8px;
+}
+.footer-btn.active {
+  background-color: #d70000;
+  color: #fff;
+  border-radius: 8px;
+}
+
