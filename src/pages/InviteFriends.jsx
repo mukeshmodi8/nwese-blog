@@ -9,8 +9,10 @@ import {
 import "./InviteFriends.css";
 
 const InviteFriends = () => {
-  const pageUrl = "https://nwese-blog-5xg5.vercel.app/";
-  const shareText = `🔥 Discover amazing blogs on tech, trends & tips. Join me at Mr. Happy's Blog!: ${pageUrl}`;
+  const pageUrl = "https://nwese-blog-ncmd.vercel.app/";
+  const shareText = `🔥 टेक्नोलॉजी, ट्रेंड्स और ज़रूरी टिप्स अब आसान हिंदी में!  
+👨‍💻 Mr. Happy Blog पर आइए और हर दिन कुछ नया सीखिए।  
+👉 पढ़ें अभी!: ${pageUrl}`;
 
   const whatsapp = `https://wa.me/?text=${encodeURIComponent(shareText)}`;
   const facebook = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(pageUrl)}`;

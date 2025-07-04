@@ -137,4 +137,22 @@
   font-size: 20px;
   font-weight: bold;
   color: #333;
+  color: #d62300;
 }
+.highlighted-btn {
+  border: 2px solid #d62300;
+  border: #d62300;;
+  border-radius: 30px;
+  padding: 6px 12px;
+  background-color: #d62300;
+  color: #d62300;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.highlighted-btn:hover {
+  background-color: #d62300;
+  color: white;
+  
+}
+

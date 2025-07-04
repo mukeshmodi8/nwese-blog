@@ -36,10 +36,14 @@ const Navbar = () => {
       <div className="top-bar">
         <div className="logo">
           <img src="/images/logo-removebg-preview.png" alt="Mr Happy" className="site-logo" />
-          <span className="logo-text">Mr Happy</span>
+          <span className="logo-text">
+            <span style={{ color: "#d62300", fontWeight: "bold" }}>M</span><span style={{ color: "black" }}>r </span>
+            <span style={{ color: "#d62300", fontWeight: "bold" }}>H</span><span style={{ color: "black" }}>appy</span>
+          </span>
         </div>
+
         <div className="user-menu">
-          <button className="profile-btn">मेरी खबरें</button>
+          <button className="profile-btn highlighted-btn">मेरी खबरें</button>
           <button className="menu-btn" onClick={toggleMenu}>☰</button>
         </div>
       </div>
