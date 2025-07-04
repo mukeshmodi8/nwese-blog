@@ -1,0 +1,26 @@
+.footer-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  border-top: 1px solid #ddd;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+  z-index: 999;
+}
+
+.footer-btn {
+  text-decoration: none;
+  color: #d62300;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.footer-btn.highlight {
+  color: #fff;
+  background-color: #d62300;
+  padding: 6px 12px;
+  border-radius: 20px;
+}

@@ -182,3 +182,48 @@
   color: #d62300;
   font-weight: bold;
 }
+.footer-btn {
+  border: none;
+  background: none;
+  font-size: 14px;
+  color: #333;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.footer-btn.highlight {
+  color: #d62300;
+  font-weight: bold;
+}
+.footer-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  border-top: 1px solid #ddd;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+  z-index: 999;
+}
+
+.footer-btn {
+  text-decoration: none;
+  color: #d62300;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.footer-btn.highlight {
+  color: #fff;
+  background-color: #d62300;
+  padding: 6px 12px;
+  border-radius: 20px;
+}
+.news-section {
+  padding-bottom: 80px; /* Footer की height जितनी */
+}

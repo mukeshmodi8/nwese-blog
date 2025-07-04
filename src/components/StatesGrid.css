@@ -1,0 +1,75 @@
+/* StatesGrid.css */
+.states-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 20px;
+  text-align: center;
+}
+
+.state-item {
+  border: 2px solid #b30000;
+  border-radius: 50%;
+  padding: 16px;
+  width: 80px;
+  height: 80px;
+  margin: auto;
+  transition: 0.2s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.state-item:hover {
+  background-color: #f5f5f5;
+  transform: scale(1.05);
+}
+
+.state-icon {
+  width: 28px;
+  height: 28px;
+  margin-bottom: 6px;
+}
+
+.state-item p {
+  font-size: 12px;
+  color: #333;
+}
+.states-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 20px;
+}
+
+.state-item {
+  border: 2px solid #d62300;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  text-align: center;
+  color: #d62300;
+  font-weight: bold;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: 0.2s;
+}
+
+.state-item:hover {
+  background-color: #fff1f0;
+  transform: scale(1.05);
+}
+
+.state-icon {
+  font-size: 24px;
+}
+
+.state-name {
+  font-size: 12px;
+  margin-top: 4px;
+}

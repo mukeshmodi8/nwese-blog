@@ -96,3 +96,45 @@
   background: white;
   z-index: 1000;
 }
+/* Hide categories on mobile */
+@media (max-width: 768px) {
+  .category-nav {
+    display: none;
+  }
+
+  .mobile-menu {
+    background: white;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    width: 100%;
+    z-index: 999;
+    border-top: 1px solid #ccc;
+  }
+
+  .mobile-menu a {
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+    color: #000;
+    text-decoration: none;
+  }
+}
+
+.site-logo {
+  height: 40px;
+  object-fit: contain;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo-text {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+}

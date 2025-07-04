@@ -10,24 +10,31 @@ import Contact from "./pages/Contact";
 import Footer from "./components/Footer";
 import InviteFriends from "./pages/InviteFriends";
 import Privacy from "./pages/Privacy";
+import States from "./pages/States";
+import FooterNav from "./components/FooterNav";
+import { CategoryProvider } from "./context/CategoryContext"; // ✅ Add this import
 
 function App() {
   return (
     <Router>
-      <Navbar />
-      <div className="p-4">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/blogs" element={<Blogs />} />
-          <Route path="/blogs/:id" element={<BlogDetails />} />
-          <Route path="/news" element={<News />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/invite" element={<InviteFriends />} />
-          <Route path="/privacy" element={<Privacy />} />
-        </Routes>
-        <Footer /> 
-      </div>
+      <CategoryProvider>
+        <Navbar />
+        <div className="p-4">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/blogs" element={<Blogs />} />
+            <Route path="/blogs/:id" element={<BlogDetails />} />
+            <Route path="/news" element={<News />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/invite" element={<InviteFriends />} />
+            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/states" element={<States />} />
+          </Routes>
+        </div>
+        <Footer />
+        <FooterNav />
+      </CategoryProvider>
     </Router>
   );
 }
