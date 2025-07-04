@@ -1,22 +1,137 @@
-/* Page links hover effect */
-.footer-link:hover {
-  color: #ffc107; /* Yellow */
+/* ✅ Main Footer Container */
+.footer-grid {
+  background-color: #101010;
+  color: #eee;
+  padding: 40px 20px;
+  border-radius: 5px;
+  font-family: 'Segoe UI', sans-serif;
+  /* border-top: 3px solid orange; */
 }
 
-/* Icons default */
-.icon {
-  margin: 0 6px;
+/* ✅ Row: holds 3 columns */
+.footer-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1100px;
+  margin: auto;
+  gap: 40px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid #333;
+}
+
+/* ✅ Each Column */
+.footer-col {
+  flex: 1 1 250px;
+  min-width: 250px;
+}
+
+/* ✅ Logo Text */
+.footer-logo {
+  font-size: 26px;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 10px;
+}
+.footer-logo .orange {
+  color: orange;
+}
+
+/* ✅ Description / Tagline */
+.footer-tagline {
+  font-size: 14px;
+  color: #aaa;
+  line-height: 1.6;
+}
+
+/* ✅ Section Heading */
+.footer-heading {
+  font-size: 16px;
+  color: orange;
+  margin-bottom: 10px;
+}
+
+/* ✅ Links List */
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links li {
+  margin-bottom: 8px;
+}
+
+.footer-links a {
+  color: #00bfff;
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
-/* Social icon hover effects */
-.icon.fb:hover {
-  color: #1877F2; /* Facebook Blue */
+.footer-links a:hover {
+  color: orange;
 }
-.icon.tw:hover {
-  color: #1DA1F2; /* Twitter Blue */
+
+/* ✅ Ad Section */
+.footer-ad {
+  text-align: center;
+  margin: 30px 0 20px;
 }
-.icon.ig:hover {
-  color: #C13584; /* Instagram Pink */
+.footer-ad iframe,
+.footer-ad ins,
+.footer-ad img {
+  max-width: 100%;
+  height: auto;
+  border: none;
+}
+
+/* ✅ Bottom Section */
+.footer-bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 6px;
+  margin-top: 30px;
+  font-size: 13px;
+  color: #777;
+  padding: 15px 10px;
+  line-height: 1.6;
+  word-break: break-word;
+}
+
+/* ✅ Responsive for Mobile */
+@media (max-width: 768px) {
+  .footer-row {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px 0;
+  }
+
+  .footer-col {
+    width: 100%;
+    margin-bottom: 30px;
+  }
+
+  .footer-logo {
+    font-size: 22px;
+  }
+
+  .footer-heading {
+    font-size: 15px;
+  }
+
+  .footer-tagline {
+    font-size: 13px;
+  }
+
+  .footer-links a {
+    font-size: 14px;
+  }
+
+  .footer-bottom {
+    font-size: 12px;
+    padding: 10px 15px;
+  }
 }

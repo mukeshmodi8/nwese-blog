@@ -13,6 +13,7 @@ import Privacy from "./pages/Privacy";
 import States from "./pages/States";
 import FooterNav from "./components/FooterNav";
 import { CategoryProvider } from "./context/CategoryContext"; // ✅ Add this import
+import StateBlogs from "./pages/StateBlogs";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
             <Route path="/invite" element={<InviteFriends />} />
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/states" element={<States />} />
+            <Route path="/state/:stateName" element={<StateBlogs />} />
           </Routes>
         </div>
         <Footer />

@@ -1,48 +1,50 @@
 import React from "react";
-import { Link } from "react-router-dom"; // जरूरी है React Router के लिए
+import { Link } from "react-router-dom";
+import "./Footer.css";
 
 const Footer = () => {
   return (
-    <>
-      {/* <ErrorBoundary>
-        <NativeAd />
-      </ErrorBoundary> */}
+    <footer className="footer-grid">
+      <div className="footer-row">
 
-      <footer
-        style={{
-          textAlign: "center",
-          padding: "20px",
-          background: "#f5f5f5",
-          borderTop: "1px solid #ddd",
-          fontSize: "14px",
-          color: "#555",
-        }}
-      >
-        <div>&copy; {new Date().getFullYear()} Mr. Happy Blogs. All Rights Reserved.</div>
-
-        <div style={{ marginTop: "12px" }}>
-          <Link to="/privacy" style={linkStyle}>Privacy Policy</Link>
-          <span style={{ margin: "0 8px" }}>|</span>
-          <Link to="/about" style={linkStyle}>About</Link>
-          <span style={{ margin: "0 8px" }}>|</span>
-          <Link to="/contact" style={linkStyle}>Contact</Link>
+        {/* 🔹 Column 1 - Brand */}
+        <div className="footer-col">
+          <h2 className="footer-logo">
+            Mr. <span className="orange">Happy</span>
+          </h2>
+          <p className="footer-tagline">
+            📚 Hindi blogs on tech, trends & tips.  
+            <br /> हर दिन कुछ नया सीखिए ✨
+          </p>
         </div>
 
-        <p style={{ marginTop: "12px", maxWidth: "600px", marginInline: "auto" }}>
-          This website is created for informational and educational purposes only. If you notice any
-          unintentional mistakes or inaccuracies in the content, please understand that it may be
-          human error. Feel free to contact us for suggestions or corrections.
-        </p>
-      </footer>
-    </>
-  );
-};
+        {/* 🔹 Column 2 - Quick Links */}
+        <div className="footer-col">
+          <h4 className="footer-heading">Quick Links</h4>
+          <ul className="footer-links">
+            <li><Link to="/privacy">Privacy Policy</Link></li>
+            <li><Link to="/about">About Us</Link></li>
+            <li><Link to="/contact">Contact</Link></li>
+            <li><a href="#top">⬆️ Back to Top</a></li>
+          </ul>
+        </div>
 
-// External Style for Link
-const linkStyle = {
-  textDecoration: "none",
-  color: "#007bff",
-  fontWeight: "500",
+        {/* 🔹 Column 3 - Contact Info */}
+        <div className="footer-col">
+          <h4 className="footer-heading">Contact Info</h4>
+          <p>📧 support@mrhappy.in</p>
+          <p>📍 India 🇮🇳</p>
+          <p>🕒 Mon–Sat, 10am–6pm</p>
+        </div>
+      </div>
+
+      {/* 🔻 Bottom Copyright */}
+      <div className="footer-bottom">
+        <p>© {new Date().getFullYear()} Mr. Happy Blogs. All rights reserved.</p>
+        <p>Made with ❤️ in India. Powered by Mr. Happy.</p>
+      </div>
+    </footer>
+  );
 };
 
 export default Footer;

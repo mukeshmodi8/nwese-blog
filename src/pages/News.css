@@ -1,130 +1,118 @@
-/* ✅ Main container */
+/* 📌 Main Container */
 .news-container {
-  padding: 2rem 1rem;
-  max-width: 1200px;
-  margin: 0 auto;
+  background-color: #f9f9f9;
+  padding: 20px;
+  padding-bottom: 80px; /* Footer space */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* ✅ Heading */
+/* 📰 Heading */
 .news-heading {
-  font-size: 2.2rem;
-  text-align: center;
-  font-weight: bold;
-  margin-bottom: 2rem;
-  color: #222;
+  font-size: 22px;
+  margin-bottom: 20px;
+  border-left: 4px solid #d62300;
+  padding-left: 10px;
+  color: #d62300;
 }
 
-/* ✅ Responsive grid layout */
+/* 🧱 News Card Grid */
 .news-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-/* ✅ Card design */
+/* 📄 Each News Card */
 .news-card {
   background-color: #fff;
-  border-radius: 12px;
+  border-radius: 10px;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
   overflow: hidden;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s ease;
   display: flex;
   flex-direction: column;
 }
 
-/* ✅ Hover effect */
-.news-card:hover {
-  transform: translateY(-6px);
-}
-
-/* ✅ Image styling */
+/* 🖼️ Image */
 .news-img {
   width: 100%;
-  height: 200px;
+  height: 180px;
   object-fit: cover;
 }
 
-/* ✅ Card content layout */
+/* 📚 Content */
 .news-content {
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
+  padding: 16px;
 }
 
-/* ✅ Title & date */
 .news-content h3 {
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: #333;
-  margin-bottom: 0.3rem;
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #222;
 }
 
 .news-date {
+  font-size: 13px;
   color: #777;
-  font-size: 0.9rem;
-  margin-bottom: 0.3rem;
+  margin-bottom: 6px;
 }
 
-/* ✅ Read time */
-.news-content p {
-  font-size: 0.9rem;
-  margin-bottom: 0.5rem;
-  color: #444;
-}
-
-/* ✅ Read More button */
+/* 📎 Read More Button */
 .read-more-btn {
-  margin-top: auto;
-  background: linear-gradient(to right, #4facfe, #00f2fe);
-  color: #fff;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
+  display: inline-block;
+  margin-top: 10px;
+  background-color: #d62300;
+  color: white;
+  padding: 6px 12px;
+  font-size: 14px;
   text-decoration: none;
-  font-weight: 600;
-  text-align: center;
+  border-radius: 4px;
   transition: 0.3s ease;
 }
 
 .read-more-btn:hover {
-  background: linear-gradient(to right, #43e97b, #38f9d7);
-  transform: scale(1.05);
+  background-color: #b91d00;
 }
 
-/* ✅ Share icons */
+/* 🔗 Share Icons */
 .share-icons {
   display: flex;
   gap: 12px;
-  margin-top: 1rem;
-  font-size: 1.3rem;
-  color: #555;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.share-icons svg {
+  margin-top: 12px;
+  font-size: 18px;
+  color: #666;
   cursor: pointer;
-  transition: transform 0.2s, color 0.2s;
 }
 
 .share-icons svg:hover {
-  transform: scale(1.2);
-  color: #007bff;
+  color: #d62300;
+  transform: scale(1.1);
+  transition: 0.3s ease;
 }
 
-/* ✅ Responsive tweak for mobile */
-@media screen and (max-width: 480px) {
-  .read-more-btn {
-    font-size: 0.9rem;
-    padding: 0.4rem 0.8rem;
+/* 📱 Responsive */
+@media (max-width: 768px) {
+  .news-heading {
+    font-size: 20px;
+  }
+
+  .news-card {
+    flex-direction: column;
+  }
+
+  .news-img {
+    height: 160px;
   }
 
   .news-content h3 {
-    font-size: 1rem;
+    font-size: 16px;
+  }
+
+  .read-more-btn {
+    font-size: 13px;
+    padding: 5px 10px;
   }
 
   .share-icons {
-    font-size: 1.1rem;
+    font-size: 16px;
   }
 }

@@ -11,7 +11,7 @@ import "./News.css";
 
 const News = () => {
   const newsBlogs = blogs.filter(
-    (item) => item.category.trim().toLowerCase() === "newse"
+    (item) => item.category.trim().toLowerCase() === "news"
   );
 
   const shareBlog = (platform, blog) => {

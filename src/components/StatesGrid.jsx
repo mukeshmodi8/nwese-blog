@@ -16,7 +16,6 @@ const states = [
   { name: "पश्चिम बंगाल", icon: "/icons/bengal.svg" },
   { name: "ओडिशा", icon: "/icons/odisha.svg" },
   { name: "महाराष्ट्र", icon: "/icons/maharashtra.svg" },
-  { name: "गुजरात", icon: "/icons/gujarat.svg" },
   { name: "राजस्थान", icon: "/icons/rajasthan.svg" },
 ];
 
