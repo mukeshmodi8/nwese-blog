@@ -1,184 +1,184 @@
-/* ✅ Main Container */
-.home-page {
-  padding: 24px;
-  font-family: 'Segoe UI', sans-serif;
-  color: #1e1e2f;
+/* Home.css – Jagran Style Inspired */
+
+/* Global Styling */
+.home-ui {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #f9f9f9;
+  color: #111;
+  padding-bottom: 60px;
 }
 
-/* ✅ Hero Section */
-.hero {
-  text-align: center;
-  margin-bottom: 40px;
+/* Header */
+.header {
+  background-color: #ffffff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
-.hero h1 {
-  font-size: 36px;
-  color: #facc15;
-}
-
-.hero p {
-  font-size: 18px;
-  margin-top: 10px;
-  color: #444;
-}
-
-/* ✅ Section Title */
-.section h2 {
-  margin-bottom: 20px;
-  color: #1e1e2f;
-  text-align: center;
-}
-
-/* ✅ Card Container */
-.card-container {
+.top-bar {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: bold;
+  color: #d62300;
+}
+
+.user-menu button {
+  margin-left: 10px;
+  padding: 6px 12px;
+  border: none;
+  background-color: #f1f1f1;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.category-nav {
+  overflow-x: auto;
+  display: flex;
+  white-space: nowrap;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  background: #fff;
+}
+
+.category-tab {
+  flex: 0 0 auto;
+  padding: 10px 16px;
+  font-size: 14px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: #333;
+}
+
+.category-tab.active {
+  color: #d62300;
+  font-weight: bold;
+  border-bottom: 2px solid #d62300;
+}
+
+/* Main News Section */
+.news-section {
+  padding: 20px;
+}
+
+.news-section h2 {
+  font-size: 20px;
+  margin-bottom: 16px;
+  border-left: 4px solid #d62300;
+  padding-left: 10px;
+  color: #d62300;
+}
+
+.news-cards {
+  display: flex;
+  flex-direction: column;
   gap: 20px;
 }
 
-/* ✅ Individual Card */
-.card {
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+.news-card {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.news-img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.news-content {
   padding: 16px;
-  width: 300px;
-  transition: transform 0.3s;
+}
+
+.news-content h3 {
+  font-size: 18px;
+  margin-bottom: 8px;
+  color: #222;
+}
+
+.excerpt {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.meta {
+  font-size: 12px;
+  color: #777;
+  margin-bottom: 10px;
+}
+
+.read-btn {
+  display: inline-block;
+  padding: 6px 12px;
+  background-color: #d62300;
+  color: #fff;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.share-icons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+  font-size: 18px;
+}
+
+.share-icons span {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.share-icons a {
+  color: inherit;
+  transition: 0.2s;
+}
+
+.share-icons a:hover {
+  transform: scale(1.1);
+}
+
+/* Footer */
+.footer-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #ffffff;
+  border-top: 1px solid #ddd;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px 0;
+  z-index: 999;
+}
+
+.footer-nav button {
+  border: none;
+  background: none;
+  font-size: 14px;
+  color: #333;
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
+  gap: 2px;
 }
 
-.card:hover {
-  transform: translateY(-5px);
-}
-
-.card img {
-  width: 100%;
-  max-width: 100%;
-  height: 180px;
-  object-fit: cover;
-  border-radius: 8px;
-  display: block;
-}
-
-/* ✅ Global Blog Content Images (for blog details page etc.) */
-.blog-content img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-  margin: 10px auto;
-  border-radius: 8px;
-}
-
-/* ✅ Text Styles inside card */
-.card h3 {
-  margin-top: 12px;
-  font-size: 20px;
-}
-
-.card p {
-  font-size: 14px;
-  margin: 10px 0;
-}
-
-/* ✅ Button Style */
-.card button {
-  background: #facc15;
-  border: none;
-  padding: 8px 16px;
+.footer-nav .highlight {
+  color: #d62300;
   font-weight: bold;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.card button:hover {
-  background: #eab308;
-}
-
-/* ✅ Anchor Style inside card */
-.card a {
-  text-decoration: none;
-  color: inherit;
-}
-
-/* ✅ Share Icons Row */
-.card .share-icons {
-  margin-top: 10px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-/* ✅ Responsive View */
-@media (max-width: 768px) {
-  .card-container {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .card {
-    width: 90%;
-  }
-}
-
-/* ❌ OLD Buttons (Optional: remove if using dropdown) */
-.category-buttons {
-  display: none; /* Hide old buttons if using dropdown */
-}
-
-/* ✅ 🔽 Dropdown Category Filter */
-.category-dropdown-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 20px 0;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.category-dropdown-wrapper label {
-  font-weight: bold;
-  font-size: 16px;
-  color: #1e1e2f;
-}
-
-/* ✅ Stylish Select Dropdown */
-.category-dropdown {
-  padding: 10px 16px;
-  border-radius: 30px;
-  border: 1px solid #ddd;
-  font-size: 16px;
-  background-color: #fff;
-  color: #1e1e2f;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  outline: none;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-}
-
-.category-dropdown:hover {
-  border-color: #facc15;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-
-.category-dropdown:focus {
-  border-color: #eab308;
-  box-shadow: 0 0 0 3px rgba(250, 204, 21, 0.3);
-}
-
-/* ✅ Mobile Responsive */
-@media (max-width: 768px) {
-  .category-dropdown-wrapper {
-    flex-direction: column;
-  }
-
-  .category-dropdown {
-    width: 90%;
-  }
 }

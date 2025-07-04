@@ -1,62 +1,87 @@
-
+/* Navbar.css – Jagran Style */
 
 .navbar {
-  background: linear-gradient(90deg, #1e1e2f, #2c2c3a);
-  color: white;
-  padding: 16px 24px;
+  background-color: #ffffff;
+  padding: 10px 16px;
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 .navbar-brand {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: bold;
-  color: #facc15;
+  color: #d62300;
   text-decoration: none;
 }
 
 .navbar-links {
   display: flex;
-  gap: 32px;
-  color: #facc15;
+  gap: 20px;
 }
 
 .navbar-links a {
-  color: white;
   text-decoration: none;
-  font-size: 18px;
-  padding-bottom: 4px;
-  transition: all 0.3s ease;
+  font-size: 15px;
+  color: #333;
+  transition: color 0.2s;
 }
 
-.navbar-links a:hover {
-  color: #facc15;
+.navbar-links a.active {
+  color: #d62300;
+  font-weight: bold;
 }
 
-.navbar-links .active {
-  border-bottom: 2px solid #facc15;
-  color: #facc15;
+.invite-btn {
+  background-color: #d62300;
+  color: #fff !important;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 14px;
 }
 
-/* Mobile styles */
 .mobile-toggle {
   display: none;
   background: none;
   border: none;
-  color: white;
-  font-size: 24px;
+  cursor: pointer;
 }
 
 .mobile-menu {
   display: none;
   flex-direction: column;
-  background-color: #2c2c3a;
-  padding: 16px 24px;
-  gap: 20px;
+  background-color: #fff;
+  padding: 10px 20px;
+  position: absolute;
+  top: 60px;
+  left: 0;
+  right: 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
 }
 
-@media screen and (max-width: 768px) {
+.mobile-menu a {
+  padding: 10px 0;
+  text-decoration: none;
+  color: #333;
+  border-bottom: 1px solid #eee;
+}
+
+.mobile-menu a.active {
+  color: #d62300;
+  font-weight: bold;
+}
+
+.mobile-menu.open {
+  display: flex;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
   .navbar-links {
     display: none;
   }
@@ -64,29 +89,10 @@
   .mobile-toggle {
     display: block;
   }
-
-  .mobile-menu.open {
-    display: flex;
-  }
 }
-
-/* Example: Navbar.css */
-
-.mobile-menu a {
-  text-decoration: none;
-  color: white;
-  display: block;
-  padding: 0.75rem 1rem;
-  font-size: 1rem;
-}
-
-.mobile-menu a:hover {
-  background-color: #333;
-  color: #ffcc00;
-}
-
-/* Optional: active class styling */
-.mobile-menu .active {
-  font-weight: bold;
-  color: #0b74de;
+.header {
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 1000;
 }
