@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useCategory } from "../context/CategoryContext";
 import "./Navbar.css";
@@ -17,18 +17,6 @@ const Navbar = () => {
   const { selectedCategory, setSelectedCategory } = useCategory();
 
   const toggleMenu = () => setIsOpen(!isOpen);
-
-  // ✅ Ad Script Inject (Optional)
-  useEffect(() => {
-    const adScript = document.createElement("script");
-    adScript.src = "//pl27073574.profitableratecpm.com/ce/cc/47/cecc470dcc4bf408d60f8bc10f665012.js";
-    adScript.async = true;
-    document.body.appendChild(adScript);
-
-    return () => {
-      document.body.removeChild(adScript);
-    };
-  }, []);
 
   return (
     <header className="header">
