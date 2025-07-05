@@ -1,27 +1,74 @@
 /* Navbar.css – Jagran Style */
 
-.navbar {
+.header {
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 1000;
+}
+
+.top-bar {
   background-color: #ffffff;
   padding: 10px 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
 }
 
-.navbar-brand {
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.site-logo {
+  height: 40px;
+  object-fit: contain;
+}
+
+.logo-text {
   font-size: 20px;
   font-weight: bold;
   color: #d62300;
-  text-decoration: none;
 }
 
+.user-menu {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.highlighted-btn {
+  border-radius: 30px;
+  padding: 6px 12px;
+  background-color: #d62300;
+  color: white;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.highlighted-btn:hover {
+  background-color: #b51800;
+  color: #fff;
+}
+
+.menu-btn {
+  background: #f1f1f1;
+  border: none;
+  padding: 6px 12px;
+  font-size: 18px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* Desktop Navigation Links */
 .navbar-links {
   display: flex;
   gap: 20px;
+  padding: 8px 16px;
+  background-color: #fff;
 }
 
 .navbar-links a {
@@ -44,13 +91,40 @@
   font-size: 14px;
 }
 
-.mobile-toggle {
-  display: none;
-  background: none;
-  border: none;
-  cursor: pointer;
+/* Category Tabs */
+.category-nav {
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+  background: #fff;
+  border-top: 1px solid #eee;
+  padding: 8px 10px;
 }
 
+.category-tab {
+  display: flex;
+  align-items: center;
+  padding: 6px 10px;
+  font-size: 14px;
+  color: #444;
+  margin-right: 10px;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.3s;
+  background: none;
+  border: none;
+}
+
+.category-tab.active {
+  color: #d62300;
+  border-bottom: 2px solid #d62300;
+}
+
+.category-tab:hover {
+  color: #d62300;
+}
+
+/* Mobile Menu */
 .mobile-menu {
   display: none;
   flex-direction: column;
@@ -86,73 +160,28 @@
     display: none;
   }
 
-  .mobile-toggle {
+  .menu-btn {
     display: block;
   }
-}
-.header {
-  position: sticky;
-  top: 0;
-  background: white;
-  z-index: 1000;
-}
-/* Hide categories on mobile */
-@media (max-width: 768px) {
+
   .category-nav {
     display: none;
   }
 
   .mobile-menu {
-    background: white;
-    padding: 10px;
     display: flex;
+  }
+}
+
+@media screen and (max-width: 410px) {
+  .top-bar {
     flex-direction: column;
-    position: absolute;
-    top: 60px;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .user-menu {
     width: 100%;
-    z-index: 999;
-    border-top: 1px solid #ccc;
-  }
-
-  .mobile-menu a {
-    padding: 10px 0;
-    border-bottom: 1px solid #eee;
-    color: #000;
-    text-decoration: none;
+    justify-content: space-between;
   }
 }
-
-.site-logo {
-  height: 40px;
-  object-fit: contain;
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.logo-text {
-  font-size: 20px;
-  font-weight: bold;
-  color: #333;
-  color: #d62300;
-}
-.highlighted-btn {
-  border: 2px solid #d62300;
-  border: #d62300;;
-  border-radius: 30px;
-  padding: 6px 12px;
-  background-color: #d62300;
-  color: #d62300;
-  font-weight: bold;
-  transition: all 0.3s ease;
-}
-
-.highlighted-btn:hover {
-  background-color: #d62300;
-  color: white;
-  
-}
-

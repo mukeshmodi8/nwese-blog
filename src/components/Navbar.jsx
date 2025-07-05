@@ -25,18 +25,20 @@ const Navbar = () => {
         <div className="logo">
           <img src="/images/logo-removebg-preview.png" alt="Mr Happy" className="site-logo" />
           <span className="logo-text">
-            <span style={{ color: "#d62300", fontWeight: "bold" }}>M</span><span style={{ color: "black" }}>r </span>
-            <span style={{ color: "#d62300", fontWeight: "bold" }}>H</span><span style={{ color: "black" }}>appy</span>
+            <span style={{ color: "#d62300", fontWeight: "bold" }}>M</span>
+            <span style={{ color: "black" }}>r </span>
+            <span style={{ color: "#d62300", fontWeight: "bold" }}>H</span>
+            <span style={{ color: "black" }}>appy</span>
           </span>
         </div>
 
         <div className="user-menu">
-          <button className="profile-btn highlighted-btn">मेरी खबरें</button>
+          <button className="highlighted-btn">मेरी खबरें</button>
           <button className="menu-btn" onClick={toggleMenu}>☰</button>
         </div>
       </div>
 
-      {/* 🔹 Desktop Category Tabs */}
+      {/* 🔹 Category Tabs */}
       <nav className="category-nav">
         {categories.map((cat) => (
           <button
@@ -59,7 +61,7 @@ const Navbar = () => {
         <NavLink to="/invite" className={({ isActive }) => isActive ? "active invite-btn" : "invite-btn"}>🎁 Invite</NavLink>
       </nav>
 
-      {/* 📱 Mobile Navigation Links Only */}
+      {/* 📱 Mobile Navigation */}
       {isOpen && (
         <div className="mobile-menu">
           <NavLink to="/" onClick={() => setIsOpen(false)}>🏠 Home</NavLink>
