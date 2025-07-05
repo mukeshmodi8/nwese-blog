@@ -15,12 +15,15 @@ import FooterNav from "./components/FooterNav";
 import { CategoryProvider } from "./context/CategoryContext"; // ✅ Add this import
 import StateBlogs from "./pages/StateBlogs";
 import Video from "./pages/Video"; 
+import ScrollToTop from "./components/ScrollToTop";
+import FlashNews from "./pages/FlashNews";
 
 
 function App() {
   return (
     <Router>
       <CategoryProvider>
+         <ScrollToTop />
         <Navbar />
         <div className="p-4">
           <Routes>
@@ -35,6 +38,7 @@ function App() {
             <Route path="/states" element={<States />} />
             <Route path="/state/:stateName" element={<StateBlogs />} />
             <Route path="/videos" element={<Video />} />
+            <Route path="/fast-news" element={<FlashNews />} />
           </Routes>
         </div>
         <Footer />

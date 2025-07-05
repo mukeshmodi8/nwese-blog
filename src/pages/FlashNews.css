@@ -1,0 +1,40 @@
+.flash-news-page {
+  padding: 20px;
+  background-color: #fdfdfd;
+}
+
+.flash-title {
+  font-size: 22px;
+  color: #d62300;
+  margin-bottom: 20px;
+  border-left: 4px solid #d62300;
+  padding-left: 10px;
+}
+
+.flash-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.flash-card {
+  background-color: #fff8f0;
+  border-left: 5px solid #ff5722;
+  padding: 12px 16px;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.flash-card p {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+  margin: 0;
+}
+
+.flash-card span {
+  font-size: 13px;
+  color: #999;
+  margin-top: 4px;
+  display: inline-block;
+}
