@@ -68,6 +68,7 @@ const Navbar = () => {
           <NavLink to="/about" onClick={() => setIsOpen(false)}>ℹ️ About</NavLink>
           <NavLink to="/contact" onClick={() => setIsOpen(false)}>📞 Contact</NavLink>
           <NavLink to="/invite" onClick={() => setIsOpen(false)}>🎁 Invite</NavLink>
+          <NavLink to="/videos" onClick={() => setIsOpen(false)}>🎬 Videos</NavLink>
         </div>
       )}
     </header>

@@ -14,6 +14,8 @@ import States from "./pages/States";
 import FooterNav from "./components/FooterNav";
 import { CategoryProvider } from "./context/CategoryContext"; // ✅ Add this import
 import StateBlogs from "./pages/StateBlogs";
+import Video from "./pages/Video"; 
+
 
 function App() {
   return (
@@ -32,6 +34,7 @@ function App() {
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/states" element={<States />} />
             <Route path="/state/:stateName" element={<StateBlogs />} />
+            <Route path="/videos" element={<Video />} />
           </Routes>
         </div>
         <Footer />

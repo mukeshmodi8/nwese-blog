@@ -8,15 +8,7 @@ const Footer = () => {
       <div className="footer-row">
 
         {/* 🔹 Column 1 - Brand */}
-        <div className="footer-col">
-          <h2 className="footer-logo">
-            Mr. <span className="orange">Happy</span>
-          </h2>
-          <p className="footer-tagline">
-            📚 Hindi blogs on tech, trends & tips.  
-            <br /> हर दिन कुछ नया सीखिए ✨
-          </p>
-        </div>
+
 
         {/* 🔹 Column 2 - Quick Links */}
         <div className="footer-col">

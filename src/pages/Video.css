@@ -1,0 +1,61 @@
+/* Video Page */
+.video-page {
+  padding: 20px;
+  background-color: #f9f9f9;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Heading */
+.video-heading {
+  font-size: 22px;
+  color: #d62300;
+  margin-bottom: 20px;
+  border-left: 4px solid #d62300;
+  padding-left: 10px;
+}
+
+/* Grid Layout */
+.video-grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+/* Video Card Style */
+.video-card {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: transform 0.2s ease;
+}
+
+.video-card:hover {
+  transform: translateY(-4px);
+}
+
+/* Video Iframe */
+.video-card iframe {
+  width: 100%;
+  height: 200px;
+  border: none;
+}
+
+/* Title */
+.video-title {
+  padding: 10px;
+  font-size: 16px;
+  color: #333;
+  text-align: center;
+  border-top: 1px solid #eee;
+}
+@media screen and (max-width: 480px) {
+  .video-title {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .video-card iframe {
+    height: 180px;
+  }
+}
