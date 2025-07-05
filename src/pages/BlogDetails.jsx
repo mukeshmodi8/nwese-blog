@@ -31,9 +31,32 @@ const BlogDetails = () => {
   return (
     <div className="blog-details-container">
       <Helmet>
-        <title>{blog.title}</title>
-        <meta name="description" content={blog.title} />
+        ...
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            headline: blog.title,
+            image: `https://nwese-blog-ncmd.vercel.app${blog.image}`,
+            author: {
+              "@type": "Person",
+              name: "Mr. Happy"
+            },
+            publisher: {
+              "@type": "Organization",
+              name: "NWese Blog",
+              logo: {
+                "@type": "ImageObject",
+                url: "https://nwese-blog-ncmd.vercel.app/logo.png"
+              }
+            },
+            datePublished: blog.publishedAt,
+            description: `जानिए - ${blog.title} | NWese हिंदी ब्लॉग में विस्तार से पढ़ें।`
+          })}
+        </script>
       </Helmet>
+
+
 
       <h1 className="blog-title">{blog.title}</h1>
       <p className="blog-date">{new Date(blog.publishedAt).toLocaleDateString()}</p>
