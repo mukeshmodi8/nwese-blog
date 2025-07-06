@@ -1,0 +1,140 @@
+.sports-page {
+  padding: 16px;
+  padding-bottom: 70px;
+  background-color: #f9f9f9;
+}
+
+.section-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 16px;
+  color: #d32f2f;
+  text-align: center;
+}
+
+/* ✅ Live Score */
+.live-score-card {
+  background-color: #fff3e0;
+  border-left: 5px solid #f44336;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+}
+
+.top-row {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  margin-bottom: 4px;
+  color: #d32f2f;
+}
+
+.match-name {
+  font-size: 16px;
+}
+
+.live-dot {
+  color: #d50000;
+  font-size: 14px;
+}
+
+.score {
+  font-size: 20px;
+  font-weight: bold;
+  color: #000;
+  margin-bottom: 4px;
+}
+
+.match-info {
+  font-size: 14px;
+  color: #555;
+}
+
+/* ✅ Blog Cards */
+.sports-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 16px;
+}
+
+.sports-card {
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.sports-card:hover {
+  transform: translateY(-4px);
+}
+
+.sports-img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+
+.sports-content {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sports-content h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.sports-content p {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.4;
+}
+
+.sports-time {
+  font-size: 12px;
+  color: #999;
+  text-align: right;
+}
+.sports-container {
+  max-width: 600px;
+  margin: auto;
+}
+
+.live-match-card {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 16px;
+  background: #f9f9f9;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  margin-top: 1rem;
+}
+
+.teams {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 12px;
+}
+
+.team {
+  text-align: center;
+}
+
+.scores {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 1rem;
+}
+
+.score-card {
+  background: #fff3e0;
+  padding: 10px;
+  border-radius: 6px;
+}

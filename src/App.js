@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Blogs from "./pages/Blogs";
@@ -12,37 +12,59 @@ import InviteFriends from "./pages/InviteFriends";
 import Privacy from "./pages/Privacy";
 import States from "./pages/States";
 import FooterNav from "./components/FooterNav";
-import { CategoryProvider } from "./context/CategoryContext"; // ✅ Add this import
+import { CategoryProvider } from "./context/CategoryContext";
 import StateBlogs from "./pages/StateBlogs";
-import Video from "./pages/Video"; 
+import Video from "./pages/Video";
 import ScrollToTop from "./components/ScrollToTop";
 import FlashNews from "./pages/FlashNews";
+import Sports from "./components/Sports";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import AdminPanel from "./components/admin/AdminPanel";
 
+const AppLayout = () => {
+  const location = useLocation();
+  const isAdminRoute = location.pathname.startsWith("/admin");
+
+  return (
+    <>
+      {!isAdminRoute && <Navbar />}
+      <ToastContainer position="top-right" autoClose={3000} />
+      <ScrollToTop />
+
+      <div className="p-4">
+        <Routes>
+          {/* ✅ Main Public Routes */}
+          <Route path="/" element={<Home />} />
+          <Route path="/blogs" element={<Blogs />} />
+          <Route path="/blogs/:id" element={<BlogDetails />} />
+          <Route path="/news" element={<News />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/invite" element={<InviteFriends />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/states" element={<States />} />
+          <Route path="/state/:stateName" element={<StateBlogs />} />
+          <Route path="/videos" element={<Video />} />
+          <Route path="/fast-news" element={<FlashNews />} />
+          <Route path="/sports" element={<Sports />} />
+
+          {/* ✅ Admin Routes */}
+          <Route path="/admin/*" element={<AdminPanel />} />
+        </Routes>
+      </div>
+
+      {!isAdminRoute && <Footer />}
+      {!isAdminRoute && <FooterNav />}
+    </>
+  );
+};
 
 function App() {
   return (
     <Router>
       <CategoryProvider>
-         <ScrollToTop />
-        <Navbar />
-        <div className="p-4">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/blogs" element={<Blogs />} />
-            <Route path="/blogs/:id" element={<BlogDetails />} />
-            <Route path="/news" element={<News />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/invite" element={<InviteFriends />} />
-            <Route path="/privacy" element={<Privacy />} />
-            <Route path="/states" element={<States />} />
-            <Route path="/state/:stateName" element={<StateBlogs />} />
-            <Route path="/videos" element={<Video />} />
-            <Route path="/fast-news" element={<FlashNews />} />
-          </Routes>
-        </div>
-        <Footer />
-        <FooterNav />
+        <AppLayout />
       </CategoryProvider>
     </Router>
   );

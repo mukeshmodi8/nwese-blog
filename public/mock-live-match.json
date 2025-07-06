@@ -1,0 +1,28 @@
+{
+  "status": "success",
+  "data": [
+    {
+      "matchStarted": true,
+      "matchEnded": false,
+      "name": "India vs Pakistan",
+      "status": "India batting 1st",
+      "teams": ["India", "Pakistan"],
+      "teamInfo": [
+        {
+          "img": "https://upload.wikimedia.org/wikipedia/en/4/41/Flag_of_India.svg"
+        },
+        {
+          "img": "https://upload.wikimedia.org/wikipedia/commons/3/32/Flag_of_Pakistan.svg"
+        }
+      ],
+      "score": [
+        {
+          "inning": "India Inning",
+          "r": "198",
+          "w": "3",
+          "o": "20.0"
+        }
+      ]
+    }
+  ]
+}

@@ -16,13 +16,13 @@ const FooterNav = () => {
         <span>फ्लैश</span>
       </Link>
 
-      {/* 📄 Epaper */}
+      {/* 🏏 Sports (Instead of Epaper) */}
       <Link
-        to="/epaper"
-        className={`footer-btn ${pathname === "/epaper" ? "active" : ""}`}
+        to="/sports"
+        className={`footer-btn ${pathname === "/sports" ? "active" : ""}`}
       >
-        <i className="material-icons">article</i>
-        <span>ई-पेपर</span>
+        <i className="material-icons">sports_soccer</i>
+        <span>स्पोर्ट्स</span>
       </Link>
 
       {/* 🏠 Home - Center Floating */}
