@@ -1,12 +1,15 @@
-/* Navbar.css – Jagran Style */
+/* Google Material Icons */
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
+/* Header Container */
 .header {
   position: sticky;
   top: 0;
-  background: white;
+  background: #fff;
   z-index: 1000;
 }
 
+/* Top Bar */
 .top-bar {
   background-color: #ffffff;
   padding: 10px 16px;
@@ -14,31 +17,53 @@
   justify-content: space-between;
   align-items: center;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  flex-wrap: nowrap;
 }
 
+/* Logo + Text */
 .logo {
   display: flex;
   align-items: center;
   gap: 8px;
+  min-width: 0;
 }
 
 .site-logo {
-  height: 40px;
+  height: 32px;
   object-fit: contain;
 }
 
 .logo-text {
   font-size: 20px;
   font-weight: bold;
+  white-space: nowrap;
+}
+
+.logo-text .red {
   color: #d62300;
 }
 
+.logo-text .black {
+  color: #000;
+}
+
+/* Menu or Button */
 .user-menu {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
+.menu-btn {
+  background: #f1f1f1;
+  border: none;
+  padding: 6px 12px;
+  font-size: 18px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* Highlighted Button */
 .highlighted-btn {
   border-radius: 30px;
   padding: 6px 12px;
@@ -54,21 +79,14 @@
   color: #fff;
 }
 
-.menu-btn {
-  background: #f1f1f1;
-  border: none;
-  padding: 6px 12px;
-  font-size: 18px;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-/* Desktop Navigation Links */
+/* Desktop Links */
 .navbar-links {
   display: flex;
   gap: 20px;
   padding: 8px 16px;
   background-color: #fff;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .navbar-links a {
@@ -99,6 +117,8 @@
   background: #fff;
   border-top: 1px solid #eee;
   padding: 8px 10px;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
 }
 
 .category-tab {
@@ -113,6 +133,7 @@
   transition: all 0.3s;
   background: none;
   border: none;
+  white-space: nowrap;
 }
 
 .category-tab.active {
@@ -124,7 +145,7 @@
   color: #d62300;
 }
 
-/* Mobile Menu */
+/* Mobile Dropdown Menu */
 .mobile-menu {
   display: none;
   flex-direction: column;
@@ -154,7 +175,7 @@
   display: flex;
 }
 
-/* Responsive */
+/* ✅ Responsive Design */
 @media (max-width: 768px) {
   .navbar-links {
     display: none;
@@ -164,24 +185,39 @@
     display: block;
   }
 
-  .category-nav {
-    display: none;
+  .mobile-menu {
+    display: flex;
   }
 
-  .mobile-menu {
+  /* ✔ Show category-nav in mobile too */
+  .category-nav {
     display: flex;
   }
 }
 
-@media screen and (max-width: 410px) {
+@media screen and (max-width: 480px) {
   .top-bar {
-    /* flex-direction: column; */
-    align-items: flex-start;
-    gap: 10px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
   }
 
-  .user-menu {
-    width: 100%;
-    justify-content: space-between;
+  .site-logo {
+    height: 28px;
+  }
+
+  .logo-text {
+    font-size: 16px;
+  }
+
+  .menu-btn {
+    padding: 4px 8px;
+    font-size: 16px;
+  }
+
+  .category-tab {
+    font-size: 13px;
+    padding: 5px 8px;
   }
 }

@@ -7,8 +7,15 @@ const Footer = () => {
     <footer className="footer-grid">
       <div className="footer-row">
 
-        {/* 🔹 Column 1 - Brand */}
-
+        {/* 🔹 Column 1 - Brand Info */}
+        <div className="footer-col">
+          <h2 className="footer-brand">
+            <span style={{ color: "#d62300" }}>Mr.</span> <span>Happy</span>
+          </h2>
+          <p className="footer-tagline">
+            Your daily dose of trending blogs, tech news, and knowledge — in easy Hindi.
+          </p>
+        </div>
 
         {/* 🔹 Column 2 - Quick Links */}
         <div className="footer-col">
@@ -17,20 +24,19 @@ const Footer = () => {
             <li><Link to="/privacy">Privacy Policy</Link></li>
             <li><Link to="/about">About Us</Link></li>
             <li><Link to="/contact">Contact</Link></li>
-            <li><a href="#top">⬆️ Back to Top</a></li>
           </ul>
         </div>
 
         {/* 🔹 Column 3 - Contact Info */}
-        <div className="footer-col">
-          <h4 className="footer-heading">Contact Info</h4>
-          <p>📧 support@mrhappy.in</p>
-          <p>📍 India 🇮🇳</p>
-          <p>🕒 Mon–Sat, 10am–6pm</p>
-        </div>
+       
       </div>
 
-      {/* 🔻 Bottom Copyright */}
+      {/* 🔸 Disclaimer */}
+      <div className="footer-disclaimer">
+        <p><strong>Disclaimer:</strong> The content provided on Mr. Happy Blog is for informational purposes only. We do not guarantee accuracy or completeness. Please verify independently before acting on any information.</p>
+      </div>
+
+      {/* 🔻 Copyright */}
       <div className="footer-bottom">
         <p>© {new Date().getFullYear()} Mr. Happy Blogs. All rights reserved.</p>
         <p>Made with ❤️ in India. Powered by Mr. Happy.</p>

@@ -1,93 +1,99 @@
+/* Footer - Jagran Style */
+
 .footer-grid {
-  background-color: #f2f2f2;
+  background-color: #f8f8f8;
+  padding: 2rem 1rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #333;
-  padding: 20px 10px;
-  font-family: 'Segoe UI', sans-serif;
-  border-top: 1px solid #ddd;
+  border-top: 2px solid #eee;
 }
 
 .footer-row {
   display: flex;
-  flex-wrap: wrap;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 30px;
   max-width: 1100px;
   margin: auto;
-  gap: 20px;
-  padding-bottom: 10px;
 }
 
 .footer-col {
-  flex: 1 1 200px;
-  min-width: 160px;
+  flex: 1;
+  min-width: 240px;
 }
 
-.footer-logo {
-  font-size: 20px;
+.footer-brand {
+  font-size: 24px;
   font-weight: bold;
-  color: #222;
-  margin-bottom: 8px;
-}
-.footer-logo .orange {
   color: #d62300;
+  margin-bottom: 8px;
 }
 
 .footer-tagline {
-  font-size: 13px;
+  font-size: 14px;
   color: #555;
-  line-height: 1.4;
+  line-height: 1.6;
 }
 
 .footer-heading {
-  font-size: 14px;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
   color: #d62300;
-  margin-bottom: 8px;
 }
 
 .footer-links {
   list-style: none;
   padding: 0;
-  margin: 0;
 }
 
 .footer-links li {
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 
 .footer-links a {
-  color: #007bff;
   text-decoration: none;
-  font-size: 13px;
+  color: #333;
+  transition: color 0.3s;
 }
 
 .footer-links a:hover {
   color: #d62300;
 }
 
-.footer-bottom {
-  text-align: center;
-  font-size: 12px;
+/* Disclaimer */
+.footer-disclaimer {
+  max-width: 1000px;
+  margin: 2rem auto 1rem;
+  font-size: 13px;
   color: #777;
-  padding-top: 10px;
-  border-top: 1px solid #ddd;
-  margin-top: 10px;
-  line-height: 1.5;
+  background: #fff;
+  padding: 12px 16px;
+  border-left: 4px solid #d62300;
+  border-radius: 6px;
 }
 
-/* ✅ Responsive */
-@media (max-width: 768px) {
+/* Bottom */
+.footer-bottom {
+  text-align: center;
+  font-size: 14px;
+  margin-top: 1rem;
+  color: #666;
+  line-height: 1.6;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
   .footer-row {
     flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 15px;
+    gap: 20px;
   }
 
   .footer-col {
-    width: 100%;
-    margin-bottom: 10px;
+    text-align: center;
   }
 
-  .footer-bottom {
-    font-size: 11px;
+  .footer-disclaimer {
+    text-align: justify;
   }
 }

@@ -75,3 +75,40 @@
 .blog-content li {
   margin-bottom: 6px;
 }
+.share-section {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.share-icons {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+.icon {
+  font-size: 28px;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 50%;
+  background-color: #f1f1f1;
+  transition: transform 0.3s ease;
+}
+
+.icon:hover {
+  transform: scale(1.2);
+}
+
+.whatsapp { color: #25D366; }
+.facebook { color: #1877F2; }
+.twitter { color: #1DA1F2; }
+.telegram { color: #0088cc; }
+.link { color: #444; }
+
+.copy-button {
+  background: none;
+  border: none;
+  padding: 0;
+}

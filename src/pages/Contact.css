@@ -1,26 +1,48 @@
+/* Contact Page - Jagran Style */
 
 .contact-page {
- max-width: 800px;
+  max-width: 800px;
   margin: auto;
   padding: 2rem;
-  font-family: 'Segoe UI', sans-serif;
-  color: #333;
+  background-color: #fff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.7;
+  color: #222;
 }
 
+/* Heading */
 .contact-page h1 {
-  font-size: 2.5rem;
-  /* color: #0b74de; */
-color: #facc15;
+  font-size: 32px;
+  color: #d62300;
+  font-weight: bold;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 10px;
+}
+
+/* Paragraph */
+.contact-page p {
+  font-size: 16px;
+  color: #333;
   margin-bottom: 1rem;
 }
 
+/* Contact Details */
 .contact-details {
-  margin: 1.5rem 0;
-  line-height: 1.8;
+  background-color: #f9f9f9;
+  padding: 15px 20px;
+  border-left: 4px solid #d62300;
+  margin-bottom: 30px;
+  border-radius: 6px;
+}
+
+.contact-details p {
+  margin: 8px 0;
+  font-size: 15px;
 }
 
 .contact-details a {
-  color: #0b74de;
+  color: #d62300;
   text-decoration: none;
 }
 
@@ -28,39 +50,56 @@ color: #facc15;
   text-decoration: underline;
 }
 
+/* Contact Form */
 .contact-form {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  margin-top: 1.5rem;
+  gap: 15px;
 }
 
 .contact-form input,
 .contact-form textarea {
-  padding: 0.75rem;
-  font-size: 1rem;
+  padding: 12px;
   border: 1px solid #ccc;
-  border-radius: 8px;
-  outline: none;
+  border-radius: 6px;
+  font-size: 15px;
   transition: border 0.3s;
+  resize: none;
 }
 
 .contact-form input:focus,
 .contact-form textarea:focus {
-  border-color: #0b74de;
+  border-color: #d62300;
+  outline: none;
 }
 
 .contact-form button {
-  padding: 0.75rem;
-  background-color: #0b74de;
+  background-color: #d62300;
   color: white;
-  font-size: 1rem;
+  padding: 12px;
+  font-size: 16px;
   border: none;
-  border-radius: 8px;
+  border-radius: 30px;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: background 0.3s ease;
 }
 
 .contact-form button:hover {
-  background-color: #0959a4;
+  background-color: #b51800;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .contact-page {
+    padding: 1rem;
+  }
+
+  .contact-page h1 {
+    font-size: 26px;
+  }
+
+  .contact-form button {
+    font-size: 15px;
+    padding: 10px;
+  }
 }

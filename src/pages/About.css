@@ -1,29 +1,78 @@
+/* About Page Styling - Jagran Style */
+
 .about-page {
-  font-family: 'Segoe UI', sans-serif;
-  color: #333;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #222;
+  background-color: #fff;
+  padding: 2rem;
+  max-width: 800px;
+  margin: auto;
+  line-height: 1.8;
 }
 
+/* Headings */
 .about-page h1 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-  /* color: #0b74de; */
-  color: #facc15;
+  font-size: 32px;
+  font-weight: bold;
+  color: #d62300;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 10px;
 }
 
 .about-page h2 {
-  margin-top: 2rem;
-  /* color: #facc15; */
-  color: #0b74de;
+  font-size: 24px;
+  color: #d62300;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  border-left: 4px solid #d62300;
+  padding-left: 10px;
 }
 
+/* Paragraphs */
+.about-page p {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 1.2rem;
+}
+
+/* List Items */
 .about-page ul {
-  padding-left: 1.2rem;
+  list-style: none;
+  padding-left: 0;
+  margin-top: 10px;
 }
 
-.about-page a {
-  color: #0b74de;
-  text-decoration: none;
+.about-page ul li {
+  background-color: #f9f9f9;
+  margin-bottom: 8px;
+  padding: 10px 12px;
+  border-left: 4px solid #d62300;
+  font-size: 16px;
+  border-radius: 4px;
+  transition: background 0.3s ease;
 }
-.about-page a:hover {
-  text-decoration: underline;
+
+.about-page ul li:hover {
+  background-color: #f0f0f0;
+}
+
+/* Responsive Adjustments */
+@media screen and (max-width: 600px) {
+  .about-page {
+    padding: 1rem;
+  }
+
+  .about-page h1 {
+    font-size: 26px;
+  }
+
+  .about-page h2 {
+    font-size: 20px;
+  }
+
+  .about-page p,
+  .about-page ul li {
+    font-size: 15px;
+  }
 }

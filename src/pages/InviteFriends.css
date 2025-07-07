@@ -1,94 +1,106 @@
+/* Invite Friends Page – Jagran Style */
+
 .invite-container {
-  padding: 40px;
-  text-align: center;
-  background-color: #fef9c3;
-  color: #1e1e2f;
-  font-family: 'Segoe UI', sans-serif;
-}
-
-.invite-container h2 {
-  font-size: 32px;
-  margin-bottom: 10px;
-  color: #f59e0b;
-}
-
-.invite-container p {
-  margin-bottom: 20px;
-  font-size: 16px;
-}
-
-.share-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-
-.icon {
-  font-size: 30px;
-  cursor: pointer;
-  transition: transform 0.2s;
-}
-
-.icon:hover {
-  transform: scale(1.2);
-}
-
-.whatsapp { color: #25D366; }
-.facebook { color: #1877F2; }
-.telegram { color: #0088cc; }
-.twitter { color: #1DA1F2; }
-.link { color: #333; }
-
-.icon-button {
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-.invite-container {
-  background-color: #fffbe6;
-  padding: 30px 20px;
-  text-align: center;
-  border-radius: 12px;
   max-width: 700px;
-  margin: 40px auto;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+  margin: auto;
+  padding: 2rem;
+  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #fff;
+  color: #222;
 }
 
 .invite-top-banner {
-  max-width: 100%;
-  border-radius: 12px;
-  margin-bottom: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-height: 240px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 1.5rem;
 }
 
+/* Heading */
+.invite-container h2 {
+  font-size: 28px;
+  color: #d62300;
+  margin-bottom: 0.5rem;
+}
+
+/* Paragraph */
+.invite-container p {
+  font-size: 16px;
+  color: #444;
+  margin-bottom: 1.2rem;
+}
+
+/* Share Buttons */
 .share-buttons {
   display: flex;
   justify-content: center;
-  gap: 20px;
-  margin-top: 20px;
   flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 1rem;
 }
 
+/* Common Icon Style */
 .icon {
-  font-size: 28px;
+  font-size: 32px;
   cursor: pointer;
-  transition: transform 0.2s;
+  transition: transform 0.3s, box-shadow 0.3s;
+  padding: 12px;
+  border-radius: 50%;
+  background-color: #f1f1f1;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
+/* Hover Effect */
 .icon:hover {
-  transform: scale(1.2);
+  transform: scale(1.15);
 }
 
-.whatsapp { color: #25D366; }
-.facebook { color: #1877F2; }
-.telegram { color: #0088cc; }
-.twitter { color: #1DA1F2; }
-.link { color: #333; }
+/* Specific Platform Colors */
+.whatsapp {
+  color: #25d366;
+}
 
+.facebook {
+  color: #1877f2;
+}
+
+.telegram {
+  color: #0088cc;
+}
+
+.twitter {
+  color: #1da1f2;
+}
+
+.link {
+  color: #555;
+}
+
+/* Button Style */
 .icon-button {
   background: none;
   border: none;
   padding: 0;
-  cursor: pointer;
+}
+
+/* Responsive */
+@media screen and (max-width: 500px) {
+  .share-buttons {
+    gap: 15px;
+  }
+
+  .icon {
+    font-size: 28px;
+    padding: 10px;
+  }
+
+  .invite-container h2 {
+    font-size: 22px;
+  }
+
+  .invite-container p {
+    font-size: 15px;
+  }
 }

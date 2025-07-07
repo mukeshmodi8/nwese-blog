@@ -2,16 +2,16 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import blogs from "../data/blogs";
 import { Helmet } from "react-helmet";
-import "../styles/blog.css";
 import CommentSection from "../components/CommentSection";
-import "./BlogDetails.css";
-
 import {
   FaWhatsapp,
   FaFacebook,
   FaTwitter,
   FaTelegram,
+  FaLink,
 } from "react-icons/fa";
+import "../styles/blog.css";
+import "./BlogDetails.css";
 
 const BlogDetails = () => {
   const { id } = useParams();
@@ -27,11 +27,22 @@ const BlogDetails = () => {
   if (!blog) return <h1>Blog Not Found</h1>;
 
   const currentUrl = window.location.href;
+  const blogTitle = blog.title;
+
+  const handleCopy = async () => {
+    await navigator.clipboard.writeText(currentUrl);
+    alert("🔗 Link copied to clipboard!");
+  };
 
   return (
     <div className="blog-details-container">
+      {/* ✅ SEO + Schema */}
       <Helmet>
-        ...
+        <title>{blog.title} | Mr. Happy Blog</title>
+        <meta name="description" content={blog.content.slice(0, 150)} />
+        <meta property="og:title" content={blog.title} />
+        <meta property="og:image" content={`https://nwese-blog-ncmd.vercel.app${blog.image}`} />
+        <meta property="og:url" content={currentUrl} />
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
@@ -40,69 +51,82 @@ const BlogDetails = () => {
             image: `https://nwese-blog-ncmd.vercel.app${blog.image}`,
             author: {
               "@type": "Person",
-              name: "Mr. Happy"
+              name: "Mr. Happy",
             },
             publisher: {
               "@type": "Organization",
               name: "NWese Blog",
               logo: {
                 "@type": "ImageObject",
-                url: "https://nwese-blog-ncmd.vercel.app/logo.png"
-              }
+                url: "https://nwese-blog-ncmd.vercel.app/logo.png",
+              },
             },
             datePublished: blog.publishedAt,
-            description: `जानिए - ${blog.title} | NWese हिंदी ब्लॉग में विस्तार से पढ़ें।`
+            description: `जानिए - ${blog.title} | NWese हिंदी ब्लॉग में विस्तार से पढ़ें।`,
           })}
         </script>
       </Helmet>
 
-
-
+      {/* ✅ Blog Content */}
       <h1 className="blog-title">{blog.title}</h1>
       <p className="blog-date">{new Date(blog.publishedAt).toLocaleDateString()}</p>
       <img className="blog-image" src={blog.image} alt={blog.title} />
-
       <div
         className="blog-content"
         dangerouslySetInnerHTML={{ __html: htmlContent }}
       />
 
-      {/* ✅ Share Section */}
+      {/* ✅ Share Buttons */}
       <div className="share-section">
-        <h4>Share This Blog:</h4>
+        <h4>📤 Share This Blog:</h4>
         <div className="share-icons">
           <a
-            href={`https://wa.me/?text=${encodeURIComponent(currentUrl)}`}
+            href={`https://wa.me/?text=${encodeURIComponent(`📢 ${blogTitle}\n🔗 ${currentUrl}`)}`}
             target="_blank"
             rel="noopener noreferrer"
+            title="Share on WhatsApp"
           >
             <FaWhatsapp className="icon whatsapp" />
           </a>
+
           <a
             href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}`}
             target="_blank"
             rel="noopener noreferrer"
+            title="Share on Facebook"
           >
             <FaFacebook className="icon facebook" />
           </a>
+
           <a
-            href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(currentUrl)}&text=${encodeURIComponent(blog.title)}`}
+            href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(`📢 ${blogTitle} 🔗 ${currentUrl}`)}`}
             target="_blank"
             rel="noopener noreferrer"
+            title="Share on Twitter"
           >
             <FaTwitter className="icon twitter" />
           </a>
+
           <a
-            href={`https://t.me/share/url?url=${encodeURIComponent(currentUrl)}&text=${encodeURIComponent(blog.title)}`}
+            href={`https://t.me/share/url?url=${encodeURIComponent(currentUrl)}&text=${encodeURIComponent(blogTitle)}`}
             target="_blank"
             rel="noopener noreferrer"
+            title="Share on Telegram"
           >
             <FaTelegram className="icon telegram" />
           </a>
+
+          <button
+            onClick={handleCopy}
+            className="copy-button"
+            title="Copy Blog Link"
+          >
+            <FaLink className="icon link" />
+          </button>
         </div>
       </div>
 
-      {/* ✅ Comment Section */}
+      {/* ✅ Comments */}
       <CommentSection blogId={id} />
     </div>
   );
