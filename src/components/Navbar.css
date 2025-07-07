@@ -1,169 +1,187 @@
-/* 🌟 HEADER MAIN WRAPPER */
+/* Navbar.css – Jagran Style */
+
 .header {
-  background-color: #ffffff;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
   position: sticky;
   top: 0;
-  z-index: 999;
+  background: white;
+  z-index: 1000;
 }
 
-/* 🔺 TOP BAR: Logo + Title + Buttons in one line */
 .top-bar {
+  background-color: #ffffff;
+  padding: 10px 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: nowrap;           /* ❌ wrapping OFF */
-  padding: 8px 12px;
-  background: #fff;
-  gap: 10px;
-  white-space: nowrap;
-  overflow-x: auto;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* 🔹 LOGO + TEXT */
 .logo {
   display: flex;
   align-items: center;
-  gap: 6px;
-  flex-shrink: 1;
-  white-space: nowrap;
-  max-width: 50%;
-  overflow: hidden;
+  gap: 8px;
 }
 
 .site-logo {
-  height: 36px;
-  width: auto;
+  height: 40px;
+  object-fit: contain;
 }
 
 .logo-text {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: bold;
-  display: flex;
-  align-items: center;
+  color: #d62300;
 }
 
-/* 🔸 USER BUTTONS (मेरी खबरें + ☰) */
 .user-menu {
   display: flex;
   align-items: center;
-  gap: 6px;
-  flex-shrink: 0;
-  white-space: nowrap;
+  gap: 10px;
 }
 
 .highlighted-btn {
+  border-radius: 30px;
+  padding: 6px 12px;
   background-color: #d62300;
   color: white;
+  font-weight: bold;
+  transition: all 0.3s ease;
   border: none;
-  padding: 4px 10px;
-  font-size: 13px;
-  border-radius: 4px;
-  white-space: nowrap;
 }
 
-.menu-btn {
-  font-size: 24px;
-  background: #eee;
-  padding: 6px 10px;
-  border-radius: 4px;
-  border: none;
-  cursor: pointer;
-}
-
-/* 🟨 CATEGORY TABS */
-.category-nav {
-  display: flex;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  padding: 6px 10px;
-  background-color: #fafafa;
-  border-top: 1px solid #eee;
-  border-bottom: 1px solid #eee;
-}
-
-.category-tab {
-  background: none;
-  border: none;
-  margin-right: 10px;
-  padding: 6px 12px;
-  font-size: 14px;
-  cursor: pointer;
-  border-radius: 20px;
-  white-space: nowrap;
-  transition: background-color 0.3s, color 0.3s;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  color: #333;
-}
-
-.category-tab.active,
-.category-tab:hover {
-  background-color: #d62300;
+.highlighted-btn:hover {
+  background-color: #b51800;
   color: #fff;
 }
 
-/* 🟦 DESKTOP NAV LINKS */
+.menu-btn {
+  background: #f1f1f1;
+  border: none;
+  padding: 6px 12px;
+  font-size: 18px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* Desktop Navigation Links */
 .navbar-links {
   display: flex;
-  justify-content: center;
   gap: 20px;
-  padding: 10px 0;
+  padding: 8px 16px;
   background-color: #fff;
 }
 
 .navbar-links a {
   text-decoration: none;
+  font-size: 15px;
   color: #333;
-  font-size: 16px;
-  font-weight: 500;
-  padding: 6px 10px;
+  transition: color 0.2s;
 }
 
-.navbar-links .active {
+.navbar-links a.active {
   color: #d62300;
   font-weight: bold;
 }
 
 .invite-btn {
   background-color: #d62300;
-  color: white !important;
-  padding: 5px 10px;
-  border-radius: 4px;
+  color: #fff !important;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 14px;
 }
 
-/* 📱 MOBILE DROPDOWN MENU */
-.mobile-menu {
+/* Category Tabs */
+.category-nav {
   display: flex;
-  flex-direction: column;
+  overflow-x: auto;
+  white-space: nowrap;
   background: #fff;
-  padding: 10px;
+  border-top: 1px solid #eee;
+  padding: 8px 10px;
+}
+
+.category-tab {
+  display: flex;
+  align-items: center;
+  padding: 6px 10px;
+  font-size: 14px;
+  color: #444;
+  margin-right: 10px;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.3s;
+  background: none;
+  border: none;
+}
+
+.category-tab.active {
+  color: #d62300;
+  border-bottom: 2px solid #d62300;
+}
+
+.category-tab:hover {
+  color: #d62300;
+}
+
+/* Mobile Menu */
+.mobile-menu {
+  display: none;
+  flex-direction: column;
+  background-color: #fff;
+  padding: 10px 20px;
+  position: absolute;
+  top: 60px;
+  left: 0;
+  right: 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
 }
 
 .mobile-menu a {
   padding: 10px 0;
-  border-bottom: 1px solid #eee;
-  color: #333;
   text-decoration: none;
+  color: #333;
+  border-bottom: 1px solid #eee;
 }
 
-/* 🔁 RESPONSIVE FIXES */
-@media (max-width: 400px) {
-  .logo-text {
-    font-size: 16px;
-  }
+.mobile-menu a.active {
+  color: #d62300;
+  font-weight: bold;
+}
 
-  .highlighted-btn {
-    font-size: 12px;
-    padding: 4px 8px;
+.mobile-menu.open {
+  display: flex;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .navbar-links {
+    display: none;
   }
 
   .menu-btn {
-    font-size: 22px;
+    display: block;
   }
 
-  .navbar-links {
+  .category-nav {
     display: none;
+  }
+
+  .mobile-menu {
+    display: flex;
+  }
+}
+
+@media screen and (max-width: 410px) {
+  .top-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .user-menu {
+    width: 100%;
+    justify-content: space-between;
   }
 }
