@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import blogs from "../data/blogs";
 import { Helmet } from "react-helmet";
+import { stripHtml } from "string-strip-html";
 import CommentSection from "../components/CommentSection";
 import {
   FaWhatsapp,
@@ -28,6 +29,8 @@ const BlogDetails = () => {
 
   const currentUrl = window.location.href;
   const blogTitle = blog.title;
+  const blogImage = `https://nwese-blog-ncmd.vercel.app${blog.image}`;
+  const blogDescription = stripHtml(blog.content).result.slice(0, 150);
 
   const handleCopy = async () => {
     await navigator.clipboard.writeText(currentUrl);
@@ -36,19 +39,34 @@ const BlogDetails = () => {
 
   return (
     <div className="blog-details-container">
-      {/* ✅ SEO + Schema */}
+      {/* ✅ SEO + Helmet */}
       <Helmet>
         <title>{blog.title} | Mr. Happy Blog</title>
-        <meta name="description" content={blog.content.slice(0, 150)} />
+        <meta name="description" content={blogDescription} />
+
+        {/* Open Graph */}
         <meta property="og:title" content={blog.title} />
-        <meta property="og:image" content={`https://nwese-blog-ncmd.vercel.app${blog.image}`} />
+        <meta property="og:description" content={blogDescription} />
+        <meta property="og:image" content={blogImage} />
         <meta property="og:url" content={currentUrl} />
+        <meta property="og:type" content="article" />
+
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={blog.title} />
+        <meta name="twitter:description" content={blogDescription} />
+        <meta name="twitter:image" content={blogImage} />
+
+        {/* Canonical */}
+        <link rel="canonical" href={currentUrl} />
+
+        {/* Structured Data */}
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "BlogPosting",
             headline: blog.title,
-            image: `https://nwese-blog-ncmd.vercel.app${blog.image}`,
+            image: blogImage,
             author: {
               "@type": "Person",
               name: "Mr. Happy",
@@ -116,11 +134,7 @@ const BlogDetails = () => {
             <FaTelegram className="icon telegram" />
           </a>
 
-          <button
-            onClick={handleCopy}
-            className="copy-button"
-            title="Copy Blog Link"
-          >
+          <button onClick={handleCopy} className="copy-button" title="Copy Blog Link">
             <FaLink className="icon link" />
           </button>
         </div>

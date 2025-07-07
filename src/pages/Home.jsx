@@ -1,4 +1,3 @@
-// src/pages/Home.jsx
 import React from "react";
 import blogs from "../data/blogs";
 import { Link } from "react-router-dom";
@@ -16,16 +15,75 @@ const Home = () => {
     selectedCategory === "All"
       ? blogs
       : blogs.filter(
-          (b) => b.category?.trim().toLowerCase() === selectedCategory.trim().toLowerCase()
+          (b) =>
+            b.category?.trim().toLowerCase() ===
+            selectedCategory.trim().toLowerCase()
         );
 
   return (
     <div className="home-ui jagran-style">
+      {/* ✅ Helmet SEO */}
       <Helmet>
         <title>Mr Happy Blog | Hindi Tech & News Articles</title>
-        <meta name="description" content="हिंदी में पढ़ें टेक्नोलॉजी, न्यूज़ और ज़रूरी ब्लॉग्स Mr. Happy Blog पर!" />
+        <meta
+          name="description"
+          content="हिंदी में पढ़ें टेक्नोलॉजी, न्यूज़ और ज़रूरी ब्लॉग्स Mr. Happy Blog पर!"
+        />
+        <meta
+          property="og:title"
+          content="Mr Happy Blog | Hindi Tech & News Articles"
+        />
+        <meta
+          property="og:description"
+          content="हिंदी में पढ़ें टेक्नोलॉजी, न्यूज़ और ज़रूरी ब्लॉग्स Mr. Happy Blog पर!"
+        />
+        <meta
+          property="og:image"
+          content={`${baseUrl}/logo.jpg`} 
+        />
+        <meta property="og:url" content={baseUrl} />
+        <meta property="og:type" content="website" />
+
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:title"
+          content="Mr Happy Blog | Hindi Tech & News Articles"
+        />
+        <meta
+          name="twitter:description"
+          content="हिंदी में पढ़ें टेक्नोलॉजी, न्यूज़ और ज़रूरी ब्लॉग्स Mr. Happy Blog पर!"
+        />
+        <meta
+          name="twitter:image"
+          content={`${baseUrl}/logo.png`}
+        />
+
+        {/* Canonical */}
+        <link rel="canonical" href={baseUrl} />
+
+        {/* JSON-LD Structured Data */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            name: "Mr Happy Blog",
+            url: baseUrl,
+            description:
+              "हिंदी में पढ़ें टेक्नोलॉजी, न्यूज़ और ज़रूरी ब्लॉग्स Mr. Happy Blog पर!",
+            publisher: {
+              "@type": "Organization",
+              name: "Mr. Happy",
+              logo: {
+                "@type": "ImageObject",
+                url: `${baseUrl}/logo.png`,
+              },
+            },
+          })}
+        </script>
       </Helmet>
 
+      {/* ✅ Main Blog UI */}
       <main className="news-section">
         <h2>
           {selectedCategory === "All"
@@ -57,7 +115,7 @@ const Home = () => {
                       dangerouslySetInnerHTML={{
                         __html:
                           blog.content
-                            .replace(/<[^>]+>/g, "") // remove HTML tags
+                            .replace(/<[^>]+>/g, "")
                             .slice(0, 80) + "...",
                       }}
                     ></div>

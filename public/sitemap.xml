@@ -1,19 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset
-  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Static Home Page -->
   <url>
     <loc>https://nwese-blog-3z8e.vercel.app/</loc>
     <priority>1.0</priority>
   </url>
-  <!-- Add your blog pages dynamically or manually -->
+
+  <!-- Dynamic Blog Pages -->
   <url>
-    <loc>https://nwese-blog-3z8e.vercel.app/blogs/Chandrayaan%204</loc>
+    <loc>https://nwese-blog-3z8e.vercel.app/blogs/future-of-ai-2025</loc>
     <priority>0.8</priority>
   </url>
+
   <url>
-    <loc>https://nwese-blog-3z8e.vercel.app/blogs/ONDC</loc>
+    <loc>https://nwese-blog-3z8e.vercel.app/blogs/chandrayaan4</loc>
     <priority>0.8</priority>
   </url>
-  <!-- और भी जितने ब्लॉग हैं, वो सब url यहां डालो -->
+
+  <url>
+    <loc>https://nwese-blog-3z8e.vercel.app/blogs/what-is-react</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://nwese-blog-3z8e.vercel.app/blogs/top-5-js-features</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://nwese-blog-3z8e.vercel.app/blogs/mars-mission-2-isro</loc>
+    <priority>0.8</priority>
+  </url>
+
 </urlset>
