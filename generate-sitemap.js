@@ -1,7 +1,7 @@
 // generate-sitemap.js
 
 const fs = require("fs");
-const blogs = require("./src/data/blogs"); // अपने blogs का data import करें
+const blogs = require("./src/data/blogs.data"); // ✅ केवल यह रखें
 
 const BASE_URL = "https://nwese-blog-3z8e.vercel.app";
 
