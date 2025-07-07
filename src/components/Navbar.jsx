@@ -33,7 +33,6 @@ const Navbar = () => {
         </div>
 
         <div className="user-menu">
-          <button className="highlighted-btn">मेरी खबरें</button>
           <button className="menu-btn" onClick={toggleMenu}>☰</button>
         </div>
       </div>
