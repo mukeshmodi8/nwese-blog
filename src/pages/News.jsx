@@ -57,18 +57,24 @@ const News = () => {
                 </Link>
 
                 <div className="share-icons">
-                  <FaShareAlt title="Share" />
+                <FaShareAlt style={{ color: "#666" }} />  
+
                   <FaWhatsapp
                     title="WhatsApp"
                     onClick={() => shareBlog("whatsapp", blog)}
+                    style={{ color: "#25D366" }}
                   />
+
                   <FaFacebook
                     title="Facebook"
                     onClick={() => shareBlog("facebook", blog)}
+                    style={{ color: "#1877F2" }}
                   />
+
                   <FaTwitter
                     title="Twitter"
                     onClick={() => shareBlog("twitter", blog)}
+                    style={{ color: "#1DA1F2" }}
                   />
                 </div>
               </div>

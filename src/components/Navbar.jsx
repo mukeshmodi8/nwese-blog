@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useCategory } from "../context/CategoryContext";
 import "./Navbar.css";
 
@@ -15,8 +15,18 @@ const categories = Object.keys(emojiMap);
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { selectedCategory, setSelectedCategory } = useCategory();
+  const navigate = useNavigate();
+  const location = useLocation(); // 🔁 check current path
 
   const toggleMenu = () => setIsOpen(!isOpen);
+
+  const handleCategoryClick = (cat) => {
+    setSelectedCategory(cat);
+    // 🔁 Navigate only if not already on /blogs
+    if (location.pathname !== "/blogs") {
+      navigate("/blogs");
+    }
+  };
 
   return (
     <header className="header">
@@ -33,7 +43,9 @@ const Navbar = () => {
         </div>
 
         <div className="user-menu">
-          <button className="menu-btn" onClick={toggleMenu}>☰</button>
+          <button className="menu-btn" onClick={toggleMenu}>
+            {isOpen ? "✖" : "☰"}
+          </button>
         </div>
       </div>
 
@@ -43,7 +55,7 @@ const Navbar = () => {
           <button
             key={cat}
             className={`category-tab ${selectedCategory === cat ? "active" : ""}`}
-            onClick={() => setSelectedCategory(cat)}
+            onClick={() => handleCategoryClick(cat)}
           >
             {emojiMap[cat]} {cat}
           </button>

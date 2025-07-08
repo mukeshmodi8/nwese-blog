@@ -56,11 +56,16 @@
 
 .menu-btn {
   background: #f1f1f1;
+  color: #d62300;
   border: none;
   padding: 6px 12px;
   font-size: 18px;
   border-radius: 6px;
   cursor: pointer;
+}
+.menu-btn:hover {
+  transform: scale(1.1);
+  color: #d62300; /* थोड़ा डार्क रेड hover पर */
 }
 
 /* Highlighted Button */
