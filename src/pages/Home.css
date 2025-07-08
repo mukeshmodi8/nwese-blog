@@ -191,7 +191,7 @@
 /* ========== 📱 Responsive Design (OnePlus 12 Friendly) ========== */
 @media screen and (max-width: 430px) {
   .top-bar {
-    flex-direction: column;
+    /* flex-direction: column; */
     gap: 10px;
     text-align: center;
   }
