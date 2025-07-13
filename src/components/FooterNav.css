@@ -15,7 +15,7 @@
   padding: 0 8px;
 }
 
-/* Normal Footer Buttons */
+
 .footer-btn {
   display: flex;
   flex-direction: column;
@@ -41,7 +41,7 @@
   font-weight: bold;
 }
 
-/* 🔴 Center Floating Home Button */
+
 .center-fab {
   background-color: #e53935;
   color: #fff;

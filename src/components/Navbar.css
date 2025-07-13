@@ -1,7 +1,7 @@
-/* Google Material Icons */
+
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
-/* Header Container */
+
 .header {
   position: sticky;
   top: 0;
@@ -9,7 +9,7 @@
   z-index: 1000;
 }
 
-/* Top Bar */
+
 .top-bar {
   background-color: #ffffff;
   padding: 10px 16px;
@@ -20,7 +20,7 @@
   flex-wrap: nowrap;
 }
 
-/* Logo + Text */
+
 .logo {
   display: flex;
   align-items: center;
@@ -47,7 +47,7 @@
   color: #000;
 }
 
-/* Menu or Button */
+
 .user-menu {
   display: flex;
   align-items: center;
@@ -65,10 +65,10 @@
 }
 .menu-btn:hover {
   transform: scale(1.1);
-  color: #d62300; /* थोड़ा डार्क रेड hover पर */
+  color: #d62300; 
 }
 
-/* Highlighted Button */
+
 .highlighted-btn {
   border-radius: 30px;
   padding: 6px 12px;
@@ -84,7 +84,7 @@
   color: #fff;
 }
 
-/* Desktop Links */
+
 .navbar-links {
   display: flex;
   gap: 20px;
@@ -114,7 +114,7 @@
   font-size: 14px;
 }
 
-/* Category Tabs */
+
 .category-nav {
   display: flex;
   overflow-x: auto;
@@ -150,7 +150,7 @@
   color: #d62300;
 }
 
-/* Mobile Dropdown Menu */
+
 .mobile-menu {
   display: none;
   flex-direction: column;
@@ -180,7 +180,7 @@
   display: flex;
 }
 
-/* ✅ Responsive Design */
+
 @media (max-width: 768px) {
   .navbar-links {
     display: none;
@@ -194,7 +194,7 @@
     display: flex;
   }
 
-  /* ✔ Show category-nav in mobile too */
+
   .category-nav {
     display: flex;
   }

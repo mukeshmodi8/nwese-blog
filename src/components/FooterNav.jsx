@@ -7,7 +7,7 @@ const FooterNav = () => {
 
   return (
     <footer className="footer-nav jagran-footer">
-      {/* 🔥 Flash News - Left Side */}
+    
       <Link
         to="/fast-news"
         className={`footer-btn ${pathname === "/fast-news" ? "active" : ""}`}
@@ -16,7 +16,7 @@ const FooterNav = () => {
         <span>फ्लैश</span>
       </Link>
 
-      {/* 🏏 Sports (Instead of Epaper) */}
+     
       <Link
         to="/sports"
         className={`footer-btn ${pathname === "/sports" ? "active" : ""}`}
@@ -25,7 +25,7 @@ const FooterNav = () => {
         <span>स्पोर्ट्स</span>
       </Link>
 
-      {/* 🏠 Home - Center Floating */}
+     
       <Link
         to="/"
         className={`center-fab ${pathname === "/" ? "active" : ""}`}
@@ -33,7 +33,7 @@ const FooterNav = () => {
         <i className="material-icons">home</i>
       </Link>
 
-      {/* 🎥 Videos */}
+      
       <Link
         to="/videos"
         className={`footer-btn ${pathname === "/videos" ? "active" : ""}`}
@@ -42,7 +42,7 @@ const FooterNav = () => {
         <span>वीडियो</span>
       </Link>
 
-      {/* 📍 States */}
+     
       <Link
         to="/states"
         className={`footer-btn ${pathname === "/states" ? "active" : ""}`}

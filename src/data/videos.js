@@ -1,5 +1,3 @@
-// src/data/videos.js
-
 const videos = [
   {
     id: 1,

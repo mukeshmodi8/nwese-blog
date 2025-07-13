@@ -39,28 +39,26 @@ const BlogDetails = () => {
 
   return (
     <div className="blog-details-container">
-      {/* ✅ SEO + Helmet */}
       <Helmet>
         <title>{blog.title} | Mr. Happy Blog</title>
         <meta name="description" content={blogDescription} />
 
-        {/* Open Graph */}
         <meta property="og:title" content={blog.title} />
         <meta property="og:description" content={blogDescription} />
         <meta property="og:image" content={blogImage} />
         <meta property="og:url" content={currentUrl} />
         <meta property="og:type" content="article" />
 
-        {/* Twitter Card */}
+       
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={blog.title} />
         <meta name="twitter:description" content={blogDescription} />
         <meta name="twitter:image" content={blogImage} />
 
-        {/* Canonical */}
+       
         <link rel="canonical" href={currentUrl} />
 
-        {/* Structured Data */}
+       
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
@@ -85,7 +83,7 @@ const BlogDetails = () => {
         </script>
       </Helmet>
 
-      {/* ✅ Blog Content */}
+     
       <h1 className="blog-title">{blog.title}</h1>
       <p className="blog-date">{new Date(blog.publishedAt).toLocaleDateString()}</p>
       <img className="blog-image" src={blog.image} alt={blog.title} />
@@ -94,7 +92,7 @@ const BlogDetails = () => {
         dangerouslySetInnerHTML={{ __html: htmlContent }}
       />
 
-      {/* ✅ Share Buttons */}
+      
       <div className="share-section">
         <h4>📤 Share This Blog:</h4>
         <div className="share-icons">
@@ -140,7 +138,7 @@ const BlogDetails = () => {
         </div>
       </div>
 
-      {/* ✅ Comments */}
+     
       <CommentSection blogId={id} />
     </div>
   );

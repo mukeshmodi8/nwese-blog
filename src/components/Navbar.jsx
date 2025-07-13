@@ -16,13 +16,12 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { selectedCategory, setSelectedCategory } = useCategory();
   const navigate = useNavigate();
-  const location = useLocation(); // 🔁 check current path
+  const location = useLocation(); 
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
   const handleCategoryClick = (cat) => {
     setSelectedCategory(cat);
-    // 🔁 Navigate only if not already on /blogs
     if (location.pathname !== "/blogs") {
       navigate("/blogs");
     }
@@ -49,7 +48,7 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* 🔹 Category Tabs */}
+     
       <nav className="category-nav">
         {categories.map((cat) => (
           <button
@@ -62,7 +61,7 @@ const Navbar = () => {
         ))}
       </nav>
 
-      {/* 🔸 Desktop Navigation */}
+     
       <nav className="navbar-links">
         <NavLink to="/" className={({ isActive }) => isActive ? "active" : ""}>🏠 Home</NavLink>
         <NavLink to="/blogs" className={({ isActive }) => isActive ? "active" : ""}>📑 Blogs</NavLink>
@@ -72,7 +71,7 @@ const Navbar = () => {
         <NavLink to="/invite" className={({ isActive }) => isActive ? "active invite-btn" : "invite-btn"}>🎁 Invite</NavLink>
       </nav>
 
-      {/* 📱 Mobile Navigation */}
+     
       {isOpen && (
         <div className="mobile-menu">
           <NavLink to="/" onClick={() => setIsOpen(false)}>🏠 Home</NavLink>

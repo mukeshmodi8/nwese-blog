@@ -1,6 +1,3 @@
-/* Blogs.css – Inspired by Jagran UI */
-
-/* Base Container */
 .container {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #f9f9f9;
@@ -9,7 +6,7 @@
   padding-bottom: 80px; /* For mobile nav spacing */
 }
 
-/* Heading */
+
 .container h1 {
   font-size: 22px;
   color: #d62300;
@@ -18,14 +15,14 @@
   padding-left: 12px;
 }
 
-/* Blog Grid */
+
 .blog-grid {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-/* Card */
+
 .blog-card {
   background-color: #fff;
   border-radius: 10px;
@@ -39,14 +36,14 @@
   transform: translateY(-2px);
 }
 
-/* Image */
+
 .blog-image {
   width: 100%;
   height: 180px;
   object-fit: cover;
 }
 
-/* Content Area */
+
 .blog-content {
   padding: 16px;
 }
@@ -59,14 +56,14 @@
   font-weight: 600;
 }
 
-/* State */
+
 .blog-state {
   font-size: 13px;
   color: #d62300;
   margin-bottom: 6px;
 }
 
-/* Excerpt */
+
 .blog-excerpt {
   font-size: 14px;
   color: #555;
@@ -74,14 +71,14 @@
   line-height: 1.5;
 }
 
-/* Meta Info */
+
 .blog-meta {
   font-size: 12px;
   color: #777;
   margin-bottom: 10px;
 }
 
-/* Actions (Read more + Share) */
+
 .blog-actions {
   display: flex;
   justify-content: space-between;
@@ -89,7 +86,7 @@
   flex-wrap: wrap;
 }
 
-/* Read Button */
+
 .blog-link {
   background-color: #d62300;
   color: #fff;
@@ -104,7 +101,7 @@
   background-color: #bb1f00;
 }
 
-/* Share Button */
+
 .share-button {
   background: none;
   border: none;
@@ -118,7 +115,7 @@
   color: #d62300;
 }
 
-/* Responsive Design */
+
 @media (max-width: 768px) {
   .container {
     padding: 16px;

@@ -13,7 +13,7 @@ import {
 
 import { getDatabase } from "firebase/database";
 
-// ✅ Firebase Config
+
 const firebaseConfig = {
   apiKey: "YOUR_API_KEY",
   authDomain: "your-project-id.firebaseapp.com",
@@ -21,7 +21,7 @@ const firebaseConfig = {
   storageBucket: "your-project-id.appspot.com",
   messagingSenderId: "YOUR_SENDER_ID",
   appId: "YOUR_APP_ID",
- databaseURL: "https://react-blog-comments-default-rtdb.firebaseio.com", // ✅ ADD THIS
+ databaseURL: "https://react-blog-comments-default-rtdb.firebaseio.com", 
 };
 
 

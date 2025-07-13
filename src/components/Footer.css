@@ -1,4 +1,4 @@
-/* Footer - Jagran Style */
+
 
 .footer-grid {
   background-color: #f8f8f8;
@@ -61,7 +61,7 @@
   color: #d62300;
 }
 
-/* Disclaimer */
+
 .footer-disclaimer {
   max-width: 1000px;
   margin: 2rem auto 1rem;
@@ -73,7 +73,7 @@
   border-radius: 6px;
 }
 
-/* Bottom */
+
 .footer-bottom {
   text-align: center;
   font-size: 14px;
@@ -82,7 +82,7 @@
   line-height: 1.6;
 }
 
-/* Responsive */
+
 @media (max-width: 600px) {
   .footer-row {
     flex-direction: column;

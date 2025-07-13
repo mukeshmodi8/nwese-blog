@@ -1,13 +1,13 @@
 import React from "react";
 import blogs from "../data/blogs";
 import { Link } from "react-router-dom";
-import { useCategory } from "../context/CategoryContext"; // ✅ category context
+import { useCategory } from "../context/CategoryContext";
 import "./Blogs.css";
 
 const Blogs = () => {
-  const { selectedCategory } = useCategory(); // ✅ use category context
+  const { selectedCategory } = useCategory();
 
-  // ✅ Filter blogs based on selected category
+
   const filteredBlogs =
     selectedCategory === "All"
       ? blogs
@@ -57,7 +57,7 @@ const Blogs = () => {
                 <div className="blog-content">
                   <h2 className="blog-title">{blog.title}</h2>
 
-                  {/* ✅ राज्य दिखा रहे हैं */}
+                
                   <p className="blog-state">📍 राज्य: {blog.state}</p>
 
                   <p className="blog-excerpt">
