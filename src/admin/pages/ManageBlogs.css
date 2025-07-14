@@ -1,0 +1,124 @@
+/* Main container */
+.manage-blog-container {
+  padding: 30px;
+  font-family: Arial, sans-serif;
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* Title */
+.manage-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Table */
+.table-wrapper {
+  overflow-x: auto;
+}
+.blog-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.blog-table th,
+.blog-table td {
+  padding: 12px;
+  border: 1px solid #ccc;
+  text-align: left;
+}
+.edit-btn,
+.delete-btn {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 6px;
+}
+.edit-btn {
+  background-color: #007bff;
+  color: white;
+}
+.delete-btn {
+  background-color: #dc3545;
+  color: white;
+}
+
+/* Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+/* Modal Box */
+.modal {
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0px 0px 20px rgba(0,0,0,0.3);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Modal Fields */
+.modal input,
+.modal textarea {
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+/* Modal Buttons */
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+.cancel-btn,
+.update-btn {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.cancel-btn {
+  background-color: #6c757d;
+  color: white;
+}
+.update-btn {
+  background-color: #28a745;
+  color: white;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* No blogs message */
+.no-blogs {
+  text-align: center;
+  font-size: 18px;
+  margin-top: 40px;
+  color: #777;
+}

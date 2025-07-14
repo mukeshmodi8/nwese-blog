@@ -1,0 +1,24 @@
+.admin-panel {
+  padding: 40px;
+  background: #121212;
+  color: white;
+  min-height: 100vh;
+  text-align: center;
+}
+
+.admin-actions button {
+  background-color: #00D1FF;
+  border: none;
+  padding: 15px 30px;
+  margin: 10px;
+  color: black;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.admin-actions button:hover {
+  background-color: #00b0e0;
+  transform: scale(1.05);
+}

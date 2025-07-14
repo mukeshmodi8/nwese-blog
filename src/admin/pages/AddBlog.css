@@ -1,0 +1,54 @@
+.add-blog-container {
+  padding: 2rem;
+  max-width: 600px;
+  margin: auto;
+  background-color: #121212;
+  color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.add-blog-container h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #00d1ff;
+}
+
+.add-blog-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.add-blog-container input,
+.add-blog-container textarea {
+  padding: 12px 16px;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+  background-color: #1e1e1e;
+  color: white;
+  font-size: 1rem;
+}
+
+.add-blog-container input::placeholder,
+.add-blog-container textarea::placeholder {
+  color: #aaa;
+}
+
+.add-blog-container button {
+  padding: 12px;
+  background-color: #00d1ff;
+  border: none;
+  border-radius: 8px;
+  color: black;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.add-blog-container button:hover {
+  background-color: #00b4e6;
+}

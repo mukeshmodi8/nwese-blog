@@ -1,14 +1,34 @@
-import React from "react";
-import blogs from "../data/blogs";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useCategory } from "../context/CategoryContext";
+import { collection, getDocs } from "firebase/firestore";
+import { firestore } from "../data/firebase";
 import "./Blogs.css";
 
 const Blogs = () => {
   const { selectedCategory } = useCategory();
+  const [blogs, setBlogs] = useState([]);
 
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(firestore, "blogs"));
+        const blogsData = querySnapshot.docs.map((doc) => ({
+          id: doc.id, 
+          ...doc.data(),
+        }));
+        console.log("📥 Blogs fetched from Firebase:", blogsData);
+        setBlogs(blogsData);
+      } catch (error) {
+        console.error("❌ Error fetching blogs:", error);
+      }
+    };
+
+    fetchBlogs();
+  }, []);
 
   const filteredBlogs =
+
     selectedCategory === "All"
       ? blogs
       : blogs.filter(
@@ -21,14 +41,10 @@ const Blogs = () => {
     const url = `${window.location.origin}/blogs/${encodeURIComponent(id)}`;
     const text = `📖 ${title} - पढ़िए यहां: ${url}`;
     if (navigator.share) {
-      navigator.share({
-        title,
-        text,
-        url,
-      });
+      navigator.share({ title, text, url });
     } else {
       navigator.clipboard.writeText(text);
-      alert("Link copied to clipboard ✅");
+      alert("✅ Link copied to clipboard");
     }
   };
 
@@ -46,44 +62,50 @@ const Blogs = () => {
         </p>
       ) : (
         <div className="blog-grid">
-          {filteredBlogs.map((blog, index) => (
-            <React.Fragment key={blog.id}>
-              <div className="blog-card">
-                <img
-                  src={blog.image}
-                  alt={blog.title}
-                  className="blog-image"
-                />
-                <div className="blog-content">
-                  <h2 className="blog-title">{blog.title}</h2>
+          {filteredBlogs.map((blog) => (
+            <div className="blog-card" key={blog.id}>
+              <img
+                src={blog.image || "/images/default.jpg"}
+                alt={blog.title}
+                className="blog-image"
+              />
+              <div className="blog-content">
+                <h2 className="blog-title">{blog.title || "No Title"}</h2>
 
-                
+                {blog.state && (
                   <p className="blog-state">📍 राज्य: {blog.state}</p>
+                )}
 
-                  <p className="blog-excerpt">
-                    {blog.content.slice(0, 130).replace(/<[^>]+>/g, "")}...
-                  </p>
-                  <p className="blog-meta">
-                    📅 {new Date(blog.publishedAt).toLocaleDateString()} | ⏱️{" "}
-                    {blog.readingTime}
-                  </p>
-                  <div className="blog-actions">
-                    <Link
-                      to={`/blogs/${encodeURIComponent(blog.id)}`}
-                      className="blog-link"
-                    >
-                      और पढ़ें →
-                    </Link>
-                    <button
-                      className="share-button"
-                      onClick={() => handleShare(blog.title, blog.id)}
-                    >
-                      🔗 शेयर
-                    </button>
-                  </div>
+                <p className="blog-excerpt">
+                  {blog.content
+                    ? blog.content.slice(0, 130).replace(/<[^>]+>/g, "")
+                    : "❗ Content not available"}...
+                </p>
+
+                <p className="blog-meta">
+                  📅{" "}
+                  {blog.publishedAt
+                    ? new Date(blog.publishedAt).toLocaleDateString()
+                    : "❓ Unknown date"}{" "}
+                  | ⏱️ {blog.readingTime || "?"}
+                </p>
+
+                <div className="blog-actions">
+                  <Link
+                    to={`/blogs/${encodeURIComponent(blog.id)}`}
+                    className="blog-link"
+                  >
+                    और पढ़ें →
+                  </Link>
+                  <button
+                    className="share-button"
+                    onClick={() => handleShare(blog.title, blog.id)}
+                  >
+                    🔗 शेयर
+                  </button>
                 </div>
               </div>
-            </React.Fragment>
+            </div>
           ))}
         </div>
       )}

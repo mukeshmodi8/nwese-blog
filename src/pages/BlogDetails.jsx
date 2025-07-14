@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import blogs from "../data/blogs";
+import { doc, getDoc } from "firebase/firestore";
+import { firestore } from "../data/firebase";
 import { Helmet } from "react-helmet";
 import { stripHtml } from "string-strip-html";
 import CommentSection from "../components/CommentSection";
@@ -16,20 +17,36 @@ import "./BlogDetails.css";
 
 const BlogDetails = () => {
   const { id } = useParams();
-  const blog = blogs.find((b) => b.id === id);
-  const [htmlContent, setHtmlContent] = useState("");
+  const [blog, setBlog] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (blog && blog.content) {
-      setHtmlContent(blog.content);
-    }
-  }, [blog]);
+    const fetchBlog = async () => {
+      try {
+        // 🧠 Find blog by ID using Firestore query on `blogs` collection
+        const blogsRef = doc(firestore, "blogs", id);
+        const blogSnap = await getDoc(blogsRef);
+        if (blogSnap.exists()) {
+          setBlog(blogSnap.data());
+        } else {
+          setBlog(null);
+        }
+      } catch (err) {
+        console.error("❌ Error loading blog:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  if (!blog) return <h1>Blog Not Found</h1>;
+    fetchBlog();
+  }, [id]);
+
+  if (loading) return <p>🔄 Loading blog...</p>;
+  if (!blog) return <h1>❌ Blog Not Found</h1>;
 
   const currentUrl = window.location.href;
   const blogTitle = blog.title;
-  const blogImage = `https://nwese-blog-ncmd.vercel.app${blog.image}`;
+  const blogImage = blog.image;
   const blogDescription = stripHtml(blog.content).result.slice(0, 150);
 
   const handleCopy = async () => {
@@ -42,57 +59,28 @@ const BlogDetails = () => {
       <Helmet>
         <title>{blog.title} | Mr. Happy Blog</title>
         <meta name="description" content={blogDescription} />
-
         <meta property="og:title" content={blog.title} />
         <meta property="og:description" content={blogDescription} />
         <meta property="og:image" content={blogImage} />
         <meta property="og:url" content={currentUrl} />
         <meta property="og:type" content="article" />
-
-       
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={blog.title} />
         <meta name="twitter:description" content={blogDescription} />
         <meta name="twitter:image" content={blogImage} />
-
-       
         <link rel="canonical" href={currentUrl} />
-
-       
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "BlogPosting",
-            headline: blog.title,
-            image: blogImage,
-            author: {
-              "@type": "Person",
-              name: "Mr. Happy",
-            },
-            publisher: {
-              "@type": "Organization",
-              name: "NWese Blog",
-              logo: {
-                "@type": "ImageObject",
-                url: "https://nwese-blog-ncmd.vercel.app/logo.png",
-              },
-            },
-            datePublished: blog.publishedAt,
-            description: `जानिए - ${blog.title} | NWese हिंदी ब्लॉग में विस्तार से पढ़ें।`,
-          })}
-        </script>
       </Helmet>
 
-     
       <h1 className="blog-title">{blog.title}</h1>
-      <p className="blog-date">{new Date(blog.publishedAt).toLocaleDateString()}</p>
+      <p className="blog-date">
+        {new Date(blog.publishedAt).toLocaleDateString()}
+      </p>
       <img className="blog-image" src={blog.image} alt={blog.title} />
       <div
         className="blog-content"
-        dangerouslySetInnerHTML={{ __html: htmlContent }}
+        dangerouslySetInnerHTML={{ __html: blog.content }}
       />
 
-      
       <div className="share-section">
         <h4>📤 Share This Blog:</h4>
         <div className="share-icons">
@@ -138,7 +126,6 @@ const BlogDetails = () => {
         </div>
       </div>
 
-     
       <CommentSection blogId={id} />
     </div>
   );

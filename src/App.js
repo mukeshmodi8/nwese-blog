@@ -20,7 +20,7 @@ import FlashNews from "./pages/FlashNews";
 import Sports from "./components/Sports";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import AdminPanel from "./components/admin/AdminPanel";
+import AdminRoutes from "./admin/AdminRoutes";
 
 const AppLayout = () => {
   const location = useLocation();
@@ -34,7 +34,7 @@ const AppLayout = () => {
 
       <div className="p-4">
         <Routes>
-          {/* ✅ Main Public Routes */}
+          {/* ✅ Public Routes */}
           <Route path="/" element={<Home />} />
           <Route path="/blogs" element={<Blogs />} />
           <Route path="/blogs/:id" element={<BlogDetails />} />
@@ -50,7 +50,7 @@ const AppLayout = () => {
           <Route path="/sports" element={<Sports />} />
 
           {/* ✅ Admin Routes */}
-          <Route path="/admin/*" element={<AdminPanel />} />
+          <Route path="/admin/*" element={<AdminRoutes />} />
         </Routes>
       </div>
 

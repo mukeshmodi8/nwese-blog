@@ -1,6 +1,6 @@
+
 import { initializeApp } from "firebase/app";
-
-
+  
 import {
   getFirestore,
   doc,
@@ -10,30 +10,31 @@ import {
   increment,
 } from "firebase/firestore";
 
-
+// 🌐 Realtime Database
 import { getDatabase } from "firebase/database";
 
-
+// ✅ Your full Firebase config (from Mr. Happy’s project)
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "your-project-id.firebaseapp.com",
-  projectId: "blog-a330c",
-  storageBucket: "your-project-id.appspot.com",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID",
- databaseURL: "https://react-blog-comments-default-rtdb.firebaseio.com", 
+  apiKey: "AIzaSyCOH8OnAKoATdQwhus3MtY1WkNw_uKnyPw",
+  authDomain: "mr-happy-blog-admin.firebaseapp.com",
+  projectId: "mr-happy-blog-admin",
+  storageBucket: "mr-happy-blog-admin.appspot.com",
+  messagingSenderId: "898141460751",
+  appId: "1:898141460751:web:9542cad34b5410153fc67a",
+  measurementId: "G-TNNLNS4HZC",
+  databaseURL: "https://react-blog-comments-default-rtdb.firebaseio.com",
 };
 
-
+// 🔧 Initialize Firebase App
 const app = initializeApp(firebaseConfig);
 
-
+// 🗃️ Firestore and Realtime DB init
 const firestore = getFirestore(app);
+const db = getDatabase(app);
 
-
-export const db = getDatabase(app);
-
-
+//
+// ✅ Blog View Functions
+//
 export const updateBlogView = async (blogId) => {
   const blogRef = doc(firestore, "blogViews", blogId.toString());
   const snap = await getDoc(blogRef);
@@ -49,4 +50,9 @@ export const fetchBlogView = async (blogId) => {
   const blogRef = doc(firestore, "blogViews", blogId.toString());
   const snap = await getDoc(blogRef);
   return snap.exists() ? snap.data().views : 0;
-}; 
+};
+
+//
+// ✅ Exports for use everywhere
+//
+export { firestore, db };
