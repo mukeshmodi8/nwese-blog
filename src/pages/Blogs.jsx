@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useCategory } from "../context/CategoryContext";
 import { collection, getDocs } from "firebase/firestore";
 import { firestore } from "../data/firebase";
+import staticBlogs from "../data/blogs"; // ✅ Static blog import
 import "./Blogs.css";
 
 const Blogs = () => {
@@ -13,14 +14,19 @@ const Blogs = () => {
     const fetchBlogs = async () => {
       try {
         const querySnapshot = await getDocs(collection(firestore, "blogs"));
-        const blogsData = querySnapshot.docs.map((doc) => ({
-          id: doc.id, 
+        const firebaseBlogs = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
           ...doc.data(),
         }));
-        console.log("📥 Blogs fetched from Firebase:", blogsData);
-        setBlogs(blogsData);
+
+        const allBlogs = [...firebaseBlogs, ...staticBlogs]; // ✅ merge both
+        allBlogs.sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt)); // optional sorting
+
+        console.log("📥 Total blogs:", allBlogs.length);
+        setBlogs(allBlogs);
       } catch (error) {
         console.error("❌ Error fetching blogs:", error);
+        setBlogs(staticBlogs); // fallback
       }
     };
 
@@ -28,7 +34,6 @@ const Blogs = () => {
   }, []);
 
   const filteredBlogs =
-
     selectedCategory === "All"
       ? blogs
       : blogs.filter(

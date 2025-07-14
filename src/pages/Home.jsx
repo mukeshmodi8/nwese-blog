@@ -1,76 +1,86 @@
-import React from "react";
-import blogs from "../data/blogs";
+import React, { useEffect, useState } from "react";
+import staticBlogs from "../data/blogs"; // Static blogs
 import { Link } from "react-router-dom";
 import { useCategory } from "../context/CategoryContext";
 import { formatDistanceToNow, format } from "date-fns";
 import { Helmet } from "react-helmet";
+import { collection, getDocs } from "firebase/firestore";
+import { firestore } from "../data/firebase"; // Firebase setup
 import "./Home.css";
 
 const Home = () => {
   const { selectedCategory } = useCategory();
   const baseUrl = window.location.origin;
 
-  // ✅ Filter Blogs by Selected Category
+  const [blogs, setBlogs] = useState([]);
+
+  // 🔁 Fetch Firebase + Static Blogs
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(firestore, "blogs"));
+        const firebaseBlogs = querySnapshot.docs.map((doc) => {
+          const data = doc.data();
+          return {
+            id: doc.id,
+            ...data,
+          };
+        });
+
+        const allBlogs = [...firebaseBlogs, ...staticBlogs];
+
+        // 🔃 Sort by newest date
+        allBlogs.sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt));
+
+        setBlogs(allBlogs);
+      } catch (error) {
+        console.error("❌ Error fetching blogs:", error);
+        setBlogs(staticBlogs); // fallback
+      }
+    };
+
+    fetchBlogs();
+  }, []);
+
+  // ✅ Category Filter (Safe check for undefined category)
   const filteredBlogs =
     selectedCategory === "All"
       ? blogs
       : blogs.filter(
           (b) =>
-            b.category?.trim().toLowerCase() ===
-            selectedCategory.trim().toLowerCase()
+            (b.category || "")
+              .trim()
+              .toLowerCase() === selectedCategory.trim().toLowerCase()
         );
 
   return (
     <div className="home-ui jagran-style">
-      {/* ✅ Helmet SEO */}
       <Helmet>
         <title>Mr Happy Blog | Hindi Tech & News Articles</title>
         <meta
           name="description"
           content="हिंदी में पढ़ें टेक्नोलॉजी, न्यूज़ और ज़रूरी ब्लॉग्स Mr. Happy Blog पर!"
         />
-        <meta
-          property="og:title"
-          content="Mr Happy Blog | Hindi Tech & News Articles"
-        />
+        <meta property="og:title" content="Mr Happy Blog | Hindi Tech & News Articles" />
         <meta
           property="og:description"
           content="हिंदी में पढ़ें टेक्नोलॉजी, न्यूज़ और ज़रूरी ब्लॉग्स Mr. Happy Blog पर!"
         />
-        <meta
-          property="og:image"
-          content={`${baseUrl}/logo.jpg`} 
-        />
+        <meta property="og:image" content={`${baseUrl}/logo.jpg`} />
         <meta property="og:url" content={baseUrl} />
         <meta property="og:type" content="website" />
-
-        {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta
-          name="twitter:title"
-          content="Mr Happy Blog | Hindi Tech & News Articles"
-        />
-        <meta
-          name="twitter:description"
-          content="हिंदी में पढ़ें टेक्नोलॉजी, न्यूज़ और ज़रूरी ब्लॉग्स Mr. Happy Blog पर!"
-        />
-        <meta
-          name="twitter:image"
-          content={`${baseUrl}/logo.png`}
-        />
-
-        {/* Canonical */}
+        <meta name="twitter:title" content="Mr Happy Blog | Hindi Tech & News Articles" />
+        <meta name="twitter:description" content="हिंदी में पढ़ें टेक्नोलॉजी, न्यूज़ और ज़रूरी ब्लॉग्स Mr. Happy Blog पर!" />
+        <meta name="twitter:image" content={`${baseUrl}/logo.png`} />
         <link rel="canonical" href={baseUrl} />
-
-        {/* JSON-LD Structured Data */}
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "WebSite",
             name: "Mr Happy Blog",
             url: baseUrl,
-            description:
-              "हिंदी में पढ़ें टेक्नोलॉजी, न्यूज़ और ज़रूरी ब्लॉग्स Mr. Happy Blog पर!",
+            description: "हिंदी में पढ़ें टेक्नोलॉजी, न्यूज़ और ज़रूरी ब्लॉग्स Mr. Happy Blog पर!",
             publisher: {
               "@type": "Organization",
               name: "Mr. Happy",
@@ -83,7 +93,7 @@ const Home = () => {
         </script>
       </Helmet>
 
-      {/* ✅ Main Blog UI */}
+      {/* ✅ Blog UI */}
       <main className="news-section">
         <h2>
           {selectedCategory === "All"
@@ -114,18 +124,22 @@ const Home = () => {
                       className="excerpt"
                       dangerouslySetInnerHTML={{
                         __html:
-                          blog.content
+                          (blog.content || "")
                             .replace(/<[^>]+>/g, "")
                             .slice(0, 80) + "...",
                       }}
                     ></div>
 
                     <p className="meta">
-                      📅 {format(new Date(blog.publishedAt), "dd MMM yyyy")} | ⏱️{" "}
-                      {blog.readingTime} | ⌛{" "}
-                      {formatDistanceToNow(new Date(blog.publishedAt), {
-                        addSuffix: true,
-                      })}
+                      📅 {blog.publishedAt
+                        ? format(new Date(blog.publishedAt), "dd MMM yyyy")
+                        : "?"}{" "}
+                      | ⏱️ {blog.readingTime || "?"} | ⌛{" "}
+                      {blog.publishedAt
+                        ? formatDistanceToNow(new Date(blog.publishedAt), {
+                            addSuffix: true,
+                          })
+                        : ""}
                     </p>
 
                     <Link

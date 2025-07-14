@@ -6,7 +6,6 @@
   padding-bottom: 80px; /* For mobile nav spacing */
 }
 
-
 .container h1 {
   font-size: 22px;
   color: #d62300;
@@ -15,13 +14,12 @@
   padding-left: 12px;
 }
 
-
 .blog-grid {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  padding: 0 10px; /* 👈 Add horizontal padding to fix left edge clipping */
 }
-
 
 .blog-card {
   background-color: #fff;
@@ -31,61 +29,64 @@
   display: flex;
   flex-direction: column;
   transition: transform 0.2s ease;
+  padding: 12px; /* 👈 Add spacing inside the card */
+  box-sizing: border-box;
 }
+
 .blog-card:hover {
   transform: translateY(-2px);
 }
-
 
 .blog-image {
   width: 100%;
   height: 180px;
   object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 12px; /* 👈 Add space below image */
 }
 
-
 .blog-content {
-  padding: 16px;
+  padding: 0; /* 👈 No extra padding needed here now */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 /* Title */
 .blog-title {
   font-size: 18px;
-  margin-bottom: 8px;
+  margin: 0;
   color: #222;
   font-weight: 600;
+  line-height: 1.5;
 }
-
 
 .blog-state {
   font-size: 13px;
   color: #d62300;
-  margin-bottom: 6px;
+  margin: 0;
 }
-
 
 .blog-excerpt {
   font-size: 14px;
   color: #555;
-  margin-bottom: 10px;
-  line-height: 1.5;
+  margin: 0;
+  line-height: 1.6;
 }
-
 
 .blog-meta {
   font-size: 12px;
   color: #777;
-  margin-bottom: 10px;
+  margin: 0;
 }
-
 
 .blog-actions {
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
+  margin-top: 10px;
 }
-
 
 .blog-link {
   background-color: #d62300;
@@ -101,24 +102,26 @@
   background-color: #bb1f00;
 }
 
-
 .share-button {
   background: none;
   border: none;
   font-size: 14px;
   cursor: pointer;
   color: #333;
-  margin-top: 8px;
+  margin-top: 6px;
   transition: color 0.3s ease;
 }
 .share-button:hover {
   color: #d62300;
 }
 
-
 @media (max-width: 768px) {
   .container {
     padding: 16px;
+  }
+
+  .blog-grid {
+    padding: 0 8px;
   }
 
   .blog-title {
