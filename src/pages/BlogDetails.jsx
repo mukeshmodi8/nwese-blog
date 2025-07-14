@@ -12,6 +12,7 @@ import {
   FaTelegram,
   FaLink,
 } from "react-icons/fa";
+import staticBlogs from "../data/blogs"; // ✅ Static blogs
 import "../styles/blog.css";
 import "./BlogDetails.css";
 
@@ -23,16 +24,25 @@ const BlogDetails = () => {
   useEffect(() => {
     const fetchBlog = async () => {
       try {
-        // 🧠 Find blog by ID using Firestore query on `blogs` collection
-        const blogsRef = doc(firestore, "blogs", id);
-        const blogSnap = await getDoc(blogsRef);
+        // ✅ Step 1: Static Blog Check
+        const staticBlog = staticBlogs.find((b) => b.id === id);
+        if (staticBlog) {
+          setBlog(staticBlog);
+          setLoading(false);
+          return;
+        }
+
+        // ✅ Step 2: Firebase Check
+        const blogRef = doc(firestore, "blogs", id);
+        const blogSnap = await getDoc(blogRef);
         if (blogSnap.exists()) {
-          setBlog(blogSnap.data());
+          setBlog({ id: blogSnap.id, ...blogSnap.data() });
         } else {
           setBlog(null);
         }
       } catch (err) {
-        console.error("❌ Error loading blog:", err);
+        console.error("❌ Error fetching blog:", err);
+        setBlog(null);
       } finally {
         setLoading(false);
       }
@@ -73,7 +83,9 @@ const BlogDetails = () => {
 
       <h1 className="blog-title">{blog.title}</h1>
       <p className="blog-date">
-        {new Date(blog.publishedAt).toLocaleDateString()}
+        {blog.publishedAt
+          ? new Date(blog.publishedAt).toLocaleDateString()
+          : ""}
       </p>
       <img className="blog-image" src={blog.image} alt={blog.title} />
       <div

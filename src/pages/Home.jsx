@@ -47,11 +47,11 @@ const Home = () => {
     selectedCategory === "All"
       ? blogs
       : blogs.filter(
-          (b) =>
-            (b.category || "")
-              .trim()
-              .toLowerCase() === selectedCategory.trim().toLowerCase()
-        );
+        (b) =>
+          (b.category || "")
+            .trim()
+            .toLowerCase() === selectedCategory.trim().toLowerCase()
+      );
 
   return (
     <div className="home-ui jagran-style">
@@ -137,17 +137,15 @@ const Home = () => {
                       | ⏱️ {blog.readingTime || "?"} | ⌛{" "}
                       {blog.publishedAt
                         ? formatDistanceToNow(new Date(blog.publishedAt), {
-                            addSuffix: true,
-                          })
+                          addSuffix: true,
+                        })
                         : ""}
                     </p>
 
-                    <Link
-                      to={`/blogs/${encodeURIComponent(blog.id)}`}
-                      className="read-btn"
-                    >
+                    <Link to={`/blogs/${encodeURIComponent(blog.id)}`} className="read-btn">
                       और पढ़ें →
                     </Link>
+
                   </div>
                 </div>
               );
