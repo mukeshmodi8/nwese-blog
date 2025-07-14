@@ -1,11 +1,10 @@
-/* Home.css – Jagran Style Inspired */
-
 /* ===== Global Styling ===== */
 .home-ui {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #f9f9f9;
   color: #111;
   padding-bottom: 60px;
+  margin: 0;
 }
 
 /* ===== Header ===== */
@@ -65,10 +64,10 @@
   border-bottom: 2px solid #d62300;
 }
 
-/* ===== Main News Section ===== */
+/* ===== News Section ===== */
 .news-section {
   padding: 20px;
-  padding-bottom: 80px; /* Footer की height जितनी */
+  padding-bottom: 80px;
 }
 
 .news-section h2 {
@@ -83,6 +82,7 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+  padding: 0 12px; /* Default spacing */
 }
 
 .news-card {
@@ -92,6 +92,8 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .news-img {
@@ -133,28 +135,6 @@
   font-size: 14px;
 }
 
-.share-icons {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-top: 10px;
-  font-size: 18px;
-}
-
-.share-icons span {
-  font-size: 14px;
-  font-weight: bold;
-}
-
-.share-icons a {
-  color: inherit;
-  transition: 0.2s;
-}
-
-.share-icons a:hover {
-  transform: scale(1.1);
-}
-
 /* ===== Footer Navigation ===== */
 .footer-nav {
   position: fixed;
@@ -188,10 +168,9 @@
   border-radius: 20px;
 }
 
-/* ========== 📱 Responsive Design (OnePlus 12 Friendly) ========== */
+/* ===== Mobile Responsive Fix (✅ Final Tested) ===== */
 @media screen and (max-width: 430px) {
   .top-bar {
-    /* flex-direction: column; */
     gap: 10px;
     text-align: center;
   }
@@ -201,23 +180,29 @@
     padding: 8px 12px;
   }
 
+  .news-section {
+    padding: 10px 0;
+  }
+
   .news-section h2 {
     font-size: 18px;
+    margin-left: 12px;
   }
 
   .news-cards {
+    padding: 0 6px; /* Mobile-specific tight spacing */
     gap: 16px;
   }
 
   .news-card {
-    flex-direction: column;
-    max-width: 100%;
+    width: 100%;
+    margin: 0 auto;
     border-radius: 10px;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
   }
 
   .news-img {
-    height: 160px;
+    height: auto;
   }
 
   .news-content {
@@ -239,11 +224,6 @@
   .read-btn {
     font-size: 13px;
     padding: 6px 10px;
-  }
-
-  .share-icons {
-    font-size: 16px;
-    gap: 8px;
   }
 
   .footer-btn {
