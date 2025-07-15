@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { firestore } from "../../data/firebase";
 import { collection, setDoc, doc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+
 import "./AddBlog.css";
 
 
@@ -26,7 +28,7 @@ const AddBlog = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const id = generateId(blog.title); // ✅ slug
+        const id = generateId(blog.title);
 
         const blogData = {
             id,
@@ -39,13 +41,27 @@ const AddBlog = () => {
         };
 
         try {
-            await setDoc(doc(firestore, "blogs", id), blogData); // ✅ use setDoc instead of addDoc
-            alert("✅ Blog added successfully!");
-            navigate("/blogs");
-        } catch (error) {
-            console.error("❌ Error adding blog:", error);
-            alert("❌ Failed to add blog");
-        }
+  await setDoc(doc(firestore, "blogs", id), blogData);
+
+  await Swal.fire({
+    icon: "success",
+    title: "✅ Blog added!",
+    text: "Your blog was added successfully!",
+    confirmButtonColor: "#28a745",
+  });
+
+  navigate("/blogs");
+} catch (error) {
+  console.error("❌ Error adding blog:", error);
+
+  Swal.fire({
+    icon: "error",
+    title: "Oops!",
+    text: "❌ Failed to add blog. Please try again.",
+    confirmButtonColor: "#dc3545",
+  });
+}
+
     };
 
     return (

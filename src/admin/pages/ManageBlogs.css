@@ -1,50 +1,83 @@
-/* Main container */
 .manage-blog-container {
-  padding: 30px;
-  font-family: Arial, sans-serif;
+  padding: 40px 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   max-width: 1200px;
   margin: auto;
+  background-color: #f9f9f9;
 }
 
-/* Title */
+
 .manage-title {
-  font-size: 24px;
-  margin-bottom: 20px;
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 30px;
   text-align: center;
+  color: #333;
 }
 
-/* Table */
+
 .table-wrapper {
   overflow-x: auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.06);
 }
+
+
 .blog-table {
   width: 100%;
   border-collapse: collapse;
+  min-width: 600px;
 }
-.blog-table th,
+.blog-table th {
+  padding: 14px;
+  background-color: #f0f0f0;
+  color: #333;
+  font-weight: 600;
+  text-align: left;
+  border-bottom: 2px solid #ddd;
+}
 .blog-table td {
   padding: 12px;
-  border: 1px solid #ccc;
-  text-align: left;
+  border-bottom: 1px solid #eee;
+  color: #555;
+}
+.blog-table tr:hover {
+  background-color: #f9f9f9;
+  transition: background 0.2s ease;
 }
 .edit-btn,
 .delete-btn {
-  padding: 8px 12px;
+  padding: 6px;
   border: none;
-  border-radius: 5px;
+  border-radius: 6px;
   cursor: pointer;
-  margin-right: 6px;
+  width: 40px;
+  height: 40px;
+  font-size: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease, transform 0.2s ease;
 }
 .edit-btn {
   background-color: #007bff;
   color: white;
 }
+.edit-btn:hover {
+  background-color: #0069d9;
+  transform: scale(1.05);
+}
 .delete-btn {
   background-color: #dc3545;
   color: white;
 }
+.delete-btn:hover {
+  background-color: #c82333;
+  transform: scale(1.05);
+}
 
-/* Modal Overlay */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -58,55 +91,81 @@
   z-index: 9999;
 }
 
-/* Modal Box */
+
 .modal {
-  background-color: white;
+  background-color: #fff;
   padding: 30px;
-  border-radius: 10px;
+  border-radius: 12px;
   width: 90%;
   max-width: 500px;
-  box-shadow: 0px 0px 20px rgba(0,0,0,0.3);
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.3);
   animation: fadeIn 0.3s ease-in-out;
 }
 
-/* Modal Fields */
+
 .modal input,
 .modal textarea {
   width: 100%;
-  margin-bottom: 15px;
-  padding: 10px;
+  margin-bottom: 18px;
+  padding: 12px;
   font-size: 16px;
-  border-radius: 6px;
+  border-radius: 8px;
   border: 1px solid #ccc;
+  transition: border 0.2s;
+}
+.modal input:focus,
+.modal textarea:focus {
+  border-color: #007bff;
+  outline: none;
 }
 
-/* Modal Buttons */
+
 .modal-actions {
   display: flex;
   justify-content: flex-end;
-  gap: 10px;
+  gap: 12px;
 }
-.cancel-btn,
-.update-btn {
-  padding: 10px 16px;
+
+.edit-btn,
+.delete-btn {
+  padding: 6px 14px;
+  min-width: 80;   
+  height: auto;
+  font-size: 15px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border: none;
   border-radius: 6px;
-  font-weight: bold;
   cursor: pointer;
+  transition: 0.2s ease;
 }
+
+
+.edit-btn,
+.delete-btn {
+  width: auto;
+}
+
 .cancel-btn {
   background-color: #6c757d;
   color: white;
+}
+.cancel-btn:hover {
+  background-color: #5a6268;
 }
 .update-btn {
   background-color: #28a745;
   color: white;
 }
+.update-btn:hover {
+  background-color: #218838;
+}
 
-/* Animation */
 @keyframes fadeIn {
   from {
-    transform: scale(0.9);
+    transform: scale(0.95);
     opacity: 0;
   }
   to {
@@ -115,10 +174,53 @@
   }
 }
 
-/* No blogs message */
 .no-blogs {
   text-align: center;
-  font-size: 18px;
+  font-size: 20px;
   margin-top: 40px;
-  color: #777;
+  color: #999;
+}
+
+@media screen and (max-width: 768px) {
+  .manage-title {
+    font-size: 24px;
+  }
+
+  .edit-btn,
+  .delete-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 14px;
+  }
+
+  .modal {
+    padding: 20px;
+  }
+
+  .modal input,
+  .modal textarea {
+    font-size: 15px;
+  }
+
+  .cancel-btn,
+  .update-btn {
+    font-size: 14px;
+    padding: 8px 14px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .manage-blog-container {
+    padding: 20px 10px;
+  }
+
+  .table-wrapper {
+    padding: 10px;
+  }
+
+  .blog-table th,
+  .blog-table td {
+    font-size: 13px;
+    padding: 8px;
+  }
 }

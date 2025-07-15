@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-// import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
-// import { firestore } from "../../data/firebase";
+import Swal from "sweetalert2";
+
 import {
   collection,
   getDocs,
@@ -8,13 +8,13 @@ import {
   doc,
   updateDoc,
 } from "firebase/firestore";
-import { firestore } from "../../data/firebase"; // 🔁 Adjust path as needed
+import { firestore } from "../../data/firebase";
 
 const ManageBlogs = () => {
   const [blogs, setBlogs] = useState([]);
   const [editingBlog, setEditingBlog] = useState(null);
 
-  // 🔃 Fetch Blogs
+  
   const fetchBlogs = async () => {
     try {
       const querySnapshot = await getDocs(collection(firestore, "blogs"));
@@ -32,33 +32,39 @@ const ManageBlogs = () => {
     fetchBlogs();
   }, []);
 
-  // ❌ Delete Blog
- const handleDelete = async (id) => {
-  try {
-    console.log("🧾 Trying to delete:", id);
-    const ref = doc(firestore, "blogs", id);
-    await deleteDoc(ref);
-    console.log("✅ Deleted from Firestore");
+ 
+const handleDelete = async (id) => {
+  const confirmResult = await Swal.fire({
+    title: "Are you sure?",
+    text: "Once deleted, you will not be able to recover this blog!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#dc3545",
+    cancelButtonColor: "#6c757d",
+    confirmButtonText: "Yes, delete it!",
+    cancelButtonText: "Cancel",
+  });
 
-    setBlogs((prev) => prev.filter((blog) => blog.id !== id));
-    alert("✅ Blog Deleted!");
-  } catch (err) {
-    console.error("❌ Delete Error:", err.message);
-    alert("❌ Error: " + err.message);
+  if (confirmResult.isConfirmed) {
+    try {
+      const ref = doc(firestore, "blogs", id);
+      await deleteDoc(ref);
+      setBlogs((prev) => prev.filter((blog) => blog.id !== id));
+
+      Swal.fire("Deleted!", "Your blog has been deleted.", "success");
+    } catch (err) {
+      console.error("❌ Delete Error:", err.message);
+      Swal.fire("Error!", err.message, "error");
+    }
   }
 };
 
 
 
-
-
-
-  // ✏️ Input Change
   const handleEditChange = (e) => {
     setEditingBlog({ ...editingBlog, [e.target.name]: e.target.value });
   };
 
-  // ✅ Save Edited Blog
   const handleUpdate = async () => {
     try {
       const blogRef = doc(firestore, "blogs", editingBlog.id);
@@ -175,20 +181,34 @@ const ManageBlogs = () => {
 const thStyle = { border: "1px solid #ccc", padding: "10px" };
 const tdStyle = { border: "1px solid #ccc", padding: "10px" };
 
+const btnBaseStyle = {
+  display: "inline-flex",
+  alignItems: "center",
+  justifyContent: "center",
+  gap: "6px", // icon और text के बीच gap
+  padding: "8px 16px", // बराबर padding
+  minWidth: "80px", // दोनों बटन कम से कम इतने चौड़े होंगे
+  height: "40px",
+  fontSize: "14px",
+  fontWeight: "500",
+  border: "none",
+  borderRadius: "6px",
+  cursor: "pointer",
+  transition: "all 0.2s ease",
+};
+
 const editBtn = {
-  padding: "6px 10px",
+  ...btnBaseStyle,
   backgroundColor: "#007bff",
   color: "#fff",
-  border: "none",
-  borderRadius: "5px",
-  marginRight: "6px",
-  cursor: "pointer",
 };
 
 const deleteBtn = {
-  ...editBtn,
+  ...btnBaseStyle,
   backgroundColor: "#dc3545",
+  color: "#fff",
 };
+
 
 const inputStyle = {
   width: "100%",

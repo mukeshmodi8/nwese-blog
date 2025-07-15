@@ -6,7 +6,7 @@ const AdminPanel = () => {
   const navigate = useNavigate();
 
   const logout = () => {
-    localStorage.removeItem("adminToken"); // ✅ correct token key
+    localStorage.removeItem("adminToken"); 
     navigate("/admin/login");
   };
 
