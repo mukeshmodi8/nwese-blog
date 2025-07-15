@@ -9,8 +9,8 @@ const AdminLogin = () => {
   const handleLogin = (e) => {
     e.preventDefault();
 
-    // Dummy login check
-    if (email === "admin@gmail.com" && password === "admin123") {
+    
+    if (email === "admin@gmail.com" && password === "") {
       localStorage.setItem("adminToken", "secret123");
       navigate("/admin/dashboard");
     } else {
