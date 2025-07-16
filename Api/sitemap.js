@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore, collection, getDocs } from "firebase/firestore";
 
-// ✅ Firebase Config from your project
+
 const firebaseConfig = {
   apiKey: "AIzaSyCOH8OnAKoATdQwhus3MtY1WkNw_uKnyPw",
   authDomain: "mr-happy-blog-admin.firebaseapp.com",
@@ -13,20 +13,19 @@ const firebaseConfig = {
   databaseURL: "https://react-blog-comments-default-rtdb.firebaseio.com",
 };
 
-// 🔧 Initialize Firebase
+
 const app = initializeApp(firebaseConfig);
 const firestore = getFirestore(app);
 
 export default async function handler(req, res) {
-  const baseUrl = "https://nwese-blog-3z8e.vercel.app"; // ✅ अपने domain का URL
+  const baseUrl = "https://nwese-blog-3z8e.vercel.app";
 
   try {
-    // ✅ 'blogs' collection से सभी docs लो
     const blogsSnapshot = await getDocs(collection(firestore, "blogs"));
 
     const urls = blogsSnapshot.docs.map((doc) => {
       const blogData = doc.data();
-      const slug = blogData.id || doc.id; // ✅ slug आपकी blog post में होगा
+      const slug = blogData.id || doc.id;
 
       return `
         <url>
@@ -35,7 +34,6 @@ export default async function handler(req, res) {
         </url>`;
     });
 
-    // ✅ XML format तैयार करो
     const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
       <url>
@@ -45,7 +43,7 @@ export default async function handler(req, res) {
       ${urls.join("\n")}
     </urlset>`;
 
-    // ✅ Response भेजो
+   
     res.setHeader("Content-Type", "text/xml");
     res.status(200).send(sitemap);
   } catch (err) {
