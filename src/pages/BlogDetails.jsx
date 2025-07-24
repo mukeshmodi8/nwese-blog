@@ -50,13 +50,30 @@ const BlogDetails = () => {
     fetchBlog();
   }, [id]);
 
-  if (loading) return <p>🔄 Loading blog...</p>;
+ if (loading) {
+  return (
+    <div className="loading-container">
+      <div className="logo-wrapper">
+        <img
+          src="/logo.jpg"
+          alt="Mr. Happy Blog"
+          className="animated-logo"
+        />
+      </div>
+      <p className="loading-text">📖 ब्लॉग लोड हो रहा है...</p>
+    </div>
+  );
+}
+
+
+
   if (!blog) return <h1>❌ Blog Not Found</h1>;
 
-  const currentUrl = window.location.href;
+  // const currentUrl = window.location.href;
   const blogTitle = blog.title;
   const blogImage = blog.image;
   const blogDescription = stripHtml(blog.content).result.slice(0, 150);
+  const currentUrl = `https://happyblogg.com/blogs/${id}`;
 
   const handleCopy = async () => {
     await navigator.clipboard.writeText(currentUrl);

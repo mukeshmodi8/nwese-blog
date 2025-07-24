@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
+Sitemap: https://www.happyblogg.com/sitemap.xml
 
-Sitemap: https://happyblogg.com/sitemap.xml
