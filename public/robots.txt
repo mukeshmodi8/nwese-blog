@@ -1,3 +1,4 @@
 User-agent: *
 Allow: /
-siteUrl: 'https://happyblogg.com',
+
+Sitemap: https://happyblogg.com/sitemap.xml
