@@ -26,11 +26,11 @@ const Contact = () => {
         <p>
           <strong>🌐 Website:</strong>{" "}
           <a
-            href="https://nwese-blog-5xg5.vercel.app/"
+            href="https://happyblogg.com/"
             target="_blank"
             rel="noopener noreferrer"
           >
-            https://nwese-blog-5xg5.vercel.app/
+            https://happyblogg.com/
           </a>
         </p>
         <p>

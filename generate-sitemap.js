@@ -3,7 +3,8 @@
 const fs = require("fs");
 const blogs = require("./src/data/blogs.data"); // ✅ केवल यह रखें
 
-const BASE_URL = "https://nwese-blog-3z8e.vercel.app";
+// ✅ अपने custom domain का उपयोग करें
+const BASE_URL = "https://happyblogg.com";
 
 const staticUrls = [
   {

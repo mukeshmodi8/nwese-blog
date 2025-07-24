@@ -1837,3 +1837,4 @@ AI मशीनों को स्मार्ट बनाता है ता
 
 export default blogs;
 
+module.exports = blogs;

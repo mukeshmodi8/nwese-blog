@@ -1548,9 +1548,8 @@ AI मशीनों को स्मार्ट बनाता है ता
 
 ];
 
-// CommonJS: Node.js (for generate-sitemap.js)
-module.exports = blogs;
+// CommonJS: Node.js (for generate-sitemap.js
 
 // ES Module: React (via blogs.js)
-export default blogs;
+module.exports = blogs;
 
