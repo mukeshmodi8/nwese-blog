@@ -5,6 +5,7 @@ import { firestore } from "../data/firebase";
 import { Helmet } from "react-helmet";
 import { stripHtml } from "string-strip-html";
 import CommentSection from "../components/CommentSection";
+import AdSenseAd from "../components/AdSenseAd"; // ✅ Ad component added
 import {
   FaWhatsapp,
   FaFacebook,
@@ -12,7 +13,7 @@ import {
   FaTelegram,
   FaLink,
 } from "react-icons/fa";
-import staticBlogs from "../data/blogs"; // ✅ Static blogs
+import staticBlogs from "../data/blogs";
 import "../styles/blog.css";
 import "./BlogDetails.css";
 
@@ -24,7 +25,6 @@ const BlogDetails = () => {
   useEffect(() => {
     const fetchBlog = async () => {
       try {
-        // ✅ Step 1: Static Blog Check
         const staticBlog = staticBlogs.find((b) => b.id === id);
         if (staticBlog) {
           setBlog(staticBlog);
@@ -32,7 +32,6 @@ const BlogDetails = () => {
           return;
         }
 
-        // ✅ Step 2: Firebase Check
         const blogRef = doc(firestore, "blogs", id);
         const blogSnap = await getDoc(blogRef);
         if (blogSnap.exists()) {
@@ -88,11 +87,20 @@ const BlogDetails = () => {
           : ""}
       </p>
       <img className="blog-image" src={blog.image} alt={blog.title} />
+
+      {/* ✅ Ad #1: After Image */}
+      <AdSenseAd />
+
+      {/* ✅ Blog Content */}
       <div
         className="blog-content"
         dangerouslySetInnerHTML={{ __html: blog.content }}
       />
 
+      {/* ✅ Ad #2: After content */}
+      <AdSenseAd />
+
+      {/* ✅ Share Buttons */}
       <div className="share-section">
         <h4>📤 Share This Blog:</h4>
         <div className="share-icons">
@@ -104,7 +112,6 @@ const BlogDetails = () => {
           >
             <FaWhatsapp className="icon whatsapp" />
           </a>
-
           <a
             href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}`}
             target="_blank"
@@ -113,7 +120,6 @@ const BlogDetails = () => {
           >
             <FaFacebook className="icon facebook" />
           </a>
-
           <a
             href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(`📢 ${blogTitle} 🔗 ${currentUrl}`)}`}
             target="_blank"
@@ -122,7 +128,6 @@ const BlogDetails = () => {
           >
             <FaTwitter className="icon twitter" />
           </a>
-
           <a
             href={`https://t.me/share/url?url=${encodeURIComponent(currentUrl)}&text=${encodeURIComponent(blogTitle)}`}
             target="_blank"
@@ -131,14 +136,20 @@ const BlogDetails = () => {
           >
             <FaTelegram className="icon telegram" />
           </a>
-
           <button onClick={handleCopy} className="copy-button" title="Copy Blog Link">
             <FaLink className="icon link" />
           </button>
         </div>
       </div>
 
+      {/* ✅ Ad #3: After share section */}
+      <AdSenseAd />
+
+      {/* ✅ Comment Section */}
       <CommentSection blogId={id} />
+
+      {/* ✅ Ad #4: At the very end */}
+      <AdSenseAd />
     </div>
   );
 };

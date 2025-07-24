@@ -32,6 +32,11 @@ const InviteFriends = () => {
         className="invite-top-banner"
       />
 
+      {/* 🔹 Ad Slot - Top */}
+      <div className="ad-slot">
+        <img src="/ads/ad1.png" alt="Ad 1" />
+      </div>
+
       <h2>🎁 Invite Your Friends</h2>
       <p>Share this blog with your friends on your favorite platform:</p>
 
@@ -51,6 +56,11 @@ const InviteFriends = () => {
         <button onClick={handleCopy} title="Copy Link" className="icon-button">
           <FaLink className="icon link" />
         </button>
+      </div>
+
+      {/* 🔹 Ad Slot - Bottom */}
+      <div className="ad-slot">
+        <img src="/ads/ad3.png" alt="Ad 3" />
       </div>
     </div>
   );
