@@ -187,3 +187,60 @@
     transform: scale(1);
   }
 }
+.suggested-blog {
+  margin-top: 2rem;
+  padding: 1rem;
+  background-color: #f4f4f4;
+  border-left: 4px solid #3b82f6;
+  border-radius: 6px;
+}
+.suggested-blog {
+  margin-top: 2rem;
+  padding: 1rem;
+  background-color: #f8fafc;
+  border-left: 4px solid #d62300;
+  border-radius: 8px;
+}
+
+.suggested-title {
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+  color: #111827;
+}
+
+.suggested-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-decoration: none;
+  color: inherit;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.suggested-card:hover {
+  background-color: #e0f2fe;
+  transform: scale(1.01);
+}
+
+.suggested-image {
+  width: 100px;
+  height: 70px;
+  object-fit: cover;
+  border-right: 2px solid #ddd;
+}
+
+.suggested-text h4 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.suggested-text p {
+  margin: 0;
+  color: #d62300;
+  font-size: 0.9rem;
+}

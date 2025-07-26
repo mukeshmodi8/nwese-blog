@@ -1,6 +1,5 @@
-
-import { initializeApp } from "firebase/app";
-  
+// firebase.js
+import { initializeApp, getApps, getApp } from "firebase/app";
 import {
   getFirestore,
   doc,
@@ -9,11 +8,9 @@ import {
   updateDoc,
   increment,
 } from "firebase/firestore";
-
-// 🌐 Realtime Database
 import { getDatabase } from "firebase/database";
 
-// ✅ Your full Firebase config (from Mr. Happy’s project)
+// 🔧 Your Firebase config
 const firebaseConfig = {
   apiKey: "AIzaSyCOH8OnAKoATdQwhus3MtY1WkNw_uKnyPw",
   authDomain: "mr-happy-blog-admin.firebaseapp.com",
@@ -25,10 +22,10 @@ const firebaseConfig = {
   databaseURL: "https://react-blog-comments-default-rtdb.firebaseio.com",
 };
 
-// 🔧 Initialize Firebase App
-const app = initializeApp(firebaseConfig);
+// ✅ Safe Firebase init (no duplicate error)
+const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
 
-// 🗃️ Firestore and Realtime DB init
+// 📦 Services
 const firestore = getFirestore(app);
 const db = getDatabase(app);
 
@@ -53,6 +50,6 @@ export const fetchBlogView = async (blogId) => {
 };
 
 //
-// ✅ Exports for use everywhere
+// ✅ Exports
 //
-export { firestore, db };
+export { app, firestore, db };

@@ -1,5 +1,11 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import React, { useEffect } from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+} from "react-router-dom";
+
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Blogs from "./pages/Blogs";
@@ -18,23 +24,41 @@ import Video from "./pages/Video";
 import ScrollToTop from "./components/ScrollToTop";
 import FlashNews from "./pages/FlashNews";
 import Sports from "./components/Sports";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AdminRoutes from "./admin/AdminRoutes";
+import Sitemap from "./pages/Sitemap";
+import SingleBlog from "./pages/SingleBlog";
+import SubscribePopup from "./components/SubscribePopup";
+
+// ✅ Correct Firebase Messaging Import
+import { requestPermissionAndGetToken, onMessageListener } from "./data/firebase-messaging-sw";
+
 
 const AppLayout = () => {
   const location = useLocation();
   const isAdminRoute = location.pathname.startsWith("/admin");
+
+  useEffect(() => {
+    requestPermissionAndGetToken();
+
+    onMessageListener()
+      .then((payload) => {
+        const { title, body } = payload.notification;
+        toast.info(`${title} - ${body}`);
+      })
+      .catch((err) => console.error("FCM listener error:", err));
+  }, []);
 
   return (
     <>
       {!isAdminRoute && <Navbar />}
       <ToastContainer position="top-right" autoClose={3000} />
       <ScrollToTop />
-
+      <SubscribePopup />
       <div className="p-4">
         <Routes>
-          {/* ✅ Public Routes */}
+          {/* Public Routes */}
           <Route path="/" element={<Home />} />
           <Route path="/blogs" element={<Blogs />} />
           <Route path="/blogs/:id" element={<BlogDetails />} />
@@ -48,8 +72,10 @@ const AppLayout = () => {
           <Route path="/videos" element={<Video />} />
           <Route path="/fast-news" element={<FlashNews />} />
           <Route path="/sports" element={<Sports />} />
+          <Route path="/sitemap" element={<Sitemap />} />
+          <Route path="/single-blog/:id" element={<SingleBlog />} />
 
-          {/* ✅ Admin Routes */}
+          {/* Admin Routes */}
           <Route path="/admin/*" element={<AdminRoutes />} />
         </Routes>
       </div>

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 import { firestore } from "../data/firebase";
 import { Helmet } from "react-helmet";
 import { stripHtml } from "string-strip-html";
 import CommentSection from "../components/CommentSection";
-import AdSenseAd from "../components/AdSenseAd"; // ✅ Ad component added
+import AdSenseAd from "../components/AdSenseAd";
 import {
   FaWhatsapp,
   FaFacebook,
@@ -21,6 +21,7 @@ const BlogDetails = () => {
   const { id } = useParams();
   const [blog, setBlog] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [suggestedBlog, setSuggestedBlog] = useState(null);
 
   useEffect(() => {
     const fetchBlog = async () => {
@@ -29,13 +30,21 @@ const BlogDetails = () => {
         if (staticBlog) {
           setBlog(staticBlog);
           setLoading(false);
+          // Suggest any other blog
+          const otherBlogs = staticBlogs.filter((b) => b.id !== id);
+          const random = otherBlogs[Math.floor(Math.random() * otherBlogs.length)];
+          setSuggestedBlog(random);
           return;
         }
 
         const blogRef = doc(firestore, "blogs", id);
         const blogSnap = await getDoc(blogRef);
         if (blogSnap.exists()) {
-          setBlog({ id: blogSnap.id, ...blogSnap.data() });
+          const fetchedBlog = { id: blogSnap.id, ...blogSnap.data() };
+          setBlog(fetchedBlog);
+          const otherBlogs = staticBlogs.filter((b) => b.id !== blogSnap.id);
+          const random = otherBlogs[Math.floor(Math.random() * otherBlogs.length)];
+          setSuggestedBlog(random);
         } else {
           setBlog(null);
         }
@@ -50,34 +59,62 @@ const BlogDetails = () => {
     fetchBlog();
   }, [id]);
 
- if (loading) {
-  return (
-    <div className="loading-container">
-      <div className="logo-wrapper">
-        <img
-          src="/logo.jpg"
-          alt="Mr. Happy Blog"
-          className="animated-logo"
-        />
+  if (loading) {
+    return (
+      <div className="loading-container">
+        <div className="logo-wrapper">
+          <img src="/logo.jpg" alt="Mr. Happy Blog" className="animated-logo" />
+        </div>
+        <p className="loading-text">📖 ब्लॉग लोड हो रहा है...</p>
       </div>
-      <p className="loading-text">📖 ब्लॉग लोड हो रहा है...</p>
-    </div>
-  );
-}
-
-
+    );
+  }
 
   if (!blog) return <h1>❌ Blog Not Found</h1>;
 
-  // const currentUrl = window.location.href;
   const blogTitle = blog.title;
   const blogImage = blog.image;
-  const blogDescription = stripHtml(blog.content).result.slice(0, 150);
   const currentUrl = `https://happyblogg.com/blogs/${id}`;
+  const blogDescription = stripHtml(
+    Array.isArray(blog.content)
+      ? blog.content.map((b) => b.text).join(" ")
+      : blog.content
+  ).result.slice(0, 150);
 
   const handleCopy = async () => {
     await navigator.clipboard.writeText(currentUrl);
     alert("🔗 Link copied to clipboard!");
+  };
+
+  const renderBlogContent = () => {
+    if (!Array.isArray(blog.content)) {
+      return (
+        <div
+          className="blog-content"
+          dangerouslySetInnerHTML={{ __html: blog.content }}
+        />
+      );
+    }
+
+    return (
+      <div className="blog-content">
+        {blog.content.map((block, index) => {
+          if (block.type === "h1") return <h2 key={index}>{block.text}</h2>;
+          if (block.type === "h2") return <h2 key={index}>{block.text}</h2>;
+          if (block.type === "h3") return <h3 key={index}>{block.text}</h3>;
+          if (block.type === "img")
+            return (
+              <img
+                key={index}
+                src={block.src}
+                alt={block.alt || ""}
+                className="blog-image"
+              />
+            );
+          return <p key={index}>{block.text}</p>;
+        })}
+      </div>
+    );
   };
 
   return (
@@ -103,21 +140,15 @@ const BlogDetails = () => {
           ? new Date(blog.publishedAt).toLocaleDateString()
           : ""}
       </p>
+
       <img className="blog-image" src={blog.image} alt={blog.title} />
 
-      {/* ✅ Ad #1: After Image */}
-      <AdSenseAd />
+      {/* <AdSenseAd /> */}
 
-      {/* ✅ Blog Content */}
-      <div
-        className="blog-content"
-        dangerouslySetInnerHTML={{ __html: blog.content }}
-      />
+      {renderBlogContent()}
 
-      {/* ✅ Ad #2: After content */}
-      <AdSenseAd />
+      {/* <AdSenseAd /> */}
 
-      {/* ✅ Share Buttons */}
       <div className="share-section">
         <h4>📤 Share This Blog:</h4>
         <div className="share-icons">
@@ -159,14 +190,29 @@ const BlogDetails = () => {
         </div>
       </div>
 
-      {/* ✅ Ad #3: After share section */}
-      <AdSenseAd />
 
-      {/* ✅ Comment Section */}
+      {/* ✅ Suggested Blog With Image */}
+      {suggestedBlog && (
+        <div className="suggested-blog">
+          <hr />
+          <h3 className="suggested-title">📝 और ब्लॉग पढ़ें</h3>
+          <Link to={`/blogs/${suggestedBlog.id}`} className="suggested-card">
+            <img
+              src={suggestedBlog.image}
+              alt={suggestedBlog.title}
+              className="suggested-image"
+            />
+            <div className="suggested-text">
+              <h4>{suggestedBlog.title}</h4>
+              <p>👉 पूरा ब्लॉग पढ़ें</p>
+            </div>
+          </Link>
+        </div>
+      )}
+
+      {/* <AdSenseAd /> */}
       <CommentSection blogId={id} />
-
-      {/* ✅ Ad #4: At the very end */}
-      <AdSenseAd />
+      {/* <AdSenseAd /> */}
     </div>
   );
 };

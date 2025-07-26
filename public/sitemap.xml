@@ -1,7 +1,30 @@
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<!--  created with Free Online Sitemap Generator www.xml-sitemaps.com  -->
-<url>
-<loc>https://www.happyblogg.com/</loc>
-<lastmod>2025-07-24T12:11:51+00:00</lastmod>
-</url>
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Home Page -->
+  <url>
+    <loc>https://happyblogg.com/</loc>
+    <lastmod>2025-07-26</lastmod>
+    <priority>1.00</priority>
+  </url>
+
+  <!-- Static Pages -->
+  <url>
+    <loc>https://happyblogg.com/about</loc>
+    <lastmod>2025-07-26</lastmod>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://happyblogg.com/contact</loc>
+    <lastmod>2025-07-26</lastmod>
+    <priority>0.80</priority>
+  </url>
+
+  <!-- Example Blog Page (Repeat this for each blog) -->
+  <url>
+    <loc>https://happyblogg.com/single-blog/your-blog-id</loc>
+    <lastmod>2025-07-26</lastmod>
+    <priority>0.90</priority>
+  </url>
+
 </urlset>
