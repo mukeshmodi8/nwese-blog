@@ -1,0 +1,31 @@
+.app-download-banner {
+  background-color: #ffeb3b; /* Yellow */
+  color: #000;
+  text-align: center;
+  padding: 10px 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  font-family: Arial, sans-serif;
+}
+
+.app-download-text {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.app-download-link {
+  color: #0d47a1;
+  font-weight: bold;
+  text-decoration: underline;
+  margin-left: 5px;
+  transition: color 0.3s ease;
+}
+
+.app-download-link:hover {
+  color: #1976d2;
+}

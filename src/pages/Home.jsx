@@ -13,6 +13,7 @@ const Home = () => {
   const baseUrl = window.location.origin;
 
   const [blogs, setBlogs] = useState([]);
+  const [showBanner, setShowBanner] = useState(true);
 
   // 🔁 Fetch Firebase + Static Blogs
   useEffect(() => {
@@ -28,10 +29,7 @@ const Home = () => {
         });
 
         const allBlogs = [...firebaseBlogs, ...staticBlogs];
-
-        // 🔃 Sort by newest date
         allBlogs.sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt));
-
         setBlogs(allBlogs);
       } catch (error) {
         console.error("❌ Error fetching blogs:", error);
@@ -42,16 +40,24 @@ const Home = () => {
     fetchBlogs();
   }, []);
 
-  // ✅ Category Filter (Safe check for undefined category)
+  // 🔻 Hide banner on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowBanner(window.scrollY < 100);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // ✅ Category Filter
   const filteredBlogs =
     selectedCategory === "All"
       ? blogs
       : blogs.filter(
-        (b) =>
-          (b.category || "")
-            .trim()
-            .toLowerCase() === selectedCategory.trim().toLowerCase()
-      );
+          (b) =>
+            (b.category || "").trim().toLowerCase() ===
+            selectedCategory.trim().toLowerCase()
+        );
 
   return (
     <div className="home-ui jagran-style">
@@ -71,7 +77,10 @@ const Home = () => {
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Mr Happy Blog | Hindi Tech & News Articles" />
-        <meta name="twitter:description" content="हिंदी में पढ़ें टेक्नोलॉजी, न्यूज़ और ज़रूरी ब्लॉग्स Mr. Happy Blog पर!" />
+        <meta
+          name="twitter:description"
+          content="हिंदी में पढ़ें टेक्नोलॉजी, न्यूज़ और ज़रूरी ब्लॉग्स Mr. Happy Blog पर!"
+        />
         <meta name="twitter:image" content={`${baseUrl}/logo.png`} />
         <link rel="canonical" href={baseUrl} />
         <script type="application/ld+json">
@@ -80,7 +89,8 @@ const Home = () => {
             "@type": "WebSite",
             name: "Mr Happy Blog",
             url: baseUrl,
-            description: "हिंदी में पढ़ें टेक्नोलॉजी, न्यूज़ और ज़रूरी ब्लॉग्स Mr. Happy Blog पर!",
+            description:
+              "हिंदी में पढ़ें टेक्नोलॉजी, न्यूज़ और ज़रूरी ब्लॉग्स Mr. Happy Blog पर!",
             publisher: {
               "@type": "Organization",
               name: "Mr. Happy",
@@ -101,6 +111,16 @@ const Home = () => {
             : `🗂️ ${selectedCategory} ब्लॉग्स`}
         </h2>
 
+        {/* ✅ Download Banner — अब यहां रखा गया है */}
+        {/* {showBanner && (
+          <div className="app-banner mb-4">
+            📱 Best experience on app –{" "}
+            <Link to="/download" className="banner-link">
+              Download Now
+            </Link>
+          </div>
+        )} */}
+
         {filteredBlogs.length === 0 ? (
           <p style={{ padding: "1rem", color: "gray" }}>
             😕 इस श्रेणी में अभी कोई ब्लॉग उपलब्ध नहीं है।
@@ -108,8 +128,6 @@ const Home = () => {
         ) : (
           <div className="news-cards">
             {filteredBlogs.map((blog) => {
-              const blogUrl = `${baseUrl}/blogs/${encodeURIComponent(blog.id)}`;
-
               return (
                 <div key={blog.id} className="news-card">
                   <img
@@ -119,7 +137,6 @@ const Home = () => {
                   />
                   <div className="news-content">
                     <h3>{blog.title}</h3>
-
                     <div
                       className="excerpt"
                       dangerouslySetInnerHTML={{
@@ -129,23 +146,24 @@ const Home = () => {
                             .slice(0, 80) + "...",
                       }}
                     ></div>
-
                     <p className="meta">
-                      📅 {blog.publishedAt
+                      📅{" "}
+                      {blog.publishedAt
                         ? format(new Date(blog.publishedAt), "dd MMM yyyy")
                         : "?"}{" "}
                       | ⏱️ {blog.readingTime || "?"} | ⌛{" "}
                       {blog.publishedAt
                         ? formatDistanceToNow(new Date(blog.publishedAt), {
-                          addSuffix: true,
-                        })
+                            addSuffix: true,
+                          })
                         : ""}
                     </p>
-
-                    <Link to={`/blogs/${encodeURIComponent(blog.id)}`} className="read-btn">
+                    <Link
+                      to={`/blogs/${encodeURIComponent(blog.id)}`}
+                      className="read-btn"
+                    >
                       और पढ़ें →
                     </Link>
-
                   </div>
                 </div>
               );

@@ -31,23 +31,23 @@ import Sitemap from "./pages/Sitemap";
 import SingleBlog from "./pages/SingleBlog";
 import SubscribePopup from "./components/SubscribePopup";
 
-// ✅ Correct Firebase Messaging Import
-import { requestPermissionAndGetToken, onMessageListener } from "./data/firebase-messaging-sw";
-
+import { requestPermissionAndGetToken, onMessageListener } from "./data/firebase-messaging-sw"; // ✅ Correct file
+import Download from "./pages/Download";
+// import AppDownloadBanner from "./components/AppDownloadBanner"; // Optional
 
 const AppLayout = () => {
   const location = useLocation();
   const isAdminRoute = location.pathname.startsWith("/admin");
 
   useEffect(() => {
-    requestPermissionAndGetToken();
+    requestPermissionAndGetToken(); // ✅ Request notification permission
 
     onMessageListener()
       .then((payload) => {
-        const { title, body } = payload.notification;
+        const { title, body } = payload.notification || {};
         toast.info(`${title} - ${body}`);
       })
-      .catch((err) => console.error("FCM listener error:", err));
+      .catch((err) => console.error("⚠️ FCM listener error:", err));
   }, []);
 
   return (
@@ -56,9 +56,12 @@ const AppLayout = () => {
       <ToastContainer position="top-right" autoClose={3000} />
       <ScrollToTop />
       <SubscribePopup />
+
       <div className="p-4">
+        {/* <AppDownloadBanner /> ✅ Optional banner component */}
+
         <Routes>
-          {/* Public Routes */}
+          {/* ✅ Public Routes */}
           <Route path="/" element={<Home />} />
           <Route path="/blogs" element={<Blogs />} />
           <Route path="/blogs/:id" element={<BlogDetails />} />
@@ -74,8 +77,9 @@ const AppLayout = () => {
           <Route path="/sports" element={<Sports />} />
           <Route path="/sitemap" element={<Sitemap />} />
           <Route path="/single-blog/:id" element={<SingleBlog />} />
+          <Route path="/download" element={<Download />} /> {/* ✅ Correct route */}
 
-          {/* Admin Routes */}
+          {/* ✅ Admin Routes */}
           <Route path="/admin/*" element={<AdminRoutes />} />
         </Routes>
       </div>

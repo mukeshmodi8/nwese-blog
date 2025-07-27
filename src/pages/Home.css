@@ -235,3 +235,47 @@
     padding: 4px 10px;
   }
 }
+.app-banner {
+  background: #f0f9ff;
+  color: #0c4a6e;
+  padding: 10px 15px;
+  border-radius: 8px;
+  font-weight: 500;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.banner-link {
+  text-decoration: none;
+  margin-left: 8px;
+  color: #1d4ed8;
+  font-weight: bold;
+  text-decoration: underline;
+}
+.app-banner {
+  background-color: #f9e0d6;
+  color: #0d0a09;
+  padding: 6px 12px;
+  font-size: 14px;
+  border-left: 4px solid #d62300;
+  border-radius: 6px;
+  margin-bottom: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 300px;
+}
+
+.banner-link {
+  margin-left: 6px;
+  color: #d62300;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 14px;
+}
+.banner-link:hover {
+  text-decoration: underline;
+}

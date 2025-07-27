@@ -5,7 +5,6 @@ import { firestore } from "../data/firebase";
 import { Helmet } from "react-helmet";
 import { stripHtml } from "string-strip-html";
 import CommentSection from "../components/CommentSection";
-import AdSenseAd from "../components/AdSenseAd";
 import {
   FaWhatsapp,
   FaFacebook,
@@ -21,7 +20,7 @@ const BlogDetails = () => {
   const { id } = useParams();
   const [blog, setBlog] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [suggestedBlog, setSuggestedBlog] = useState(null);
+  const [suggestedBlogs, setSuggestedBlogs] = useState([]);
 
   useEffect(() => {
     const fetchBlog = async () => {
@@ -29,11 +28,9 @@ const BlogDetails = () => {
         const staticBlog = staticBlogs.find((b) => b.id === id);
         if (staticBlog) {
           setBlog(staticBlog);
+          const others = staticBlogs.filter((b) => b.id !== id).slice(0, 3);
+          setSuggestedBlogs(others);
           setLoading(false);
-          // Suggest any other blog
-          const otherBlogs = staticBlogs.filter((b) => b.id !== id);
-          const random = otherBlogs[Math.floor(Math.random() * otherBlogs.length)];
-          setSuggestedBlog(random);
           return;
         }
 
@@ -42,9 +39,8 @@ const BlogDetails = () => {
         if (blogSnap.exists()) {
           const fetchedBlog = { id: blogSnap.id, ...blogSnap.data() };
           setBlog(fetchedBlog);
-          const otherBlogs = staticBlogs.filter((b) => b.id !== blogSnap.id);
-          const random = otherBlogs[Math.floor(Math.random() * otherBlogs.length)];
-          setSuggestedBlog(random);
+          const others = staticBlogs.filter((b) => b.id !== blogSnap.id).slice(0, 3);
+          setSuggestedBlogs(others);
         } else {
           setBlog(null);
         }
@@ -143,11 +139,7 @@ const BlogDetails = () => {
 
       <img className="blog-image" src={blog.image} alt={blog.title} />
 
-      {/* <AdSenseAd /> */}
-
       {renderBlogContent()}
-
-      {/* <AdSenseAd /> */}
 
       <div className="share-section">
         <h4>📤 Share This Blog:</h4>
@@ -190,29 +182,30 @@ const BlogDetails = () => {
         </div>
       </div>
 
-
-      {/* ✅ Suggested Blog With Image */}
-      {suggestedBlog && (
+      {/* ✅ Suggested Blogs Section (3 cards) */}
+      {suggestedBlogs && suggestedBlogs.length > 0 && (
         <div className="suggested-blog">
           <hr />
           <h3 className="suggested-title">📝 और ब्लॉग पढ़ें</h3>
-          <Link to={`/blogs/${suggestedBlog.id}`} className="suggested-card">
-            <img
-              src={suggestedBlog.image}
-              alt={suggestedBlog.title}
-              className="suggested-image"
-            />
-            <div className="suggested-text">
-              <h4>{suggestedBlog.title}</h4>
-              <p>👉 पूरा ब्लॉग पढ़ें</p>
-            </div>
-          </Link>
+          <div className="suggested-blog-list">
+            {suggestedBlogs.map((blog) => (
+              <Link to={`/blogs/${blog.id}`} key={blog.id} className="suggested-card">
+                <img
+                  src={blog.image}
+                  alt={blog.title}
+                  className="suggested-image"
+                />
+                <div className="suggested-text">
+                  <h4>{blog.title}</h4>
+                  <p>👉 पूरा ब्लॉग पढ़ें</p>
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
       )}
 
-      {/* <AdSenseAd /> */}
       <CommentSection blogId={id} />
-      {/* <AdSenseAd /> */}
     </div>
   );
 };
