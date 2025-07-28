@@ -16,7 +16,7 @@ const videos = [
   },
   {
     id: 7,
-    title: "Google Web Stories Tutorial by ‪@SatishKVideos‬ | FREE Course",
+    title: "Google Web Stories Tutorial by @SatishKVideos | FREE Course",
     url: "https://www.youtube.com/embed/yTSYA4gFfxQ",
   },
   {

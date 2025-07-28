@@ -1,7 +1,8 @@
 import React from "react";
 import "./Download.css";
+import { Download } from "lucide-react";
 
-const Download = () => {
+const download = () => {
   return (
     <div className="download-page">
       <div className="download-container">
@@ -12,7 +13,7 @@ const Download = () => {
 
         <div className="icon-bounce">
           <img
-            src="/logo.jpg" // Make sure this icon exists in public folder
+            src="/logo.jpg"
             alt="App Icon"
             className="download-app-icon"
           />

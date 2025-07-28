@@ -30,7 +30,6 @@ import AdminRoutes from "./admin/AdminRoutes";
 import Sitemap from "./pages/Sitemap";
 import SingleBlog from "./pages/SingleBlog";
 import SubscribePopup from "./components/SubscribePopup";
-
 import { requestPermissionAndGetToken, onMessageListener } from "./data/firebase-messaging-sw"; // ✅ Correct file
 import Download from "./pages/Download";
 // import AppDownloadBanner from "./components/AppDownloadBanner"; // Optional
@@ -77,7 +76,9 @@ const AppLayout = () => {
           <Route path="/sports" element={<Sports />} />
           <Route path="/sitemap" element={<Sitemap />} />
           <Route path="/single-blog/:id" element={<SingleBlog />} />
-          {/* <Route path="/download" element={<Download />} /> ✅ Correct route */}
+          <Route path="/download" element={<Download />} /> ✅ Correct route
+         
+         
 
           {/* ✅ Admin Routes */}
           <Route path="/admin/*" element={<AdminRoutes />} />
