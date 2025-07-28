@@ -77,7 +77,7 @@ const AppLayout = () => {
           <Route path="/sports" element={<Sports />} />
           <Route path="/sitemap" element={<Sitemap />} />
           <Route path="/single-blog/:id" element={<SingleBlog />} />
-          <Route path="/download" element={<Download />} /> {/* ✅ Correct route */}
+          {/* <Route path="/download" element={<Download />} /> ✅ Correct route */}
 
           {/* ✅ Admin Routes */}
           <Route path="/admin/*" element={<AdminRoutes />} />
