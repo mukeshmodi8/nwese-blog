@@ -2,6 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import "./StatesGrid.css";
 
+// राज्यों की लिस्ट
 const states = [
   { name: "उत्तर प्रदेश", icon: "/icons/uttar-pradesh.svg" },
   { name: "बिहार", icon: "/icons/bihar.svg" },
@@ -20,19 +21,27 @@ const states = [
   { name: "राजस्थान", icon: "/icons/rajasthan.svg" },
 ];
 
+// हेल्पर फ़ंक्शन: नाम को स्लग में बदले
+const generateSlug = (name) =>
+  name
+    .toLowerCase()
+    .replace(/\s+/g, "-")
+    .replace(/[^\u0900-\u097F-a-zA-Z0-9-]/g, "");
+
 const StatesGrid = () => {
   return (
     <div className="states-grid">
-      {states.map((state) => (
-        <NavLink
-          key={state.slug}
-          to={`/state/${state.slug}`}
-          className="state-item"
-        >
-          <div className="state-icon">{state.icon}</div>
-          <div className="state-name">{state.name}</div>
-        </NavLink>
-      ))}
+      {states.map((state) => {
+        const slug = generateSlug(state.name);
+        return (
+          <NavLink key={slug} to={`/state/${slug}`} className="state-item">
+            <div className="state-icon">
+              <img src={state.icon} alt={state.name} width={50} height={50} />
+            </div>
+            <div className="state-name">{state.name}</div>
+          </NavLink>
+        );
+      })}
     </div>
   );
 };

@@ -45,8 +45,6 @@ const AdminRoutes = () => {
           </ProtectedRoute>
         }
       />
-      {/* ❌ REMOVE THIS LINE
-      <Route path="/blogs/:id" element={<BlogDetails />} /> */}
     </Routes>
   );
 };
