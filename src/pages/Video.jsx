@@ -1,6 +1,6 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import videos from "../data/videos"; // ✅ Import JSON file
+import videos from "../data/videos"; 
 import "./Video.css";
 
 const Video = () => {
