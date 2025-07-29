@@ -32,7 +32,7 @@ import SingleBlog from "./pages/SingleBlog";
 import SubscribePopup from "./components/SubscribePopup";
 import { requestPermissionAndGetToken, onMessageListener } from "./data/firebase-messaging-sw"; // ✅ Correct file
 import { Download } from "lucide-react";
-// import Download from "./pages/Download";
+import Download from "./pages/Download";
 // import AppDownloadBanner from "./components/AppDownloadBanner"; // Optional
 
 const AppLayout = () => {
@@ -40,7 +40,7 @@ const AppLayout = () => {
   const isAdminRoute = location.pathname.startsWith("/admin");
 
   useEffect(() => {
-    requestPermissionAndGetToken(); // ✅ Request notification permission
+    requestPermissionAndGetToken(); 
 
     onMessageListener()
       .then((payload) => {

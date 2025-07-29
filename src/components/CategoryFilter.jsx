@@ -1,4 +1,3 @@
-// src/components/CategoryFilter.jsx
 import React from "react";
 import { useCategory } from "../context/CategoryContext";
 
