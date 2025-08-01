@@ -95,6 +95,6 @@ function App() {
       </CategoryProvider>
     </Router>
   );
-}
+} 
 
 export default App;
