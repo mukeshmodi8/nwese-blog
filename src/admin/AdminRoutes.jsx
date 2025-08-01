@@ -8,7 +8,7 @@ import ManageProducts from "./pages/ManageProducts";
 import ManageBlogs from "./pages/ManageBlogs";
 import ProtectedRoute from "./ProtectedRoute";
 
-const AdminRoutes = () => {
+const AdminRoutes = () => { 
   return (
     <Routes>
       <Route path="login" element={<AdminLogin />} />

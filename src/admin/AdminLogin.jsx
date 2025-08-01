@@ -17,7 +17,7 @@ const AdminLogin = () => {
     if (email.trim() === correctEmail && password === correctPassword) {
       localStorage.setItem("adminToken", "secret123");
 
-      Swal.fire({
+      Swal.fire({ 
         icon: "success",
         title: "Login Successful 🎉",
         text: "Welcome Mr. Happy!",
