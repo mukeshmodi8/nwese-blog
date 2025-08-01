@@ -1,4 +1,3 @@
-// src/data/blogService.js
 import { collection, getDocs } from "firebase/firestore";
 import { firestore } from "./firebase";
 

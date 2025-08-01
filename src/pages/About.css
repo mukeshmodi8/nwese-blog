@@ -1,5 +1,3 @@
-/* About Page Styling - Jagran Style */
-
 .about-page {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #222;
@@ -10,7 +8,7 @@
   line-height: 1.8;
 }
 
-/* Headings */
+
 .about-page h1 {
   font-size: 32px;
   font-weight: bold;

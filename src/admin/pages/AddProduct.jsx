@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { firestore } from "../../data/firebase"; // ✅ correct import
+import { firestore } from "../../data/firebase"; 
 import { collection, addDoc } from "firebase/firestore";
 
 const AddProduct = () => {

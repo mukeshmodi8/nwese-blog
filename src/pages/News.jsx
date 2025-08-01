@@ -1,4 +1,3 @@
-// src/pages/News.jsx
 import React from "react";
 import blogs from "../data/blogs";
 import { Link } from "react-router-dom";
@@ -11,7 +10,6 @@ import {
 import "./News.css";
 
 const News = () => {
-  // 🔍 Filter "news" category (case-insensitive)
   const newsBlogs = blogs.filter(
     (item) => item?.category?.trim().toLowerCase() === "news"
   );

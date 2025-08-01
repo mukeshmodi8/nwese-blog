@@ -1,9 +1,7 @@
-// generate-sitemap.js
-
 const fs = require("fs");
-const blogs = require("./src/data/blogs.data"); // ✅ केवल यह रखें
+const blogs = require("./src/data/blogs.data");
 
-// ✅ अपने custom domain का उपयोग करें
+
 const BASE_URL = "https://happyblogg.com";
 
 const staticUrls = [

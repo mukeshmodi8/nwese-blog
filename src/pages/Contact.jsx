@@ -1,5 +1,5 @@
 import React from "react";
-import "./Contact.css"; // Importing AdSense component
+import "./Contact.css";
 import AdSenseAd from "../components/AdSenseAd";
  
 
@@ -15,7 +15,7 @@ const Contact = () => {
         feel free to contact us. We'd love to hear from you!
       </p>
 
-      {/* 🔸 Ad in between */}
+     
       <AdSenseAd />
 
       <div className="contact-details">
@@ -45,7 +45,7 @@ const Contact = () => {
         <button type="submit">Send Message</button>
       </form>
 
-      {/* 🔸 Ad at bottom */}
+     
       <AdSenseAd />
     </div>
   );

@@ -1,4 +1,3 @@
-/* ===== Global Styling ===== */
 .home-ui {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #f9f9f9;
@@ -7,7 +6,6 @@
   margin: 0;
 }
 
-/* ===== Header ===== */
 .header {
   background-color: #ffffff;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
@@ -38,7 +36,6 @@
   cursor: pointer;
 }
 
-/* ===== Category Nav ===== */
 .category-nav {
   overflow-x: auto;
   display: flex;
@@ -64,7 +61,7 @@
   border-bottom: 2px solid #d62300;
 }
 
-/* ===== News Section ===== */
+
 .news-section {
   padding: 20px;
   padding-bottom: 80px;
@@ -82,7 +79,7 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-  padding: 0 12px; /* Default spacing */
+  padding: 0 12px; 
 }
 
 .news-card {
@@ -135,7 +132,7 @@
   font-size: 14px;
 }
 
-/* ===== Footer Navigation ===== */
+
 .footer-nav {
   position: fixed;
   bottom: 0;
@@ -168,7 +165,6 @@
   border-radius: 20px;
 }
 
-/* ===== Mobile Responsive Fix (✅ Final Tested) ===== */
 @media screen and (max-width: 430px) {
   .top-bar {
     gap: 10px;
@@ -190,7 +186,7 @@
   }
 
   .news-cards {
-    padding: 0 6px; /* Mobile-specific tight spacing */
+    padding: 0 6px;
     gap: 16px;
   }
 

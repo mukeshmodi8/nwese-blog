@@ -37,7 +37,7 @@ const SingleBlog = () => {
         <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
 
-      {/* अब blog का main content */}
+      
       <h1>{title}</h1>
       <p>{blogData?.content}</p>
       <img src={image} alt={title} />

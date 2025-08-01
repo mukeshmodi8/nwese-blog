@@ -31,13 +31,9 @@ import Sitemap from "./pages/Sitemap";
 import SingleBlog from "./pages/SingleBlog";
 import SubscribePopup from "./components/SubscribePopup";
 import { requestPermissionAndGetToken, onMessageListener } from "./data/firebase-messaging-sw";
-
-// ✅ Renamed lucide-react icon import to avoid conflict
 import { Download as DownloadIcon } from "lucide-react";
-
-// ✅ Page component
 import Download from "./pages/Download";
-// import AppDownloadBanner from "./components/AppDownloadBanner"; // Optional
+
 
 const AppLayout = () => {
   const location = useLocation();
@@ -62,10 +58,7 @@ const AppLayout = () => {
       <SubscribePopup />
 
       <div className="p-4">
-        {/* <AppDownloadBanner /> ✅ Optional banner component */}
-
         <Routes>
-          {/* ✅ Public Routes */}
           <Route path="/" element={<Home />} />
           <Route path="/blogs" element={<Blogs />} />
           <Route path="/blogs/:id" element={<BlogDetails />} />

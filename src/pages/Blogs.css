@@ -3,7 +3,7 @@
   background-color: #f9f9f9;
   color: #111;
   padding: 20px;
-  padding-bottom: 80px; /* For mobile nav spacing */
+  padding-bottom: 80px; 
 }
 
 .container h1 {
@@ -18,7 +18,7 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-  padding: 0 10px; /* 👈 Add horizontal padding to fix left edge clipping */
+  padding: 0 10px; 
 }
 
 .blog-card {
@@ -29,7 +29,7 @@
   display: flex;
   flex-direction: column;
   transition: transform 0.2s ease;
-  padding: 12px; /* 👈 Add spacing inside the card */
+  padding: 12px; 
   box-sizing: border-box;
 }
 
@@ -42,11 +42,11 @@
   height: 180px;
   object-fit: cover;
   border-radius: 6px;
-  margin-bottom: 12px; /* 👈 Add space below image */
+  margin-bottom: 12px; 
 }
 
 .blog-content {
-  padding: 0; /* 👈 No extra padding needed here now */
+  padding: 0; 
   display: flex;
   flex-direction: column;
   gap: 10px;

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import staticBlogs from "../data/blogs"; // Static blogs
+import staticBlogs from "../data/blogs"; 
 import { Link } from "react-router-dom";
 import { useCategory } from "../context/CategoryContext";
 import { formatDistanceToNow, format } from "date-fns";
 import { Helmet } from "react-helmet";
 import { collection, getDocs } from "firebase/firestore";
-import { firestore } from "../data/firebase"; // Firebase setup
+import { firestore } from "../data/firebase";
 import "./Home.css";
 
 const Home = () => {
@@ -15,7 +15,7 @@ const Home = () => {
   const [blogs, setBlogs] = useState([]);
   const [showBanner, setShowBanner] = useState(true);
 
-  // 🔁 Fetch Firebase + Static Blogs
+ 
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
@@ -40,7 +40,7 @@ const Home = () => {
     fetchBlogs();
   }, []);
 
-  // 🔻 Hide banner on scroll
+
   useEffect(() => {
     const handleScroll = () => {
       setShowBanner(window.scrollY < 100);
@@ -49,7 +49,7 @@ const Home = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // ✅ Category Filter
+
   const filteredBlogs =
     selectedCategory === "All"
       ? blogs
@@ -103,7 +103,7 @@ const Home = () => {
         </script>
       </Helmet>
 
-      {/* ✅ Blog UI */}
+      
       <main className="news-section">
         <h2>
           {selectedCategory === "All"

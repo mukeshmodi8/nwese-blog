@@ -152,7 +152,7 @@
   animation: bounce 2s infinite;
 }
 
-/* Animations */
+
 @keyframes pulse {
   0% {
     transform: scale(1);

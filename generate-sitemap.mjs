@@ -1,7 +1,7 @@
 import fs from "fs";
-import blogs from "./src/data/blogs.js"; // ✅ अब ES import
+import blogs from "./src/data/blogs.js"; 
 
-const BASE_URL = "https://happyblogg.com"; // ✅ सही domain डालें
+const BASE_URL = "https://happyblogg.com"; 
 
 const staticUrls = [
   {

@@ -1,5 +1,3 @@
-/* Invite Friends Page – Jagran Style */
-
 .invite-container {
   max-width: 700px;
   margin: auto;
@@ -18,21 +16,21 @@
   margin-bottom: 1.5rem;
 }
 
-/* Heading */
+
 .invite-container h2 {
   font-size: 28px;
   color: #d62300;
   margin-bottom: 0.5rem;
 }
 
-/* Paragraph */
+
 .invite-container p {
   font-size: 16px;
   color: #444;
   margin-bottom: 1.2rem;
 }
 
-/* Share Buttons */
+
 .share-buttons {
   display: flex;
   justify-content: center;
@@ -41,7 +39,7 @@
   margin-top: 1rem;
 }
 
-/* Common Icon Style */
+
 .icon {
   font-size: 32px;
   cursor: pointer;
@@ -52,12 +50,12 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
-/* Hover Effect */
+
 .icon:hover {
   transform: scale(1.15);
 }
 
-/* Specific Platform Colors */
+
 .whatsapp {
   color: #25d366;
 }
@@ -78,14 +76,14 @@
   color: #555;
 }
 
-/* Button Style */
+
 .icon-button {
   background: none;
   border: none;
   padding: 0;
 }
 
-/* Responsive */
+
 @media screen and (max-width: 500px) {
   .share-buttons {
     gap: 15px;

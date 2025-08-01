@@ -1,9 +1,7 @@
-// src/data/firebase-messaging.js
-
 import { initializeApp, getApps } from "firebase/app";
 import { getMessaging, getToken, onMessage } from "firebase/messaging";
 
-// Firebase config
+
 const firebaseConfig = {
   apiKey: "AIzaSyCOH8OnAKoATdQwhus3MtY1WkNw_uKnyPw",
   authDomain: "mr-happy-blog-admin.firebaseapp.com",
@@ -13,11 +11,10 @@ const firebaseConfig = {
   appId: "1:898141460751:web:9542cad34b5410153fc67a",
 };
 
-// Prevent duplicate initialization
 const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
 const messaging = getMessaging(app);
 
-// ✅ Request Notification Permission + Get Token
+
 export const requestPermissionAndGetToken = async () => {
   try {
     const permission = await Notification.requestPermission();
@@ -34,7 +31,7 @@ export const requestPermissionAndGetToken = async () => {
   }
 };
 
-// ✅ Listen to foreground messages
+
 export const onMessageListener = () =>
   new Promise((resolve) => {
     onMessage(messaging, (payload) => {

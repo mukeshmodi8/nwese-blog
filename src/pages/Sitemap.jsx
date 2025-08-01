@@ -1,5 +1,3 @@
-// src/pages/Sitemap.jsx
-
 import React, { useEffect, useState } from "react";
 import { fetchAllBlogs } from "../data/blogService"; // blogService.js से import
 
