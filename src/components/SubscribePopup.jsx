@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./SubscribePopup.css"; // <- Add this import
+import "./SubscribePopup.css"; 
 
 const SubscribePopup = () => {
   const [showPopup, setShowPopup] = useState(false);

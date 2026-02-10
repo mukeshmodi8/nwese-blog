@@ -2,7 +2,6 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import "./StatesGrid.css";
 
-// राज्यों की लिस्ट
 const states = [
   { name: "उत्तर प्रदेश", icon: "/icons/uttar-pradesh.svg" },
   { name: "बिहार", icon: "/icons/bihar.svg" },
@@ -21,7 +20,6 @@ const states = [
   { name: "राजस्थान", icon: "/icons/rajasthan.svg" },
 ];
 
-// हेल्पर फ़ंक्शन: नाम को स्लग में बदले
 const generateSlug = (name) =>
   name
     .toLowerCase()

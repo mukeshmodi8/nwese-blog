@@ -1,4 +1,3 @@
-// components/AdminHeading.jsx
 import React from "react";
 
 const AdminHeading = ({ title }) => {

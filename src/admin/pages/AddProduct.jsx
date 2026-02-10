@@ -22,7 +22,7 @@ const AddProduct = () => {
     e.preventDefault();
 
     try {
-      await addDoc(collection(firestore, "products"), product); // ✅ firestore used here
+      await addDoc(collection(firestore, "products"), product);
       alert("✅ Product added successfully!");
       setProduct({
         title: "",

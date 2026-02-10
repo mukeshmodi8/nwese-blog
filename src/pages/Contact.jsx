@@ -44,8 +44,6 @@ const Contact = () => {
         <textarea placeholder="Your Message..." rows="5" required></textarea>
         <button type="submit">Send Message</button>
       </form>
-
-     
       <AdSenseAd />
     </div>
   );

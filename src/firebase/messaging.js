@@ -20,7 +20,6 @@ export const requestPermissionAndGetToken = async () => {
     });
     if (token) {
       console.log("✅ FCM Token:", token);
-      // 🔒 Optionally: Send token to your backend/server here
     } else {
       console.warn("⚠️ No token received.");
     }

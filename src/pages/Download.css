@@ -76,8 +76,6 @@
     transform: translateY(-10px);
   }
 }
-
-/* Mobile responsive */
 @media (max-width: 500px) {
   .download-container {
     padding: 25px 20px;

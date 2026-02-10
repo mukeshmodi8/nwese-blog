@@ -1,4 +1,3 @@
-// src/components/AdSenseAd.jsx
 import React, { useEffect } from "react";
 
 const AdSenseAd = () => {

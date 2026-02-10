@@ -122,8 +122,6 @@ const ManageBlogs = () => {
           </table>
         </div>
       )}
-
-      {/* Edit Modal */}
       {editingBlog && (
         <div style={styles.modalOverlay}>
           <div style={styles.modalBox}>
@@ -171,8 +169,6 @@ const ManageBlogs = () => {
     </div>
   );
 };
-
-// ✅ Styles Object (Responsive + Clean)
 const styles = {
   container: {
     padding: "30px",

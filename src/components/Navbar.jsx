@@ -29,7 +29,6 @@ const Navbar = () => {
 
   return (
     <header className="header">
-      {/* 🔺 Top Bar */}
       <div className="top-bar">
         <div className="logo">
           <img src="/images/logo-removebg-preview.png" alt="Mr Happy" className="site-logo" />

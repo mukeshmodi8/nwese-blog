@@ -18,7 +18,6 @@ const download = () => {
             className="download-app-icon"
           />
         </div>
-
         <a href="/app.apk" className="download-btn" download>
           ⬇️ Download Now
         </a>

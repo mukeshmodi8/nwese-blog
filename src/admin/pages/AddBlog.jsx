@@ -5,7 +5,6 @@ import { firestore } from "../../data/firebase";
 import "./AddBlog.css";
 import Swal from "sweetalert2";
 
-// Generate SEO-friendly blog ID from title
 const generateId = (title) =>
   title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 
