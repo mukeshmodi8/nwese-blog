@@ -3,9 +3,17 @@ import { useNavigate } from "react-router-dom";
 import { doc, setDoc } from "firebase/firestore";
 import { firestore } from "../../data/firebase";
 import Swal from "sweetalert2";
-import { ArrowLeft, Type, FileText, Send, ImagePlus } from "lucide-react";
+import { ArrowLeft, Type, FileText, Send, ImagePlus, LayoutGrid } from "lucide-react";
 import { uploadToCloudinary } from "../../utils/uploadToCloudinary";
 import "./AddBlog.css";
+
+// Navbar वाली ही कैटेगरीज यहाँ डिफाइन की हैं
+const categoriesList = [
+  "Technology", "Health", "Sports", "Entertainment", "Business", 
+  "News", "Travel", "Education", "Science", "Politics", 
+  "Finance", "Food", "Fashion", "Gaming", "Culture", 
+  "Environment", "Automotive", "Real Estate", "Art & Culture"
+];
 
 const generateId = (title) =>
   title
@@ -21,7 +29,7 @@ const AddBlog = () => {
     title: "",
     image: "",
     readingTime: "",
-    category: "",
+    category: "", // यहाँ अब ड्रॉपडाउन से वैल्यू आएगी
     content: "",
     metaTitle: "",
     metaDescription: "",
@@ -34,9 +42,6 @@ const AddBlog = () => {
     setBlog((prev) => ({ ...prev, [name]: value }));
   };
 
-  /* =============================
-     FEATURED IMAGE UPLOAD
-  ============================== */
   const handleFeaturedImage = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -53,9 +58,6 @@ const AddBlog = () => {
     }
   };
 
-  /* =============================
-     INSERT IMAGE IN CONTENT
-  ============================== */
   const handleInsertImage = () => {
     const input = document.createElement("input");
     input.type = "file";
@@ -84,9 +86,6 @@ const AddBlog = () => {
     input.click();
   };
 
-  /* =============================
-     PUBLISH BLOG
-  ============================== */
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -95,13 +94,8 @@ const AddBlog = () => {
       return;
     }
 
-    if (!blog.metaTitle || !blog.metaDescription) {
-      Swal.fire("Missing", "SEO fields are required", "warning");
-      return;
-    }
-
-    if (!blog.title || !blog.content) {
-      Swal.fire("Missing", "Title & content are required", "warning");
+    if (!blog.category) {
+      Swal.fire("Missing", "Please select a category", "warning");
       return;
     }
 
@@ -142,7 +136,6 @@ const AddBlog = () => {
       )}
 
       <div className="container py-4" style={{ maxWidth: "1000px" }}>
-        {/* HEADER */}
         <div className="d-flex align-items-center gap-3 mb-4">
           <button onClick={() => navigate(-1)} className="back-btn-custom">
             <ArrowLeft size={20} />
@@ -151,7 +144,6 @@ const AddBlog = () => {
         </div>
 
         <form onSubmit={handleSubmit} className="row g-4">
-          {/* LEFT */}
           <div className="col-lg-8">
             <div className="blog-card-custom p-4">
               <label className="custom-label">
@@ -188,7 +180,6 @@ const AddBlog = () => {
             </div>
           </div>
 
-          {/* RIGHT */}
           <div className="col-lg-4">
             <div className="blog-card-custom p-4 sticky-top" style={{ top: 20 }}>
               <h5 className="fw-bold mb-3">SEO & Settings</h5>
@@ -229,15 +220,24 @@ const AddBlog = () => {
                 required
               />
 
-              <label className="custom-label">Category</label>
-              <input
-                type="text"
+              {/* CATEGORY DROPDOWN */}
+              <label className="custom-label">
+                <LayoutGrid size={16} /> Category
+              </label>
+              <select
                 name="category"
                 className="input-field-custom mb-2"
                 value={blog.category}
                 onChange={handleChange}
                 required
-              />
+              >
+                <option value="">Select Category</option>
+                {categoriesList.map((cat) => (
+                  <option key={cat} value={cat}>
+                    {cat}
+                  </option>
+                ))}
+              </select>
 
               <label className="custom-label">Reading Time</label>
               <input
