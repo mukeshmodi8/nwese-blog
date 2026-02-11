@@ -1,54 +1,140 @@
-.add-blog-container {
-  padding: 2rem;
-  max-width: 600px;
-  margin: auto;
-  background-color: #121212;
-  color: #fff;
+/* AddBlog.css */
+
+.add-blog-wrapper {
+  background-color: #f1f5f9;
+  min-height: 100vh;
+}
+
+/* कार्ड स्टाइल */
+.blog-card-custom {
+  background: #ffffff;
+  border-radius: 24px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* इनपुट फील्ड्स */
+.input-field-custom {
+  width: 100%;
+  border: 2px solid #e2e8f0;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-  font-family: 'Segoe UI', sans-serif;
-}
-
-.add-blog-container h2 {
-  text-align: center;
-  margin-bottom: 1.5rem;
-  color: #00d1ff;
-}
-
-.add-blog-container form {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.add-blog-container input,
-.add-blog-container textarea {
   padding: 12px 16px;
-  border: none;
-  border-radius: 8px;
+  background-color: #f8fafc;
+  transition: all 0.3s ease;
   outline: none;
-  background-color: #1e1e1e;
-  color: white;
-  font-size: 1rem;
 }
 
-.add-blog-container input::placeholder,
-.add-blog-container textarea::placeholder {
-  color: #aaa;
+.input-field-custom:focus {
+  border-color: #0d6efd;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.1);
 }
 
-.add-blog-container button {
-  padding: 12px;
-  background-color: #00d1ff;
+/* लेबल स्टाइल */
+.custom-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  color: #475569;
+  margin-bottom: 8px;
+  margin-left: 4px;
+}
+
+/* टेक्स्ट एरिया */
+.textarea-custom {
+  resize: none;
+  min-height: 350px;
+}
+
+/* बैक बटन */
+.back-btn-custom {
+  background: white;
   border: none;
-  border-radius: 8px;
-  color: black;
-  font-weight: bold;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background 0.3s ease;
+  width: 45px;
+  height: 45px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  transition: 0.3s;
 }
 
-.add-blog-container button:hover {
-  background-color: #00b4e6;
+.back-btn-custom:hover {
+  background: #0d6efd;
+  color: white;
+  transform: translateX(-3px);
+}
+
+/* इमेज प्रीव्यू */
+.preview-container-custom {
+  width: 100%;
+  height: 180px;
+  border-radius: 15px;
+  overflow: hidden;
+  border: 2px solid #e2e8f0;
+}
+
+.preview-container-custom img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* पब्लिश बटन */
+.publish-btn-custom {
+  width: 100%;
+  padding: 15px;
+  background: #0d6efd;
+  color: white;
+  border: none;
+  border-radius: 15px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: 0.3s;
+  box-shadow: 0 10px 15px -3px rgba(13, 110, 253, 0.3);
+}
+
+.publish-btn-custom:hover {
+  background: #0b5ed7;
+  transform: translateY(-2px);
+  box-shadow: 0 15px 20px -3px rgba(13, 110, 253, 0.4);
+}
+
+.upload-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.upload-box {
+  background: #fff;
+  padding: 30px 40px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.spinner {
+  width: 48px;
+  height: 48px;
+  border: 5px solid #ddd;
+  border-top: 5px solid #0d6efd;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: auto;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }

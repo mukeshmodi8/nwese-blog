@@ -36,10 +36,13 @@ const BlogDetails = () => {
 
         const blogRef = doc(firestore, "blogs", id);
         const blogSnap = await getDoc(blogRef);
+
         if (blogSnap.exists()) {
           const fetchedBlog = { id: blogSnap.id, ...blogSnap.data() };
           setBlog(fetchedBlog);
-          const others = staticBlogs.filter((b) => b.id !== blogSnap.id).slice(0, 3);
+          const others = staticBlogs
+            .filter((b) => b.id !== blogSnap.id)
+            .slice(0, 3);
           setSuggestedBlogs(others);
         } else {
           setBlog(null);
@@ -71,11 +74,22 @@ const BlogDetails = () => {
   const blogTitle = blog.title;
   const blogImage = blog.image;
   const currentUrl = `https://happyblogg.com/blogs/${id}`;
-  const blogDescription = stripHtml(
+
+  const rawText = stripHtml(
     Array.isArray(blog.content)
       ? blog.content.map((b) => b.text).join(" ")
       : blog.content
-  ).result.slice(0, 150);
+  ).result;
+
+  const autoDescription = rawText.slice(0, 155);
+
+  const finalTitle = blog.metaTitle
+    ? blog.metaTitle
+    : `${blog.title} | Mr Happy Blog`;
+
+  const finalDescription = blog.metaDescription
+    ? blog.metaDescription
+    : autoDescription;
 
   const handleCopy = async () => {
     await navigator.clipboard.writeText(currentUrl);
@@ -103,8 +117,9 @@ const BlogDetails = () => {
               <img
                 key={index}
                 src={block.src}
-                alt={block.alt || ""}
+                alt={block.alt || blog.title}
                 className="blog-image"
+                loading="lazy"
               />
             );
           return <p key={index}>{block.text}</p>;
@@ -116,21 +131,46 @@ const BlogDetails = () => {
   return (
     <div className="blog-details-container">
       <Helmet>
-        <title>{blog.title} | Mr. Happy Blog</title>
-        <meta name="description" content={blogDescription} />
-        <meta property="og:title" content={blog.title} />
-        <meta property="og:description" content={blogDescription} />
+        <title>{finalTitle}</title>
+        <meta name="description" content={finalDescription} />
+        <meta property="og:title" content={finalTitle} />
+        <meta property="og:description" content={finalDescription} />
         <meta property="og:image" content={blogImage} />
         <meta property="og:url" content={currentUrl} />
         <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={blog.title} />
-        <meta name="twitter:description" content={blogDescription} />
+        <meta name="twitter:title" content={finalTitle} />
+        <meta name="twitter:description" content={finalDescription} />
         <meta name="twitter:image" content={blogImage} />
         <link rel="canonical" href={currentUrl} />
+
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            headline: blog.title,
+            image: blog.image,
+            datePublished: blog.publishedAt,
+            author: {
+              "@type": "Person",
+              name: "Mr Happy"
+            },
+            publisher: {
+              "@type": "Organization",
+              name: "Mr Happy Blog",
+              logo: {
+                "@type": "ImageObject",
+                url: "https://happyblogg.com/logo.jpg"
+              }
+            },
+            description: finalDescription,
+            mainEntityOfPage: currentUrl
+          })}
+        </script>
       </Helmet>
 
       <h1 className="blog-title">{blog.title}</h1>
+
       <p className="blog-date">
         {blog.publishedAt
           ? new Date(blog.publishedAt).toLocaleDateString()
@@ -141,48 +181,29 @@ const BlogDetails = () => {
 
       {renderBlogContent()}
 
+      {/* ✅ Share Section (UNCHANGED) */}
       <div className="share-section">
         <h4>📤 Share This Blog:</h4>
         <div className="share-icons">
-          <a
-            href={`https://wa.me/?text=${encodeURIComponent(`📢 ${blogTitle}\n🔗 ${currentUrl}`)}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            title="Share on WhatsApp"
-          >
+          <a href={`https://wa.me/?text=${encodeURIComponent(`📢 ${blogTitle}\n🔗 ${currentUrl}`)}`} target="_blank" rel="noopener noreferrer">
             <FaWhatsapp className="icon whatsapp" />
           </a>
-          <a
-            href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            title="Share on Facebook"
-          >
+          <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}`} target="_blank" rel="noopener noreferrer">
             <FaFacebook className="icon facebook" />
           </a>
-          <a
-            href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(`📢 ${blogTitle} 🔗 ${currentUrl}`)}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            title="Share on Twitter"
-          >
+          <a href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(`📢 ${blogTitle} 🔗 ${currentUrl}`)}`} target="_blank" rel="noopener noreferrer">
             <FaTwitter className="icon twitter" />
           </a>
-          <a
-            href={`https://t.me/share/url?url=${encodeURIComponent(currentUrl)}&text=${encodeURIComponent(blogTitle)}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            title="Share on Telegram"
-          >
+          <a href={`https://t.me/share/url?url=${encodeURIComponent(currentUrl)}&text=${encodeURIComponent(blogTitle)}`} target="_blank" rel="noopener noreferrer">
             <FaTelegram className="icon telegram" />
           </a>
-          <button onClick={handleCopy} className="copy-button" title="Copy Blog Link">
+          <button onClick={handleCopy} className="copy-button">
             <FaLink className="icon link" />
           </button>
         </div>
       </div>
 
-      {/* ✅ Suggested Blogs Section (3 cards) */}
+      {/* ✅ Suggested Blogs (UNCHANGED) */}
       {suggestedBlogs && suggestedBlogs.length > 0 && (
         <div className="suggested-blog">
           <hr />
@@ -190,11 +211,7 @@ const BlogDetails = () => {
           <div className="suggested-blog-list">
             {suggestedBlogs.map((blog) => (
               <Link to={`/blogs/${blog.id}`} key={blog.id} className="suggested-card">
-                <img
-                  src={blog.image}
-                  alt={blog.title}
-                  className="suggested-image"
-                />
+                <img src={blog.image} alt={blog.title} className="suggested-image" />
                 <div className="suggested-text">
                   <h4>{blog.title}</h4>
                   <p>👉 पूरा ब्लॉग पढ़ें</p>
